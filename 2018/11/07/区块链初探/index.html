@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="区块链,">
 
 
 
@@ -80,6 +80,7 @@
 
 
 <meta name="description" content="0. 实验环境 虚拟机： ubuntu-17.10.1-desktop-amd64  go的版本: go1.11   1. 以太坊的安装，安装geth客户端 geth是用go语言写的，编译geth源码需要go语言和C语言编译器，因此需要先安装go语言，go语言版本推荐用go1.7及以上，go语言的安装配置教程。  将github仓库克隆源文件：   1git clone https://githu">
+<meta name="keywords" content="区块链">
 <meta property="og:type" content="article">
 <meta property="og:title" content="区块链初探">
 <meta property="og:url" content="http://yoursite.com/2018/11/07/区块链初探/index.html">
@@ -109,7 +110,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/11/07/区块链初探/19.png">
 <meta property="og:image" content="http://yoursite.com/2018/11/07/区块链初探/20.png">
 <meta property="og:image" content="http://yoursite.com/2018/11/07/区块链初探/22.png">
-<meta property="og:updated_time" content="2018-11-07T10:32:30.435Z">
+<meta property="og:updated_time" content="2018-11-07T14:31:19.784Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="区块链初探">
 <meta name="twitter:description" content="0. 实验环境 虚拟机： ubuntu-17.10.1-desktop-amd64  go的版本: go1.11   1. 以太坊的安装，安装geth客户端 geth是用go语言写的，编译geth源码需要go语言和C语言编译器，因此需要先安装go语言，go语言版本推荐用go1.7及以上，go语言的安装配置教程。  将github仓库克隆源文件：   1git clone https://githu">
@@ -214,6 +215,26 @@
         </li>
       
         
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -296,6 +317,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/区块链/" itemprop="url" rel="index">
+                    <span itemprop="name">区块链</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -350,10 +393,53 @@
 <h3 id="2-私有链创世区块搭建"><a href="#2-私有链创世区块搭建" class="headerlink" title="2. 私有链创世区块搭建"></a>2. 私有链创世区块搭建</h3><ul>
 <li><p>自定义创世区块，<code>genesis.json</code></p>
   <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"config"</span>: &#123;</span><br><span class="line">            <span class="attr">"chainId"</span>: <span class="number">666</span>,</span><br><span class="line">            <span class="attr">"homesteadBlock"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"eip155Block"</span>: <span class="number">0</span>,</span><br><span class="line">            <span class="attr">"eip158Block"</span>: <span class="number">0</span></span><br><span class="line">        &#125;,</span><br><span class="line">    <span class="attr">"alloc"</span>      : &#123;&#125;,</span><br><span class="line">    <span class="attr">"coinbase"</span>   : <span class="string">"0x0000000000000000000000000000000000000000"</span>,</span><br><span class="line">    <span class="attr">"difficulty"</span> : <span class="string">"0x00000001"</span>,</span><br><span class="line">    <span class="attr">"extraData"</span>  : <span class="string">""</span>,</span><br><span class="line">    <span class="attr">"gasLimit"</span>   : <span class="string">"0xffffff"</span>,</span><br><span class="line">    <span class="attr">"nonce"</span>      : <span class="string">"0x0000000000000042"</span>,</span><br><span class="line">    <span class="attr">"mixhash"</span>    : <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000000"</span>,</span><br><span class="line">    <span class="attr">"parentHash"</span> : <span class="string">"0x0000000000000000000000000000000000000000000000000000000000000000"</span>,</span><br><span class="line">    <span class="attr">"timestamp"</span>  : <span class="string">"0x00"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> 参数解释：<br>  | 参数        | 解释           |<br>  | ————- |:————-:|<br>  |alloc|用来预置账号以及账号的eth数量。私链挖矿比较容易，不需要预置有币的账号|<br>  |coinbase| 矿工的账号|<br>  |difficulty|设置当前区块的难度|<br>  |extraData|附加信息|<br>  |gasLimit|该值设置对GAS的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大|<br>  |nonce|nonce值是一个64随机数，用于挖矿|<br>  |mixHash|与nonce配合用于挖矿，由上一个区块的一部分生成的hash|<br>  |parentHash|上一个区块的hash值，因为是创世区块，因此该值为0|</p>
+<p> 参数解释：</p>
 </li>
-<li><p>初始化区块链<br>  <code>geth -datadir myData/00 init genesis.json</code><br>  参数解释：</p>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>alloc</td>
+<td style="text-align:center">用来预置账号以及账号的eth数量。私链挖矿比较容易，不需要预置有币的账号</td>
+</tr>
+<tr>
+<td>coinbase</td>
+<td style="text-align:center">矿工的账号</td>
+</tr>
+<tr>
+<td>difficulty</td>
+<td style="text-align:center">设置当前区块的难度</td>
+</tr>
+<tr>
+<td>extraData</td>
+<td style="text-align:center">附加信息</td>
+</tr>
+<tr>
+<td>gasLimit</td>
+<td style="text-align:center">该值设置对GAS的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大</td>
+</tr>
+<tr>
+<td>nonce</td>
+<td style="text-align:center">nonce值是一个64随机数，用于挖矿</td>
+</tr>
+<tr>
+<td>mixHash</td>
+<td style="text-align:center">与nonce配合用于挖矿，由上一个区块的一部分生成的hash</td>
+</tr>
+<tr>
+<td>parentHash</td>
+<td style="text-align:center">上一个区块的hash值，因为是创世区块，因此该值为0</td>
+</tr>
+</tbody>
+</table>
 <ul>
+<li>初始化区块链<br>  <code>geth -datadir myData/00 init genesis.json</code><br>  参数解释：<ul>
 <li><code>datadir</code> -    设置当前区块链网络数据存放的位置，区块链网络存储在<code>myData/00</code>文件夹下</li>
 <li><code>init</code> - 指定创世块文件的位置，并创建初始块</li>
 </ul>
@@ -622,6 +708,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/区块链/" rel="tag"># 区块链</a>
+          
+        </div>
+      
 
       
       
@@ -631,15 +723,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/07/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/07/区块链个人认识/" rel="prev" title="区块链个人认识">
+                区块链个人认识 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -718,20 +810,48 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
             
 
           </nav>
 
           
 
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Liu-YT" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
           
 
           
