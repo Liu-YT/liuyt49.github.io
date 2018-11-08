@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="服务计算,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. 介绍 Linux命令行使用程序 - selpg，这个名称代表SELect PaGes。selpg允许用户指定从输入文本抽取的页的范围，这些输入文本可以来自文件或另一个进程。 关于selpg的详细介绍，参照开发Linux命令行实用程序 实现slepg代码 我的 - Golang实现 官方 - C语言实现    2. 设计与实现2.1 设计思路 理解selpg命令的功能以及处理流程。   sel">
+<meta name="keywords" content="服务计算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="服务计算 - 3 Golang开发Linux命令行实用程序 - selpg">
+<meta property="og:url" content="http://yoursite.com/2018/11/08/服务计算-3-Golang开发Linux命令行实用程序-selpg/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="1. 介绍 Linux命令行使用程序 - selpg，这个名称代表SELect PaGes。selpg允许用户指定从输入文本抽取的页的范围，这些输入文本可以来自文件或另一个进程。 关于selpg的详细介绍，参照开发Linux命令行实用程序 实现slepg代码 我的 - Golang实现 官方 - C语言实现    2. 设计与实现2.1 设计思路 理解selpg命令的功能以及处理流程。   sel">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-11-08T06:43:04.015Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="服务计算 - 3 Golang开发Linux命令行实用程序 - selpg">
+<meta name="twitter:description" content="1. 介绍 Linux命令行使用程序 - selpg，这个名称代表SELect PaGes。selpg允许用户指定从输入文本抽取的页的范围，这些输入文本可以来自文件或另一个进程。 关于selpg的详细介绍，参照开发Linux命令行实用程序 实现slepg代码 我的 - Golang实现 官方 - C语言实现    2. 设计与实现2.1 设计思路 理解selpg命令的功能以及处理流程。   sel">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/08/服务计算-3-Golang开发Linux命令行实用程序-selpg/">
+
+
+
+
+
+  <title>服务计算 - 3 Golang开发Linux命令行实用程序 - selpg | My Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">My Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/08/服务计算-3-Golang开发Linux命令行实用程序-selpg/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liuyt49">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">服务计算 - 3 Golang开发Linux命令行实用程序 - selpg</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-08T14:28:34+08:00">
+                2018-11-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务计算/" itemprop="url" rel="index">
+                    <span itemprop="name">服务计算</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h3><ul>
+<li>Linux命令行使用程序 - <code>selpg</code>，这个名称代表<code>SELect PaGes</code>。selpg允许用户指定从输入文本抽取的页的范围，这些输入文本可以来自文件或另一个进程。</li>
+<li>关于selpg的详细介绍，参照<a href="https://www.ibm.com/developerworks/cn/linux/shell/clutil/index.html" target="_blank" rel="noopener"><strong>开发Linux命令行实用程序</strong></a></li>
+<li>实现<code>slepg</code>代码<ul>
+<li><a href="https://github.com/Liu-YT/selpg" target="_blank" rel="noopener">我的 - Golang实现</a></li>
+<li><a href="https://www.ibm.com/developerworks/cn/linux/shell/clutil/selpg.c" target="_blank" rel="noopener">官方 - C语言实现</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="2-设计与实现"><a href="#2-设计与实现" class="headerlink" title="2. 设计与实现"></a>2. 设计与实现</h3><h4 id="2-1-设计思路"><a href="#2-1-设计思路" class="headerlink" title="2.1 设计思路"></a>2.1 设计思路</h4><ul>
+<li>理解<code>selpg</code>命令的功能以及处理流程。</li>
+</ul>
+<ul>
+<li><code>selpg</code>命令涉及的基本操作<ul>
+<li>文件的读写</li>
+<li>从终端获取输入以及在终端输出</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-2-功能模块划分与实现"><a href="#2-2-功能模块划分与实现" class="headerlink" title="2.2 功能模块划分与实现"></a>2.2 功能模块划分与实现</h4><ul>
+<li><p>构建命令行参数的结构体，由于参数使用的比较多，可以使用一个结构体存储起来，使用起来比较方便</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> selpg_args <span class="keyword">struct</span> &#123;</span><br><span class="line">	startPage      <span class="keyword">int</span></span><br><span class="line">	endPage        <span class="keyword">int</span></span><br><span class="line">	inFile         <span class="keyword">string</span></span><br><span class="line">	pageLen        <span class="keyword">int</span></span><br><span class="line">	pageType       <span class="keyword">bool</span> <span class="comment">// true for -f, false for -lNumber</span></span><br><span class="line">	outDestination <span class="keyword">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>参数解析</p>
+<ul>
+<li>使用<a href="https://godoc.org/github.com/spf13/pflag" target="_blank" rel="noopener">pflag包</a>对命令行输入参数进行解析</li>
+<li>使用 pflag 替代 goflag 以满足 Unix 命令行规范， 参考：<a href="https://o-my-chenjian.com/2017/09/20/Using-Flag-And-Pflag-With-Golang/" target="_blank" rel="noopener">Golang之使用Flag和Pflag</a></li>
+<li>获得<code>flag</code>参数后<code>pflag.Parse()</code>函数才能把参数解析出来</li>
+<li>使用<code>pflag.Args()</code>来获取未被标记的参数</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 解析获取参数</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getArgs</span><span class="params">(args *selpg_args)</span></span> &#123;</span><br><span class="line">  pflag.IntVarP(&amp;(args.startPage), <span class="string">"startPage"</span>, <span class="string">"s"</span>, <span class="number">-1</span>, <span class="string">"start page"</span>)</span><br><span class="line">  pflag.IntVarP(&amp;(args.endPage), <span class="string">"endPage"</span>, <span class="string">"e"</span>, <span class="number">-1</span>, <span class="string">"end page"</span>)</span><br><span class="line">  pflag.IntVarP(&amp;(args.pageLen), <span class="string">"pageLen"</span>, <span class="string">"l"</span>, <span class="number">72</span>, <span class="string">"the length of page"</span>)</span><br><span class="line">  pflag.BoolVarP(&amp;(args.pageType), <span class="string">"pageType"</span>, <span class="string">"f"</span>, <span class="literal">false</span>, <span class="string">"page type"</span>)</span><br><span class="line">  pflag.StringVarP(&amp;(args.outDestination), <span class="string">"outDestination"</span>, <span class="string">"d"</span>, <span class="string">""</span>, <span class="string">"print destination"</span>)</span><br><span class="line">  pflag.Parse()</span><br><span class="line"></span><br><span class="line">  other := pflag.Args() <span class="comment">// 其余参数</span></span><br><span class="line">  <span class="keyword">if</span> <span class="built_in">len</span>(other) &gt; <span class="number">0</span> &#123;</span><br><span class="line">    args.inFile = other[<span class="number">0</span>]</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    args.inFile = <span class="string">""</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>参数检查</p>
+<ul>
+<li>检查输入参数的合法性<ul>
+<li>是否输入了起始页和结束页</li>
+<li>起始页大于1小于结束页以及不能溢出（<code>MaxInt32</code>）</li>
+<li>结束页大于起始页并且不能溢出（<code>MaxInt32</code>）</li>
+</ul>
+</li>
+<li><p>遇到不合法则输出错误同时结束程序</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 检查参数合法性</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">checkArgs</span><span class="params">(args *selpg_args)</span></span> &#123;</span><br><span class="line">  <span class="keyword">if</span> args.startPage == <span class="number">-1</span> || args.endPage == <span class="number">-1</span> &#123;</span><br><span class="line">    os.Stderr.Write([]<span class="keyword">byte</span>(<span class="string">"You shouid input like selpg -sNumber -eNumber ... \n"</span>))</span><br><span class="line">    os.Exit(<span class="number">0</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> args.startPage &lt; <span class="number">1</span> || args.startPage &gt; math.MaxInt32 &#123;</span><br><span class="line">    os.Stderr.Write([]<span class="keyword">byte</span>(<span class="string">"You should input valid start page\n"</span>))</span><br><span class="line">    os.Exit(<span class="number">0</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> args.endPage &lt; <span class="number">1</span> || args.endPage &gt; math.MaxInt32 || args.endPage &lt; args.startPage &#123;</span><br><span class="line">    os.Stderr.Write([]<span class="keyword">byte</span>(<span class="string">"You should input valid end page\n"</span>))</span><br><span class="line">    os.Exit(<span class="number">0</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!args.pageType) &amp;&amp; (args.pageLen &lt; <span class="number">1</span> || args.pageLen &gt; math.MaxInt32) &#123;</span><br><span class="line">    os.Stderr.Write([]<span class="keyword">byte</span>(<span class="string">"You should input valid page length\n"</span>))</span><br><span class="line">    os.Exit(<span class="number">0</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>执行命令</p>
+<ul>
+<li><p>执行命令部分主要涉及到文件的读取以及写入或者标准输入的获取以及命令行下输出，我们使用到<a href="https://godoc.org/bufio" target="_blank" rel="noopener">bufio包</a>，至于<code>-dXXX</code> 实现，使用到 <a href="https://studygolang.com/articles/3329" target="_blank" rel="noopener">os/exec包</a> </p>
+</li>
+<li><p><strong><code>bufio包介绍与使用</code></strong></p>
+<ul>
+<li><p><code>bufio包</code>实现了带缓存的 I/O 操作，它封装一个 <code>io.Reader</code> 或 <code>io.Writer</code> 对象，使其具有缓存和一些文本读写功能</p>
+<ul>
+<li><p><code>func NewReaderSize(rd io.Reader, size int) *Reader</code></p>
+<p><code>NewReaderSize</code> 将<code>rd</code> 封装成一个带缓存的 <code>bufio.Reader</code> 对象，缓存大小由 <code>size</code> 指定（如果小于 16 则会被设置为 16）。如果<code>rd</code>的基类型就是有足够缓存的 <code>bufio.Reader</code> 类型，则直接将rd 转换为基类型返回。</p>
+</li>
+<li><p><code>func NewReaderSize(rd io.Reader, size int) *Reader</code></p>
+<p><code>NewReader</code>相当于 <code>NewReaderSize(rd, 4096)</code></p>
+</li>
+<li><p><code>func (reader *Reader) ReadBytes(delim byte) (line []byte, err error)</code></p>
+<p><code>ReadBytes</code> 在 <code>reader</code>中查找<code>delim</code>并读出 <code>delim</code> 及其之前的所有数据。如果 <code>ReadBytes</code> 在找到 <code>delim</code> 之前遇到错误，则返回遇到错误之前的所有数据，同时返回遇到的错误（通常是 <code>io.EOF</code>）。 只有当 <code>ReadBytes</code> 找不到 <code>delim</code>时，<code>err</code> 才不为 <code>nil</code></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong><code>os/exec包介绍与使用</code></strong></p>
+<ul>
+<li><p><code>os/exec</code>包执行外部命令。它包装了<code>os.StartProcess</code>函数以便更容易的修正输入和输出，使用管道连接I/O，以及作其它的一些调整。 </p>
+<ul>
+<li><p><code>func Command(name string, arg ...string) *Cmd</code></p>
+<p>  command返回cmd结构来执行带有相关参数的命令，它仅仅设定cmd结构中的Path和Args参数，如果name参数中不包含路径分隔符，command使用LookPath来解决路径问题，否则的话就直接使用name；Args直接跟在command命令之后，所以在Args中不许要添加命令。我们用该命令创建一个命令对象，参数为子进程路径和子进程参数（可选）　</p>
+  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 指定运行的程序，实现模拟的打印机</span></span><br><span class="line">cmd := exec.Command(<span class="string">"./"</span> + args.outDestination)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>func (c *Cmd) StderrPipe() (io.ReadCloser, error)</code>　　</p>
+<p>  StderrPipe返回一个pipe，这个管道连接到command的标准错误，当command命令退出时，Wait将关闭这些pipe</p>
+</li>
+<li><code>func (c *Cmd) StdinPipe() (io.WriteCloser, error)</code>　　　<br>  StdinPipe返回一个连接到command标准输入的管道pipe。我们可以通过在此处写入传输信息，然后作为子进程的标准输入。</li>
+</ul>
+</li>
+<li><p>对于<code>-dXXX</code>的实现，创建一个子进程，让其模拟打印机，使用管道将数据传输给子进程，子进程读取管道内传输的信息并且打印出来。</p>
+</li>
+</ul>
+</li>
+<li><p>处理流程</p>
+<ul>
+<li>判断是否指定输入文件，为空则将标准输入作为输入，否则为文件流</li>
+<li>判断是否为<code>-d</code>类型</li>
+<li>判断输入类型为<code>-l</code>还是<code>-f</code>，依据要求读取输入，在输出到标准输出</li>
+<li><p>判断起始页数以及结束页数是否满足实际标准</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 执行命令</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">processInput</span><span class="params">(args *selpg_args)</span></span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// read the file</span></span><br><span class="line">  <span class="keyword">var</span> reader *bufio.Reader</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> args.inFile == <span class="string">""</span> &#123;</span><br><span class="line">    reader = bufio.NewReader(os.Stdin)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    fileIn, err := os.Open(args.inFile)</span><br><span class="line">    <span class="keyword">defer</span> fileIn.Close()</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">      os.Stderr.Write([]<span class="keyword">byte</span>(<span class="string">"Open file error\n"</span>))</span><br><span class="line">      os.Exit(<span class="number">0</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    reader = bufio.NewReader(fileIn)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// output the file</span></span><br><span class="line">  <span class="keyword">if</span> args.outDestination == <span class="string">""</span> &#123;</span><br><span class="line">    <span class="comment">// 输出到当前命令行</span></span><br><span class="line">    outputCurrent(reader, args)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 输出到目的地</span></span><br><span class="line">    outputToDest(reader, args)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输出到当前命令行</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">outputCurrent</span><span class="params">(reader *bufio.Reader, args *selpg_args)</span>;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">// 输出到指定目的地</span></span><br><span class="line"><span class="function"><span class="title">func</span> <span class="title">outputToDest</span><span class="params">(reader *bufio.Reader, args *selpg_args)</span>;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>具体代码参见<a href="https://github.com/Liu-YT/selpg#use" target="_blank" rel="noopener">Github项目</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-参考文献"><a href="#3-参考文献" class="headerlink" title="3. 参考文献"></a>3. 参考文献</h3><ul>
+<li><p><a href="https://godoc.org/github.com/spf13/pflag" target="_blank" rel="noopener">PFlag的使用</a></p>
+</li>
+<li><p><a href="https://godoc.org/io#Pipe" target="_blank" rel="noopener">package io</a></p>
+</li>
+<li><p><a href="https://o-my-chenjian.com/2017/09/20/Using-Flag-And-Pflag-With-Golang/" target="_blank" rel="noopener">Golang之使用Flag和Pflag</a></p>
+</li>
+<li><p><a href="https://studygolang.com/articles/3329" target="_blank" rel="noopener">Golang中os/exec包的用法</a></p>
+</li>
+<li><p><a href="https://studygolang.com/articles/4367" target="_blank" rel="noopener">Golang中bufio包的用法</a></p>
+<p>​</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/服务计算/" rel="tag"># 服务计算</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/08/服务计算-2-Go语言开发环境配置/" rel="next" title="服务计算 - 2 Go语言开发环境配置">
+                <i class="fa fa-chevron-left"></i> 服务计算 - 2 Go语言开发环境配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/08/服务计算-4-持续集成服务-Travis-CI/" rel="prev" title="服务计算 - 4 持续集成服务 Travis CI">
+                服务计算 - 4 持续集成服务 Travis CI <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="liuyt49">
+            
+              <p class="site-author-name" itemprop="name">liuyt49</p>
+              <p class="site-description motion-element" itemprop="description">一个菜鸟的成长记录</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Liu-YT" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-介绍"><span class="nav-number">1.</span> <span class="nav-text">1. 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-设计与实现"><span class="nav-number">2.</span> <span class="nav-text">2. 设计与实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-设计思路"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 设计思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-功能模块划分与实现"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 功能模块划分与实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-参考文献"><span class="nav-number">3.</span> <span class="nav-text">3. 参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liuyt49</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
