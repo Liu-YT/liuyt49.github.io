@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="PoW共识机制原理及优缺点PoW(Proof of Work)工作量证明，最早应用于Adam Back 1996年提出的Hashcash中，而后被中本聪改造为以“挖矿”形式实现区块链一致性的共识机制。 PoW(Proof of Work)机制，其核心设计思路是提出一个复杂度计算值的运算过程，用户需要消耗大量的算力才能计算出一个满意的值并提供给服务方快速验证。在比特币网络中，就应用了PoW这种共识机">
+<meta name="description" content="PoW(Proof of Work)工作量证明，最早应用于Adam Back 1996年提出的Hashcash中，而后被中本聪改造为以“挖矿”形式实现区块链一致性的共识机制。 PoW(Proof of Work)机制，其核心设计思路是提出一个复杂度计算值的运算过程，用户需要消耗大量的算力才能计算出一个满意的值并提供给服务方快速验证。在比特币网络中，就应用了PoW这种共识机制，挖矿实际是一个竞争记账">
 <meta name="keywords" content="区块链">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PoW共识机制原理及优缺点">
 <meta property="og:url" content="http://yoursite.com/2018/11/07/PoW共识机制原理及优缺点/index.html">
 <meta property="og:site_name" content="My Blog">
-<meta property="og:description" content="PoW共识机制原理及优缺点PoW(Proof of Work)工作量证明，最早应用于Adam Back 1996年提出的Hashcash中，而后被中本聪改造为以“挖矿”形式实现区块链一致性的共识机制。 PoW(Proof of Work)机制，其核心设计思路是提出一个复杂度计算值的运算过程，用户需要消耗大量的算力才能计算出一个满意的值并提供给服务方快速验证。在比特币网络中，就应用了PoW这种共识机">
+<meta property="og:description" content="PoW(Proof of Work)工作量证明，最早应用于Adam Back 1996年提出的Hashcash中，而后被中本聪改造为以“挖矿”形式实现区块链一致性的共识机制。 PoW(Proof of Work)机制，其核心设计思路是提出一个复杂度计算值的运算过程，用户需要消耗大量的算力才能计算出一个满意的值并提供给服务方快速验证。在比特币网络中，就应用了PoW这种共识机制，挖矿实际是一个竞争记账">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-07T14:40:46.270Z">
+<meta property="og:updated_time" content="2018-11-08T11:48:24.389Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PoW共识机制原理及优缺点">
-<meta name="twitter:description" content="PoW共识机制原理及优缺点PoW(Proof of Work)工作量证明，最早应用于Adam Back 1996年提出的Hashcash中，而后被中本聪改造为以“挖矿”形式实现区块链一致性的共识机制。 PoW(Proof of Work)机制，其核心设计思路是提出一个复杂度计算值的运算过程，用户需要消耗大量的算力才能计算出一个满意的值并提供给服务方快速验证。在比特币网络中，就应用了PoW这种共识机">
+<meta name="twitter:description" content="PoW(Proof of Work)工作量证明，最早应用于Adam Back 1996年提出的Hashcash中，而后被中本聪改造为以“挖矿”形式实现区块链一致性的共识机制。 PoW(Proof of Work)机制，其核心设计思路是提出一个复杂度计算值的运算过程，用户需要消耗大量的算力才能计算出一个满意的值并提供给服务方快速验证。在比特币网络中，就应用了PoW这种共识机制，挖矿实际是一个竞争记账">
 
 
 
@@ -342,10 +342,10 @@
       
 
       
-        <h2 id="PoW共识机制原理及优缺点"><a href="#PoW共识机制原理及优缺点" class="headerlink" title="PoW共识机制原理及优缺点"></a>PoW共识机制原理及优缺点</h2><p>PoW(<code>Proof of Work</code>)工作量证明，最早应用于Adam Back 1996年提出的<code>Hashcash</code>中，而后被中本聪改造为以“挖矿”形式实现区块链一致性的共识机制。</p>
-<p>PoW(<code>Proof of Work</code>)机制，其核心设计思路是提出一个复杂度计算值的运算过程，用户需要消耗大量的算力才能计算出一个满意的值并提供给服务方快速验证。在比特币网络中，就应用了PoW这种共识机制，挖矿实际是一个竞争记账权的过程，矿工们需要以最快的速度计算出符合要求的Block Hash(区块哈希值)，以此获得新区块的记账权以及相应的比特币的奖励。当然由于哈希函数是无法预测的随机散列函数，所以计算出来符合要求的哈希值具有一定的难度，需要耗费大量算力才能获得被认可的结果，矿工需要不停的变更区块头中的随机数，并对每次变更后的区块头做双重SHA256运算，将结果值与当前网络的目标值做对比，如果小于目标值，则解题成功，工作量证明完成。在整个过程中，矿工贡献的算力是其工作量，工作量体现在其计算得到的满足要求的哈希值，证明其确实经过大量的尝试和计算。当工作量证明完成后，挖矿节点马上对交易区块进行打包确认并广播给全部节点，然后获得相应的比特币奖励。但是这种过程是有可能存在两个矿工同时解出了题目的情况的，则这时将造成软分叉。从分叉的区块起，由于不同的矿工跟从了不同的区块，在分叉出来的两条不同链上，算力是有差别的，因此两条链的增长速度也是不一样的，在一段时间之后，总有一条链的长度要超过另一条。此时一旦矿工发现存在一条更长的链，则会在这条链的基础上继续挖矿，而另一条分叉则会被抛弃。到目前为此PoW技术在区块链中起着至关重要的作用，它也成为了加密货币中主流的共识机制之一，不仅仅应用在比特币上，像以太坊等加密货币都有使用。</p>
+        <p>PoW(<code>Proof of Work</code>)工作量证明，最早应用于Adam Back 1996年提出的<code>Hashcash</code>中，而后被中本聪改造为以“挖矿”形式实现区块链一致性的共识机制。</p>
+<p>PoW(<code>Proof of Work</code>)机制，其核心设计思路是提出一个复杂度计算值的运算过程，用户需要消耗大量的算力才能计算出一个满意的值并提供给服务方快速验证。在比特币网络中，就应用了PoW这种共识机制，挖矿实际是一个竞争记账权的过程，矿工们需要以最快的速度计算出符合要求的<code>Block Hash</code>(区块哈希值)，以此获得新区块的记账权以及相应的比特币的奖励。当然由于哈希函数是无法预测的随机散列函数，所以计算出来符合要求的哈希值具有一定的难度，需要耗费大量算力才能获得被认可的结果，矿工需要不停的变更区块头中的随机数，并对每次变更后的区块头做双重SHA256运算，将结果值与当前网络的目标值做对比，如果小于目标值，则解题成功，工作量证明完成。在整个过程中，矿工贡献的算力是其工作量，工作量体现在其计算得到的满足要求的哈希值，证明其确实经过大量的尝试和计算。当工作量证明完成后，挖矿节点马上对交易区块进行打包确认并广播给全部节点，然后获得相应的比特币奖励。但是这种过程是有可能存在两个矿工同时解出了题目的情况的，则这时将造成软分叉。从分叉的区块起，由于不同的矿工跟从了不同的区块，在分叉出来的两条不同链上，算力是有差别的，因此两条链的增长速度也是不一样的，在一段时间之后，总有一条链的长度要超过另一条。此时一旦矿工发现存在一条更长的链，则会在这条链的基础上继续挖矿，而另一条分叉则会被抛弃。到目前为此PoW技术在区块链中起着至关重要的作用，它也成为了加密货币中主流的共识机制之一，不仅仅应用在比特币上，像以太坊等加密货币都有使用。</p>
 <p>为什么要采用PoW这种共识机制呢？首先，很多人都认为挖矿过程中浪费大量的计算机资源去计算一个似乎没有很大意义的值，得到仅仅是一些虚拟货币而已（虽然现在比较值钱）。不可否认，PoW共识机制确实存在比较多的缺点。首先，其造成巨额支出，挖矿需要高度专业化的计算机硬件来运行复杂的算法，当然普通的计算机也可以使用，只是基本不可能挖到矿，算力根本不是一个级别的。同时，挖矿耗费大量的电力。在2017年全球矿工用于比特币挖矿的电力已经超过159个国家的年度电费输出，这是十分浪费资源且不环保的。同时，这些计算是“无用”。矿工做很多工作来生成块并消耗大量电力。但是，他们的计算在其他任何地方都不适用。它们保证了网络的安全性，但不能应用于商业，科学或任何其他领域。但是，PoW共识机制还是有一些好处的，其主要好处是反DoS攻击和保证采矿的公平性。PoW对网络中的操作施加了一些限制。他们需要付出很多努力才能被执行。高效的攻击需要大量的计算能力和大量的时间来进行计算。因此，攻击是可能的，攻击者必须投入超过总体51%的运算力才能保证篡改结果，攻击成本是相当高的，效益也不高。同时PoW也保证了挖矿的公平性，每位矿工获得记账权的概率与其投入的算力有关，投入越多收获也越多。</p>
-<p>对于PoW存在问题，主要是存在着浪费过多资源在无用的计算中，对于这个问题，个人感觉难以从根源上解决，PoW的机制使得注定做出很多无用的计算，浪费很多资源，我们是否可以考虑使用别的共识机制代替掉PoW共识机制呢。例如PoS(Proof of Stake)股权证明机制或者DPoS（Delegated Proof of Stake）：授权股权证明机制，这两种都可以减少大量的能耗，对于PoS甚至可以不用挖矿，不需要大量耗费电力和能源，收益与个人持有加密货币数量与持有时间相关，但是也有可能导致马太效应。对于PoW共识机制存在的问题，目前似乎难以找到从根源上解决的办法，最理想的似乎是使用PoS或者DPoS共识机制，当然如果能够充分的利用其中的计算机资源，将每次计算一个”无用”的值变成计算一些有价值的东西，这样也是有一定的改进的。</p>
+<p>对于PoW存在问题，主要是存在着浪费过多资源在无用的计算中，对于这个问题，个人感觉难以从根源上解决，PoW的机制使得注定做出很多无用的计算，浪费很多资源，我们是否可以考虑使用别的共识机制代替掉PoW共识机制呢。例如PoS(<code>Proof of Stake</code>)股权证明机制或者DPoS（<code>Delegated Proof of Stake</code>）：授权股权证明机制，这两种都可以减少大量的能耗，对于PoS甚至可以不用挖矿，不需要大量耗费电力和能源，收益与个人持有加密货币数量与持有时间相关，但是也有可能导致马太效应。对于PoW共识机制存在的问题，目前似乎难以找到从根源上解决的办法，最理想的似乎是使用PoS或者DPoS共识机制，当然如果能够充分的利用其中的计算机资源，将每次计算一个”无用”的值变成计算一些有价值的东西，这样也是有一定的改进的。</p>
 
       
     </div>
@@ -440,17 +440,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -467,7 +458,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -522,22 +513,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#PoW共识机制原理及优缺点"><span class="nav-number">1.</span> <span class="nav-text">PoW共识机制原理及优缺点</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
