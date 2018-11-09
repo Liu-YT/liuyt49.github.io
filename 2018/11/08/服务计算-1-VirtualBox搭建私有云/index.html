@@ -74,6 +74,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="My Blog" type="application/atom+xml">
+
 
 
 
@@ -414,7 +416,7 @@
 <li>安装可以启用VirtualBox远程显示系统的扩展包，<a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="noopener">下载Oracle VM VirtualBox Extension Pack</a></li>
 </ul>
 </li>
-<li>在安装扩展包之前，<strong>需要关闭–注意不是挂起–所有运行中的虚拟机</strong>，并关闭整个VirtualBox系统。</li>
+<li>在安装扩展包之前，<strong>需要关闭—注意不是挂起—所有运行中的虚拟机</strong>，并关闭整个VirtualBox系统。</li>
 <li>安装扩展包<ul>
 <li>在Windows中，您只需双击扩展包或手动在<code>管理</code>-&gt;<code>全局设定</code>-&gt;<code>扩展</code>中点击Add Package图标(<code>&#39;+&#39;号图标</code>)找到正确的安装包列表。<br><img src="/2018/11/08/服务计算-1-VirtualBox搭建私有云/5.png" alt="这里写图片描述"></li>
 <li>如果您是通过命令行操作的，通过VBoxManager extpack命令添加VirtualBox远程显示扩展包。</li>
@@ -556,7 +558,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -567,7 +569,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -578,7 +580,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -586,6 +588,13 @@
 
           </nav>
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           
@@ -821,6 +830,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 
