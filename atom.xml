@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-11-10T01:52:14.918Z</updated>
+  <updated>2018-11-10T01:58:59.290Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>41. First Missing Positive</title>
+    <link href="http://yoursite.com/2018/11/10/41-First-Missing-Positive/"/>
+    <id>http://yoursite.com/2018/11/10/41-First-Missing-Positive/</id>
+    <published>2018-11-10T01:54:02.000Z</published>
+    <updated>2018-11-10T01:58:59.290Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><ul><li>Given an unsorted integer array, find the smallest missing positive integer.</li><li><p><strong>Example:</strong></p>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: [7,8,9,11,12]</span><br><span class="line">Output: 1</span><br></pre></td></tr></table></figure></li><li><p><strong>Note:</strong> Your algorithm should run in O(n) time and uses constant extra space.</p></li></ul><h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><ul><li>本题的题意比较容易理解，即寻找一个无序的数组里面找到一个最小缺失的正整数</li><li>第一想法是将无序数组进行排序，然后遍历一遍排好序的数组即可找出最小缺失的正整数，但是排序算法最优解的时间复杂度都为O(nlogn)，显然不能满足题目的时间复杂度要求</li><li>其次的主要想法就是利用数组的下标，因为下标是从0开始的，不断累增的数列，并且除0外都是正整数<ul><li>遍历数组，将当前元素交换到其减一后作为下标的位置，即<code>nums[i]</code>与<code>nums[nums[i] - 1]</code>进行交换，即将<code>1</code>放到数组<code>0</code>号位，将<code>2</code>放到数组<code>1</code>号位，依此类推。这个步骤比较关键，其中小坑也比较多，有些是提交了才发现的<ul><li>交换条件的选择，可能被交换的元素必须要满足<code>&gt; 0</code>&amp;&amp;<code>&lt; array.size</code>&amp;&amp;<code>nums[i] != nums[nums[i] - 1]</code>,其中最后一个条件是避免两个位置不断的执行交换，例如输入[1,1]的情况，造成死循环</li><li>循环变量的控制，当需要交换的时候需要将循环变量-1，或者说不发生交换的时候，循环变量+1</li></ul></li><li>再次遍历数组，将第一个下标 与对应位置元素 - 1不等的下标返回，若都相等，则返回<code>数组的size</code> + 1</li></ul></li></ul><h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">firstMissingPositive</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> minPos = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> size = nums.size(); </span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将满足条件的的元素进行交换，将元素放到数组下标等于该元素的位置</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; ) &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] &lt; size &amp;&amp; nums[i] &gt;= <span class="number">1</span> &amp;&amp; nums[i] != nums[nums[i] - <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">int</span> tmp = nums[nums[i] - <span class="number">1</span>];</span><br><span class="line">                nums[nums[i] - <span class="number">1</span>] = nums[i];</span><br><span class="line">                nums[i] = tmp;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                ++i;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历数组，寻找下标与对应位置不等的下标，此下标即为最小整数，否则则为size+1</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; ++i) </span><br><span class="line">            <span class="keyword">if</span>(i != nums[i] - <span class="number">1</span>)</span><br><span class="line">                <span class="keyword">return</span> i + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> size + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Given an unsorted integer array, find the smallest missing posit
+      
+    
+    </summary>
+    
+      <category term="算法 | leetcode" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95-leetcode/"/>
+    
+    
+      <category term="leetcode" scheme="http://yoursite.com/tags/leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>8. String to Integer (atoi)</title>
