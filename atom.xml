@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-11-09T07:15:19.324Z</updated>
+  <updated>2018-11-10T01:52:14.918Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>8. String to Integer (atoi)</title>
+    <link href="http://yoursite.com/2018/11/10/8-String-to-Integer-atoi/"/>
+    <id>http://yoursite.com/2018/11/10/8-String-to-Integer-atoi/</id>
+    <published>2018-11-10T01:49:29.000Z</published>
+    <updated>2018-11-10T01:52:14.918Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>Implement atoi which converts a string to an integer.</p><p>The function first discards as many whitespace characters as necessary until the first non-whitespace character is found. Then, starting from this character, takes an optional initial plus or minus sign followed by as many numerical digits as possible, and interprets them as a numerical value.</p><p>The string can contain additional characters after those that form the integral number, which are ignored and have no effect on the behavior of this function.</p><p>If the first sequence of non-whitespace characters in str is not a valid integral number, or if no such sequence exists because either str is empty or it contains only whitespace characters, no conversion is performed.</p><p>If no valid conversion could be performed, a zero value is returned.</p><p><strong>Note:</strong></p><ul><li>Only the space character<code>&#39; &#39;</code> is considered as whitespace character.</li><li>Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [$−2^{31}$,  $2^{31}$ − 1]. If the numerical value is out of the range of representable values, INT_MAX (2^31 − 1) or INT_MIN (−2^31) is returned.</li></ul><p><strong>Example:</strong></p><blockquote><p>Input: “words and 987”<br>Output: 0<br>Explanation: The first non-whitespace character is ‘w’, which is not a numerical digit or a +/- sign. Therefore no valid conversion could be performed.</p><p>Input: “-91283472332”<br>Output: -2147483648<br>Explanation: The number “-91283472332” is out of the range of a 32-bit signed integer.Thefore INT_MIN (−2^31) is returned.</p></blockquote><h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><ul><li>本题就是相当于重写atoi这个函数，将字符串转化成整数</li><li>本题需要注意的点<ul><li>将字符串前面的空白去掉</li><li>数字的正负</li><li>数字溢出</li><li>输入无效</li></ul></li></ul><h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">myAtoi</span><span class="params">(<span class="built_in">string</span> str)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;<span class="comment">// 返回的数字</span></span><br><span class="line">    <span class="keyword">int</span> sign = <span class="number">1</span>; <span class="comment">// 返回数字的符号</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(str[i] == <span class="string">' '</span>) &#123; ++i; &#125;</span><br><span class="line">    <span class="keyword">if</span>(i &lt; str.length &amp;&amp; (str[i] == <span class="string">'+'</span> || str[i] == <span class="string">'-'</span>)) &#123;</span><br><span class="line">        sign = str[i] == <span class="string">'+'</span> ? <span class="number">1</span> : <span class="number">-1</span>;</span><br><span class="line">        ++i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(str[i] &gt;= <span class="string">'0'</span> &amp;&amp; str[i] &lt;= <span class="string">'9'</span> &amp;&amp; i &lt; str.length()) &#123;</span><br><span class="line">        <span class="keyword">if</span>(ans &gt; INT_MAX / <span class="number">10</span> || (ans == INT_MAX / <span class="number">10</span>  &amp;&amp; str[i] &gt; <span class="string">'7'</span>))</span><br><span class="line">            <span class="keyword">return</span> sign == <span class="number">1</span> ? INT_MAX : INT_MIN;</span><br><span class="line">        ans = ans * <span class="number">10</span> + str[i] - <span class="string">'0'</span>;</span><br><span class="line">        ++i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans * sign;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h3&gt;&lt;p&gt;Implement atoi which converts a string to an integer.&lt;/p&gt;
+&lt;p&gt;The funct
+      
+    
+    </summary>
+    
+      <category term="算法 | leetcode" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95-leetcode/"/>
+    
+    
+      <category term="leetcode" scheme="http://yoursite.com/tags/leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>3. Longest Substring Without Repeating Characters</title>

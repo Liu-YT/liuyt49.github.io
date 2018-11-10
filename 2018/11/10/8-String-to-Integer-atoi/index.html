@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="题目Given an array of integers, return indices of the two numbers such that they add up to a specific target. You may assume that each input would have exactly one solution, and you may not use the same">
+<meta name="description" content="题目Implement atoi which converts a string to an integer. The function first discards as many whitespace characters as necessary until the first non-whitespace character is found. Then, starting from th">
 <meta name="keywords" content="leetcode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="1. Two Sum">
-<meta property="og:url" content="http://yoursite.com/2018/11/09/1-Two-Sum/index.html">
+<meta property="og:title" content="8. String to Integer (atoi)">
+<meta property="og:url" content="http://yoursite.com/2018/11/10/8-String-to-Integer-atoi/index.html">
 <meta property="og:site_name" content="My Blog">
-<meta property="og:description" content="题目Given an array of integers, return indices of the two numbers such that they add up to a specific target. You may assume that each input would have exactly one solution, and you may not use the same">
+<meta property="og:description" content="题目Implement atoi which converts a string to an integer. The function first discards as many whitespace characters as necessary until the first non-whitespace character is found. Then, starting from th">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-09T07:05:29.145Z">
+<meta property="og:updated_time" content="2018-11-10T01:52:14.918Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="1. Two Sum">
-<meta name="twitter:description" content="题目Given an array of integers, return indices of the two numbers such that they add up to a specific target. You may assume that each input would have exactly one solution, and you may not use the same">
+<meta name="twitter:title" content="8. String to Integer (atoi)">
+<meta name="twitter:description" content="题目Implement atoi which converts a string to an integer. The function first discards as many whitespace characters as necessary until the first non-whitespace character is found. Then, starting from th">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/09/1-Two-Sum/">
+  <link rel="canonical" href="http://yoursite.com/2018/11/10/8-String-to-Integer-atoi/">
 
 
 
 
 
-  <title>1. Two Sum | My Blog</title>
+  <title>8. String to Integer (atoi) | My Blog</title>
   
 
 
@@ -255,7 +255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/1-Two-Sum/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/10/8-String-to-Integer-atoi/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liuyt49">
@@ -272,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">1. Two Sum</h1>
+          <h1 class="post-title" itemprop="name headline">8. String to Integer (atoi)</h1>
         
 
         <div class="post-meta">
@@ -284,8 +284,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T14:43:50+08:00">
-                2018-11-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-10T09:49:29+08:00">
+                2018-11-10
               </time>
             
 
@@ -344,22 +344,32 @@
       
 
       
-        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>Given an array of integers, return indices of the two numbers such that they add up to a specific target.</p>
-<p>You may assume that each input would have exactly one solution, and you may not use the same element twice.</p>
+        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>Implement atoi which converts a string to an integer.</p>
+<p>The function first discards as many whitespace characters as necessary until the first non-whitespace character is found. Then, starting from this character, takes an optional initial plus or minus sign followed by as many numerical digits as possible, and interprets them as a numerical value.</p>
+<p>The string can contain additional characters after those that form the integral number, which are ignored and have no effect on the behavior of this function.</p>
+<p>If the first sequence of non-whitespace characters in str is not a valid integral number, or if no such sequence exists because either str is empty or it contains only whitespace characters, no conversion is performed.</p>
+<p>If no valid conversion could be performed, a zero value is returned.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>Only the space character<code>&#39; &#39;</code> is considered as whitespace character.</li>
+<li>Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [$−2^{31}$,  $2^{31}$ − 1]. If the numerical value is out of the range of representable values, INT_MAX (2^31 − 1) or INT_MIN (−2^31) is returned.</li>
+</ul>
+<p><strong>Example:</strong></p>
 <blockquote>
-<p>Example:<br>    Given nums = [2, 7, 11, 15], target = 9,<br>   Because nums[0] + nums[1] = 2 + 7 = 9,     return [0, 1].</p>
+<p>Input: “words and 987”<br>Output: 0<br>Explanation: The first non-whitespace character is ‘w’, which is not a numerical digit or a +/- sign. Therefore no valid conversion could be performed.</p>
+<p>Input: “-91283472332”<br>Output: -2147483648<br>Explanation: The number “-91283472332” is out of the range of a 32-bit signed integer.Thefore INT_MIN (−2^31) is returned.</p>
 </blockquote>
 <h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><ul>
-<li>暴力破解，遍历每个元素x并查找是否有另一个值等于target - x。</li>
-<li>时间复杂度为 $O(n^2)$</li>
+<li>本题就是相当于重写atoi这个函数，将字符串转化成整数</li>
+<li>本题需要注意的点<ul>
+<li>将字符串前面的空白去掉</li>
+<li>数字的正负</li>
+<li>数字溢出</li>
+<li>输入无效</li>
 </ul>
-<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; twoSum(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size() - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; nums.size(); ++j) &#123;</span><br><span class="line">                <span class="keyword">if</span>(target - nums[i] == nums[j]) &#123;</span><br><span class="line">                    ans.push_back(i);</span><br><span class="line">                    ans.push_back(j);</span><br><span class="line">                    <span class="keyword">return</span> ans;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="更优解法"><a href="#更优解法" class="headerlink" title="更优解法"></a>更优解法</h3><ul>
-<li>这个是看了答案发现的，利用map的查找，节省时间。</li>
-<li>时间复杂度为 $O(nlogn)$</li>
+</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; twoSum(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; myMap;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(myMap.count(target - nums[i])) &#123;</span><br><span class="line">                ans.push_back(myMap.find(target - nums[i])-&gt;second);</span><br><span class="line">                ans.push_back(i);</span><br><span class="line">                <span class="keyword">return</span> ans;</span><br><span class="line">            &#125; </span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                myMap.insert(make_pair(nums[i], i));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">myAtoi</span><span class="params">(<span class="built_in">string</span> str)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;		<span class="comment">// 返回的数字</span></span><br><span class="line">    <span class="keyword">int</span> sign = <span class="number">1</span>; 		<span class="comment">// 返回数字的符号</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(str[i] == <span class="string">' '</span>) &#123; ++i; &#125;</span><br><span class="line">    <span class="keyword">if</span>(i &lt; str.length &amp;&amp; (str[i] == <span class="string">'+'</span> || str[i] == <span class="string">'-'</span>)) &#123;</span><br><span class="line">        sign = str[i] == <span class="string">'+'</span> ? <span class="number">1</span> : <span class="number">-1</span>;</span><br><span class="line">        ++i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(str[i] &gt;= <span class="string">'0'</span> &amp;&amp; str[i] &lt;= <span class="string">'9'</span> &amp;&amp; i &lt; str.length()) &#123;</span><br><span class="line">        <span class="keyword">if</span>(ans &gt; INT_MAX / <span class="number">10</span> || (ans == INT_MAX / <span class="number">10</span>  &amp;&amp; str[i] &gt; <span class="string">'7'</span>))</span><br><span class="line">            <span class="keyword">return</span> sign == <span class="number">1</span> ? INT_MAX : INT_MIN;</span><br><span class="line">        ans = ans * <span class="number">10</span> + str[i] - <span class="string">'0'</span>;</span><br><span class="line">        ++i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans * sign;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -389,8 +399,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/08/区块链基础问答/" rel="next" title="区块链基础问答">
-                <i class="fa fa-chevron-left"></i> 区块链基础问答
+              <a href="/2018/11/09/3-Longest-Substring-Without-Repeating-Characters/" rel="next" title="3. Longest Substring Without Repeating Characters">
+                <i class="fa fa-chevron-left"></i> 3. Longest Substring Without Repeating Characters
               </a>
             
           </div>
@@ -398,10 +408,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/09/67-Add-Binary/" rel="prev" title="67. Add Binary">
-                67. Add Binary <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -552,7 +558,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更优解法"><span class="nav-number">4.</span> <span class="nav-text">更优解法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现代码"><span class="nav-number">3.</span> <span class="nav-text">实现代码</span></a></li></ol></div>
             
 
           </div>
