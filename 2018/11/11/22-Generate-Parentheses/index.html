@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="题目 Given an unsorted integer array, find the smallest missing positive integer. Example:   12Input: [7,8,9,11,12]Output: 1  Note: Your algorithm should run in O(n) time and uses constant extra space.">
+<meta name="description" content="22. Generate Parentheses题目 Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.For example, given n = 3, a solution set is:      1234567[    &amp;quot;((">
 <meta name="keywords" content="leetcode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="41. First Missing Positive">
-<meta property="og:url" content="http://yoursite.com/2018/11/10/41-First-Missing-Positive/index.html">
+<meta property="og:title" content="22. Generate Parentheses">
+<meta property="og:url" content="http://yoursite.com/2018/11/11/22-Generate-Parentheses/index.html">
 <meta property="og:site_name" content="My Blog">
-<meta property="og:description" content="题目 Given an unsorted integer array, find the smallest missing positive integer. Example:   12Input: [7,8,9,11,12]Output: 1  Note: Your algorithm should run in O(n) time and uses constant extra space.">
+<meta property="og:description" content="22. Generate Parentheses题目 Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.For example, given n = 3, a solution set is:      1234567[    &amp;quot;((">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-10T01:58:59.290Z">
+<meta property="og:updated_time" content="2018-11-11T07:27:30.847Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="41. First Missing Positive">
-<meta name="twitter:description" content="题目 Given an unsorted integer array, find the smallest missing positive integer. Example:   12Input: [7,8,9,11,12]Output: 1  Note: Your algorithm should run in O(n) time and uses constant extra space.">
+<meta name="twitter:title" content="22. Generate Parentheses">
+<meta name="twitter:description" content="22. Generate Parentheses题目 Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.For example, given n = 3, a solution set is:      1234567[    &amp;quot;((">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/10/41-First-Missing-Positive/">
+  <link rel="canonical" href="http://yoursite.com/2018/11/11/22-Generate-Parentheses/">
 
 
 
 
 
-  <title>41. First Missing Positive | My Blog</title>
+  <title>22. Generate Parentheses | My Blog</title>
   
 
 
@@ -255,7 +255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/10/41-First-Missing-Positive/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/11/22-Generate-Parentheses/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liuyt49">
@@ -272,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">41. First Missing Positive</h1>
+          <h1 class="post-title" itemprop="name headline">22. Generate Parentheses</h1>
         
 
         <div class="post-meta">
@@ -284,8 +284,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-10T09:54:02+08:00">
-                2018-11-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-11T15:24:31+08:00">
+                2018-11-11
               </time>
             
 
@@ -344,28 +344,26 @@
       
 
       
-        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><ul>
-<li>Given an unsorted integer array, find the smallest missing positive integer.</li>
-<li><p><strong>Example:</strong></p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: [7,8,9,11,12]</span><br><span class="line">Output: 1</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>Note:</strong> Your algorithm should run in O(n) time and uses constant extra space.</p>
+        <h3 id="22-Generate-Parentheses"><a href="#22-Generate-Parentheses" class="headerlink" title="22. Generate Parentheses"></a>22. Generate Parentheses</h3><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><ul>
+<li>Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.<br>For example, given n = 3, a solution set is:      <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &quot;((()))&quot;,</span><br><span class="line">    &quot;(()())&quot;,</span><br><span class="line">    &quot;(())()&quot;,</span><br><span class="line">    &quot;()(())&quot;,</span><br><span class="line">    &quot;()()()&quot;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><ul>
-<li>本题的题意比较容易理解，即寻找一个无序的数组里面找到一个最小缺失的正整数</li>
-<li>第一想法是将无序数组进行排序，然后遍历一遍排好序的数组即可找出最小缺失的正整数，但是排序算法最优解的时间复杂度都为O(nlogn)，显然不能满足题目的时间复杂度要求</li>
-<li>其次的主要想法就是利用数组的下标，因为下标是从0开始的，不断累增的数列，并且除0外都是正整数<ul>
-<li>遍历数组，将当前元素交换到其减一后作为下标的位置，即<code>nums[i]</code>与<code>nums[nums[i] - 1]</code>进行交换，即将<code>1</code>放到数组<code>0</code>号位，将<code>2</code>放到数组<code>1</code>号位，依此类推。这个步骤比较关键，其中小坑也比较多，有些是提交了才发现的<ul>
-<li>交换条件的选择，可能被交换的元素必须要满足<code>&gt; 0</code>&amp;&amp;<code>&lt; array.size</code>&amp;&amp;<code>nums[i] != nums[nums[i] - 1]</code>,其中最后一个条件是避免两个位置不断的执行交换，例如输入[1,1]的情况，造成死循环</li>
-<li>循环变量的控制，当需要交换的时候需要将循环变量-1，或者说不发生交换的时候，循环变量+1</li>
+<li>本题是利用溯源算法去解决的，穷举出每一种可能性，把所有成功的解都返回解空间。<ul>
+<li>本题利用递归和DFS进行解决，其中重点是找到递归的传递关系，在理解递归的时候只需将其理解成一个黑盒子，考虑其中的效果</li>
+<li>递归的思路<ul>
+<li>回归条件  ：<code>当左右括号加起来等于2n的时候</code></li>
+<li>选择条件1：<code>当左括号的数量小于n的时候</code></li>
+<li>递归关系1：<code>左括号的数量加1</code></li>
+<li>选择条件2：<code>当右括号的数量小于左括号的数量的时候</code> </li>
+<li>递归关系2：<code>右括号的数量加1</code></li>
 </ul>
 </li>
-<li>再次遍历数组，将第一个下标 与对应位置元素 - 1不等的下标返回，若都相等，则返回<code>数组的size</code> + 1</li>
 </ul>
 </li>
 </ul>
-<h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">firstMissingPositive</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> minPos = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> size = nums.size(); </span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将满足条件的的元素进行交换，将元素放到数组下标等于该元素的位置</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; ) &#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] &lt; size &amp;&amp; nums[i] &gt;= <span class="number">1</span> &amp;&amp; nums[i] != nums[nums[i] - <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">int</span> tmp = nums[nums[i] - <span class="number">1</span>];</span><br><span class="line">                nums[nums[i] - <span class="number">1</span>] = nums[i];</span><br><span class="line">                nums[i] = tmp;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                ++i;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">		</span><br><span class="line">        <span class="comment">// 遍历数组，寻找下标与对应位置不等的下标，此下标即为最小整数，否则则为size+1</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; ++i) </span><br><span class="line">            <span class="keyword">if</span>(i != nums[i] - <span class="number">1</span>)</span><br><span class="line">                <span class="keyword">return</span> i + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> size + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; generateParenthesis(<span class="keyword">int</span> n) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; v;</span><br><span class="line">        <span class="built_in">string</span> str = <span class="string">""</span>;</span><br><span class="line">        dfs(str, <span class="number">0</span>, <span class="number">0</span>, n, v);</span><br><span class="line">        <span class="keyword">return</span> v;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">string</span> buildStr, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; &amp;v)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(left + right == <span class="number">2</span> * n) &#123;</span><br><span class="line">            v.push_back(<span class="built_in">string</span>(buildStr));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(left &lt; n) &#123;</span><br><span class="line">            dfs(buildStr + <span class="string">"("</span>, left + <span class="number">1</span>, right, n, v);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(right &lt; left) &#123;</span><br><span class="line">            dfs(buildStr + <span class="string">")"</span>, left, right + <span class="number">1</span>, n, v);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -395,8 +393,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/10/8-String-to-Integer-atoi/" rel="next" title="8. String to Integer (atoi)">
-                <i class="fa fa-chevron-left"></i> 8. String to Integer (atoi)
+              <a href="/2018/11/11/5-Longest-Palindromic-Substring/" rel="next" title="5. Longest Palindromic Substring">
+                <i class="fa fa-chevron-left"></i> 5. Longest Palindromic Substring
               </a>
             
           </div>
@@ -404,10 +402,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/11/5-Longest-Palindromic-Substring/" rel="prev" title="5. Longest Palindromic Substring">
-                5. Longest Palindromic Substring <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -558,7 +552,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现代码"><span class="nav-number">3.</span> <span class="nav-text">实现代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#22-Generate-Parentheses"><span class="nav-number">1.</span> <span class="nav-text">22. Generate Parentheses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">2.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路"><span class="nav-number">3.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现代码"><span class="nav-number">4.</span> <span class="nav-text">实现代码</span></a></li></ol></div>
             
 
           </div>
