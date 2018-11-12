@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="My Blog">
 <meta property="og:description" content="题目Implement pow(x, n), which calculates x raised to the power n (xn).  Example 1:   12Input: 2.00000, 10Output: 1024.00000  Example 2:   12Input: 2.10000, 3Output: 9.26100  Example 3:   123Input: 2.00">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-12T02:14:19.808Z">
+<meta property="og:updated_time" content="2018-11-12T02:17:15.917Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="50. Pow(x, n)">
 <meta name="twitter:description" content="题目Implement pow(x, n), which calculates x raised to the power n (xn).  Example 1:   12Input: 2.00000, 10Output: 1024.00000  Example 2:   12Input: 2.10000, 3Output: 9.26100  Example 3:   123Input: 2.00">
@@ -372,9 +372,11 @@
 <li><p>时间$O(n)$，当n很大时，超时</p>
 </li>
 <li><p>未考虑边界条件<code>n =INT_MIN</code>，这个时候<code>-n</code>赋不进<code>n</code></p>
-<h4 id="解法-2-—-分治（AC）"><a href="#解法-2-—-分治（AC）" class="headerlink" title="解法 2 — 分治（AC）"></a>解法 2 — <strong>分治</strong>（<code>AC</code>）</h4></li>
+</li>
 </ul>
 </li>
+</ul>
+<h4 id="解法-2-—-分治（AC）"><a href="#解法-2-—-分治（AC）" class="headerlink" title="解法 2 — 分治（AC）"></a>解法 2 — <strong>分治</strong>（<code>AC</code>）</h4><ul>
 <li><p>超时问题解决</p>
 <ul>
 <li>将$x^n$分解为$x^{n/2} <em> x^{n/2} </em>  x^{n\%2}$递归求解</li>
