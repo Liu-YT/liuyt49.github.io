@@ -81,23 +81,23 @@
 
 
 
-<meta name="description" content="1. 什么是持续集成服务 Travis CI 提供的是持续集成服务（Continuous Integration，简称 CI）。它绑定 Github 上面的项目，只要有新的代码，就会自动抓取。然后，提供一个运行环境，执行测试，完成构建，还能部署到服务器。持续集成指的是只要代码有变更，就自动运行构建和测试，反馈运行结果。确保符合预期以后，再将新代码”集成”到主干。持续集成的好处在于，每次代码的小幅变">
+<meta name="description" content="什么是持续集成服务 Travis CI 提供的是持续集成服务（Continuous Integration，简称 CI）。它绑定 Github 上面的项目，只要有新的代码，就会自动抓取。然后，提供一个运行环境，执行测试，完成构建，还能部署到服务器。持续集成指的是只要代码有变更，就自动运行构建和测试，反馈运行结果。确保符合预期以后，再将新代码”集成”到主干。持续集成的好处在于，每次代码的小幅变更，就">
 <meta name="keywords" content="服务计算">
 <meta property="og:type" content="article">
 <meta property="og:title" content="服务计算 - 4 持续集成服务 Travis CI">
 <meta property="og:url" content="http://yoursite.com/2018/11/08/服务计算-4-持续集成服务-Travis-CI/index.html">
 <meta property="og:site_name" content="My Blog">
-<meta property="og:description" content="1. 什么是持续集成服务 Travis CI 提供的是持续集成服务（Continuous Integration，简称 CI）。它绑定 Github 上面的项目，只要有新的代码，就会自动抓取。然后，提供一个运行环境，执行测试，完成构建，还能部署到服务器。持续集成指的是只要代码有变更，就自动运行构建和测试，反馈运行结果。确保符合预期以后，再将新代码”集成”到主干。持续集成的好处在于，每次代码的小幅变">
+<meta property="og:description" content="什么是持续集成服务 Travis CI 提供的是持续集成服务（Continuous Integration，简称 CI）。它绑定 Github 上面的项目，只要有新的代码，就会自动抓取。然后，提供一个运行环境，执行测试，完成构建，还能部署到服务器。持续集成指的是只要代码有变更，就自动运行构建和测试，反馈运行结果。确保符合预期以后，再将新代码”集成”到主干。持续集成的好处在于，每次代码的小幅变更，就">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/2018/11/08/服务计算-4-持续集成服务-Travis-CI/1.png">
 <meta property="og:image" content="http://yoursite.com/2018/11/08/服务计算-4-持续集成服务-Travis-CI/2.png">
 <meta property="og:image" content="http://yoursite.com/2018/11/08/服务计算-4-持续集成服务-Travis-CI/3.png">
 <meta property="og:image" content="http://yoursite.com/2018/11/08/服务计算-4-持续集成服务-Travis-CI/4.png">
 <meta property="og:image" content="http://yoursite.com/2018/11/08/服务计算-4-持续集成服务-Travis-CI/5.png">
-<meta property="og:updated_time" content="2018-11-13T12:13:04.627Z">
+<meta property="og:updated_time" content="2018-11-13T12:14:53.740Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="服务计算 - 4 持续集成服务 Travis CI">
-<meta name="twitter:description" content="1. 什么是持续集成服务 Travis CI 提供的是持续集成服务（Continuous Integration，简称 CI）。它绑定 Github 上面的项目，只要有新的代码，就会自动抓取。然后，提供一个运行环境，执行测试，完成构建，还能部署到服务器。持续集成指的是只要代码有变更，就自动运行构建和测试，反馈运行结果。确保符合预期以后，再将新代码”集成”到主干。持续集成的好处在于，每次代码的小幅变">
+<meta name="twitter:description" content="什么是持续集成服务 Travis CI 提供的是持续集成服务（Continuous Integration，简称 CI）。它绑定 Github 上面的项目，只要有新的代码，就会自动抓取。然后，提供一个运行环境，执行测试，完成构建，还能部署到服务器。持续集成指的是只要代码有变更，就自动运行构建和测试，反馈运行结果。确保符合预期以后，再将新代码”集成”到主干。持续集成的好处在于，每次代码的小幅变更，就">
 <meta name="twitter:image" content="http://yoursite.com/2018/11/08/服务计算-4-持续集成服务-Travis-CI/1.png">
 
 
@@ -350,16 +350,16 @@
       
 
       
-        <h2 id="1-什么是持续集成服务"><a href="#1-什么是持续集成服务" class="headerlink" title="1. 什么是持续集成服务"></a>1. 什么是持续集成服务</h2><blockquote>
+        <h2 id="什么是持续集成服务"><a href="#什么是持续集成服务" class="headerlink" title="什么是持续集成服务"></a>什么是持续集成服务</h2><blockquote>
 <p>Travis CI 提供的是持续集成服务（Continuous Integration，简称 CI）。它绑定 Github 上面的项目，只要有新的代码，就会自动抓取。然后，提供一个运行环境，执行测试，完成构建，还能部署到服务器。<br>持续集成指的是只要代码有变更，就自动运行构建和测试，反馈运行结果。确保符合预期以后，再将新代码”集成”到主干。<br>持续集成的好处在于，每次代码的小幅变更，就能看到运行结果，从而不断累积小的变更，而不是在开发周期结束时，一下子合并一大块代码。</p>
 </blockquote>
-<h2 id="2-创建一个简单的含测试的go项目"><a href="#2-创建一个简单的含测试的go项目" class="headerlink" title="2 创建一个简单的含测试的go项目"></a>2 创建一个简单的含测试的go项目</h2><pre><code>Travis CI 只支持 Github，不支持其他代码托管服务。
+<h2 id="创建一个简单的含测试的go项目"><a href="#创建一个简单的含测试的go项目" class="headerlink" title="创建一个简单的含测试的go项目"></a>创建一个简单的含测试的go项目</h2><pre><code>Travis CI 只支持 Github，不支持其他代码托管服务。
 </code></pre><ul>
 <li>测试项目： <a href="https://github.com/Liu-YT/Hello-Go" target="_blank" rel="noopener">Hello-Go</a></li>
 <li><code>README.md</code>包含详细的创建过程</li>
 <li>Go test 测试结果<br><img src="/2018/11/08/服务计算-4-持续集成服务-Travis-CI/1.png" alt=""></li>
 </ul>
-<h2 id="3-Travis-CI的使用"><a href="#3-Travis-CI的使用" class="headerlink" title="3. Travis CI的使用"></a>3. Travis CI的使用</h2><ol>
+<h2 id="Travis-CI的使用"><a href="#Travis-CI的使用" class="headerlink" title="Travis CI的使用"></a>Travis CI的使用</h2><ol>
 <li>打开 <a href="https://travis-ci.org/" target="_blank" rel="noopener">Travis CI</a>，使用你的 Github 账号登录后它会同步你的仓库</li>
 <li>找到你的 <code>Hello-Go</code> 仓库，打开仓库旁边的开关。一旦激活了一个仓库，Travis 会监听这个仓库的所有变化。<br><img src="/2018/11/08/服务计算-4-持续集成服务-Travis-CI/2.png" alt=""></li>
 <li><p><code>Travis</code> 要求项目的根目录下面，必须有一个<code>.travis.yml</code>文件。这是配置文件，指定了<code>Travis</code>的行为。该文件必须保存在 Github 仓库里面，一旦代码仓库有新的 Commit，Travis 就会去找这个文件，执行里面的命令。在仓库的根目录添加.travis.yml文件，如下：</p>
@@ -569,7 +569,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-什么是持续集成服务"><span class="nav-number">1.</span> <span class="nav-text">1. 什么是持续集成服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-创建一个简单的含测试的go项目"><span class="nav-number">2.</span> <span class="nav-text">2 创建一个简单的含测试的go项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Travis-CI的使用"><span class="nav-number">3.</span> <span class="nav-text">3. Travis CI的使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是持续集成服务"><span class="nav-number">1.</span> <span class="nav-text">什么是持续集成服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个简单的含测试的go项目"><span class="nav-number">2.</span> <span class="nav-text">创建一个简单的含测试的go项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Travis-CI的使用"><span class="nav-number">3.</span> <span class="nav-text">Travis CI的使用</span></a></li></ol></div>
             
 
           </div>
