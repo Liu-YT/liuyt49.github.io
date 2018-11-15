@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-11-14T03:30:31.166Z</updated>
+  <updated>2018-11-15T05:18:27.118Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,45 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>134. Gas Station</title>
+    <link href="http://yoursite.com/2018/11/15/134-Gas-Station/"/>
+    <id>http://yoursite.com/2018/11/15/134-Gas-Station/</id>
+    <published>2018-11-15T05:17:01.000Z</published>
+    <updated>2018-11-15T05:18:27.118Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>There are N gas stations along a circular route, where the amount of gas at station i is <code>gas[i]</code>.</p><p>You have a car with an unlimited gas tank and it costs <code>cost[i]</code> of gas to travel from station i to its next station (i+1). You begin the journey with an empty tank at one of the gas stations.</p><p>Return the starting gas station’s index if you can travel around the circuit once in the clockwise direction, otherwise return -1.</p><p><strong>Note:</strong></p><ul><li>If there exists a solution, it is guaranteed to be unique.</li><li>Both input arrays are non-empty and have the same length.</li><li>Each element in the input arrays is a non-negative integer.</li></ul><p><strong>Example 1:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Input: </span><br><span class="line">gas  = [1,2,3,4,5]</span><br><span class="line">cost = [3,4,5,1,2]</span><br><span class="line"></span><br><span class="line">Output: 3</span><br><span class="line"></span><br><span class="line">Explanation:</span><br><span class="line">Start at station 3 (index 3) and fill up with 4 unit of gas. Your tank = 0 + 4 = 4</span><br><span class="line">Travel to station 4. Your tank = 4 - 1 + 5 = 8</span><br><span class="line">Travel to station 0. Your tank = 8 - 2 + 1 = 7</span><br><span class="line">Travel to station 1. Your tank = 7 - 3 + 2 = 6</span><br><span class="line">Travel to station 2. Your tank = 6 - 4 + 3 = 5</span><br><span class="line">Travel to station 3. The cost is 5. Your gas is just enough to travel back to station 3.</span><br><span class="line">Therefore, return 3 as the starting index.</span><br></pre></td></tr></table></figure></p><p><strong>Example 2:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Input: </span><br><span class="line">gas  = [2,3,4]</span><br><span class="line">cost = [3,4,3]</span><br><span class="line"></span><br><span class="line">Output: -1</span><br><span class="line"></span><br><span class="line">Explanation:</span><br><span class="line">You can&apos;t start at station 0 or 1, as there is not enough gas to travel to the next station.</span><br><span class="line">Let&apos;s start at station 2 and fill up with 4 unit of gas. Your tank = 0 + 4 = 4</span><br><span class="line">Travel to station 0. Your tank = 4 - 3 + 2 = 3</span><br><span class="line">Travel to station 1. Your tank = 3 - 3 + 3 = 3</span><br><span class="line">You cannot travel back to station 2, as it requires 4 unit of gas but you only have 3.</span><br><span class="line">Therefore, you can&apos;t travel around the circuit once no matter where you start.</span><br></pre></td></tr></table></figure></p><h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><ul><li>这道题还是比较简单的，给出汽车行驶到每个点需要的油量<code>cost[i]</code>以及该点可以补充的油量<code>gas[i]</code>     ,求能否顺序走完一圈</li><li>首先整个行程的总代价<code>total</code>=<code>gas总和</code> - <code>cost总和</code>，如果<code>total</code>小于0，则整个行程不可能可以被完成，但是如果<code>total</code>大于0，则行程一定可以被完成。</li><li><code>preTank</code>记录从开始节点<code>i</code>到当前节点<code>j</code>所得代价<ul><li><code>preTank &lt; 0</code>，则说明不能顺利到达，因为<code>cost</code>比<code>gas</code>大，当然两个地点中间的任意一点也是不能顺利到达的，因为每次前进的<code>preTank</code>都需要大于等于0，此时需要把当前节点作为行程的节点，并且<code>preTank = gas[j] - cost[j]</code>。</li><li><code>preTank &gt;= 0</code>， <code>preTank += gas[j] - cost[j]</code>，继续前进。 </li></ul></li></ul><h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">canCompleteCircuit</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; gas, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; cost)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> size = gas.size();</span><br><span class="line">        <span class="keyword">int</span> preTank = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> tank = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; ++i) &#123;</span><br><span class="line">            tank += gas[i] - cost[i];</span><br><span class="line">            <span class="keyword">if</span>(preTank &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                start = i;</span><br><span class="line">                preTank = gas[i] - cost[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                preTank += gas[i] - cost[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> tank &gt;= <span class="number">0</span> ? start : <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h3&gt;&lt;p&gt;There are N gas stations along a circular route, where the amount of g
+      
+    
+    </summary>
+    
+      <category term="算法 | leetcode" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95-leetcode/"/>
+    
+    
+      <category term="leetcode" scheme="http://yoursite.com/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>207. Course Schedule II</title>
+    <link href="http://yoursite.com/2018/11/15/207-Course-Schedule-II/"/>
+    <id>http://yoursite.com/2018/11/15/207-Course-Schedule-II/</id>
+    <published>2018-11-15T05:16:40.000Z</published>
+    <updated>2018-11-15T05:16:40.703Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>785. Is Graph Bipartite?</title>
@@ -470,58 +509,6 @@
     
     
       <category term="服务计算" scheme="http://yoursite.com/tags/%E6%9C%8D%E5%8A%A1%E8%AE%A1%E7%AE%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>VirtualBox安装Centos7虚拟机教程</title>
-    <link href="http://yoursite.com/2018/11/08/VirtualBox%E5%AE%89%E8%A3%85Centos7%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%95%99%E7%A8%8B/"/>
-    <id>http://yoursite.com/2018/11/08/VirtualBox安装Centos7虚拟机教程/</id>
-    <published>2018-11-08T06:10:56.000Z</published>
-    <updated>2018-11-08T06:20:12.632Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="实验准备"><a href="#实验准备" class="headerlink" title="实验准备"></a>实验准备</h4><ul><li>VirtualBox安装，下载Oracle VirtualBox 5.X安装包，<a href="https://www.virtualbox.org/" target="_blank" rel="noopener">官方下载</a></li><li>Centos安装包 ，下载centos的安装包，<a href="https://www.centos.org/download/" target="_blank" rel="noopener">官方下载</a><hr></li></ul><h4 id="实验环境配置"><a href="#实验环境配置" class="headerlink" title="实验环境配置"></a>实验环境配置</h4><ul><li><strong>安装VirtualBox，并运行</strong><ul><li>配置 VirtualBox 虚拟机存储位置，避免找不到虚拟机存储位置，同时避免虚拟机装在系统盘上，造成启动盘浪费<ul><li>VirtualBox菜单 ：管理 -&gt; 全局设定，常规页面 -&gt;修改默认虚拟电脑的存放位置<br> <img src="/2018/11/08/VirtualBox安装Centos7虚拟机教程/1.png" alt="这里写图片描述"></li><li>创建虚拟机内部虚拟网络，使得VirtualBox  内部虚拟机可以通过它，实现虚拟机之间、虚拟机与主机的通讯<ul><li>VirtualBox菜单 ：管理 -&gt; 主机网络管理器，创建一块虚拟网卡，网址分配：<code>192.168.100.1/24</code>，掩码为<code>255.255.255.0</code><br><img src="/2018/11/08/VirtualBox安装Centos7虚拟机教程/2.png" alt="这里写图片描述"></li><li>在主机 windows 命令行窗口输入 <code>ipconfig</code> 就可以看到 <code>VirtualBox Host-Only Network #?:</code> 的网卡<br><img src="/2018/11/08/VirtualBox安装Centos7虚拟机教程/3.png" alt="这里写图片描述"></li></ul></li></ul></li><li><strong>创建新的虚拟机</strong><ul><li>点击“新建”按钮 <img src="/2018/11/08/VirtualBox安装Centos7虚拟机教程/4.png" alt="新建按钮"><br><img src="/2018/11/08/VirtualBox安装Centos7虚拟机教程/5.png" alt="这里写图片描述"><br>虚拟机务必以<code>cent</code>开头，系统版本将会自动识别，安装中分配的内存大小建议为2G，并且创建虚拟磁盘，存储空间最好分配30G以上，避免以后扩展难。<ul><li>虚拟机配置(右键虚拟机点击设置)<ul><li>显示，显存采用默认。如果是桌面版，显存越大越好<br><img src="/2018/11/08/VirtualBox安装Centos7虚拟机教程/6.png" alt="这里写图片描述"><ul><li>网络，第一块网卡必须是<code>NAT</code>；第二块网卡连接方式： <code>Host-Only</code>，接口就是前面创建的虚拟网卡<br><img src="/2018/11/08/VirtualBox安装Centos7虚拟机教程/7.png" alt="网络配置"></li></ul></li></ul></li></ul></li></ul></li></ul></li></ul><hr><h4 id="安装centos-7"><a href="#安装centos-7" class="headerlink" title="安装centos 7"></a>安装centos 7</h4><ul><li>加载iso文件<ul><li>点击虚拟机，在虚拟机右侧详情页面<br>  存储-&gt;点击<code>[光驱]没有盘片</code><br><img src="/2018/11/08/VirtualBox安装Centos7虚拟机教程/8.png" alt="这里写图片描述"></li></ul></li><li>安装centos系统<ul><li>双击虚拟机，进入安装</li><li>选择语言，自己喜欢的就ok了</li><li>配置<code>安装位置</code><br><img src="/2018/11/08/VirtualBox安装Centos7虚拟机教程/9.png" alt="这里写图片描述"><ul><li>配置<code>网络与主机名</code><br><img src="/2018/11/08/VirtualBox安装Centos7虚拟机教程/10.png" alt="这里写图片描述"></li><li>修改主机名，并且开启两个网卡，同时对第二块网卡进行配置（点击第二个网卡页面内的<code>configue...</code>按钮）<ul><li>配置(<code>configue</code>) -&gt; IPv4设置(<code>IPv4 Settings</code>) -&gt; 添加(<code>Add</code>)，同时获取方法(<code>Method</code>)改成手动设置(<code>Manual</code>)<br><img src="/2018/11/08/VirtualBox安装Centos7虚拟机教程/11.png" alt="这里写图片描述"><br>其中ipv4设置地址为<code>192.168.100.2</code>，网关为<code>255.255.255.0</code></li></ul></li></ul></li></ul></li><li>继续完成安装</li><li>设置root密码，可以不创建用户，直接使用root用户登陆，普通用户登陆需要执行某些命令的时候没有权限，或者使用普通用户登陆以后可以切换到root用户，使用命令<code>su</code>进行切换<ul><li>root账号， 用户名：<code>root</code>， 密码：<code>已设置的root的密码</code></li></ul></li></ul><hr><h4 id="系统设置"><a href="#系统设置" class="headerlink" title="系统设置"></a>系统设置</h4><ul><li>检查网卡配置<ul><li>配置网络的UI界面 <code>nmtui</code>，配置第二块网卡地址</li><li>ping 主机，例如： <code>ping 192.168.100.1</code></li><li>ping 外网，例如：<code>ping www.baidu.com</code></li></ul></li><li>升级OS系统内核<ul><li>获取wget，<code>yum install wget</code><ul><li>配置源，<a href="https://opsx.alibaba.com/mirror" target="_blank" rel="noopener">阿里云源</a> （建议配置，非必需）</li><li>升级 OS内核， <code>yum update</code><hr></li></ul></li></ul></li></ul><h4 id="安装图形化界面（可选）"><a href="#安装图形化界面（可选）" class="headerlink" title="安装图形化界面（可选）"></a>安装图形化界面（可选）</h4><ul><li>重新配置虚拟机 CPU，内存，显存</li><li>启动虚拟机</li><li>安装桌面 <code>yum groupinstall &quot;GNOME Desktop&quot; &quot;Graphical Administration Tools&quot;</code></li><li>设置启动目标为桌面 <code>ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target</code></li><li>重启</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h4 id=&quot;实验准备&quot;&gt;&lt;a href=&quot;#实验准备&quot; class=&quot;headerlink&quot; title=&quot;实验准备&quot;&gt;&lt;/a&gt;实验准备&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;VirtualBox安装，下载Oracle VirtualBox 5.X安装包，&lt;a href=&quot;https:/
-      
-    
-    </summary>
-    
-      <category term="服务计算" scheme="http://yoursite.com/categories/%E6%9C%8D%E5%8A%A1%E8%AE%A1%E7%AE%97/"/>
-    
-    
-      <category term="虚拟机 | 搭建教程" scheme="http://yoursite.com/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA-%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PoW共识机制原理及优缺点</title>
-    <link href="http://yoursite.com/2018/11/07/PoW%E5%85%B1%E8%AF%86%E6%9C%BA%E5%88%B6%E5%8E%9F%E7%90%86%E5%8F%8A%E4%BC%98%E7%BC%BA%E7%82%B9/"/>
-    <id>http://yoursite.com/2018/11/07/PoW共识机制原理及优缺点/</id>
-    <published>2018-11-07T14:39:21.000Z</published>
-    <updated>2018-11-08T11:48:24.389Z</updated>
-    
-    <content type="html"><![CDATA[<p>PoW(<code>Proof of Work</code>)工作量证明，最早应用于Adam Back 1996年提出的<code>Hashcash</code>中，而后被中本聪改造为以“挖矿”形式实现区块链一致性的共识机制。</p><p>PoW(<code>Proof of Work</code>)机制，其核心设计思路是提出一个复杂度计算值的运算过程，用户需要消耗大量的算力才能计算出一个满意的值并提供给服务方快速验证。在比特币网络中，就应用了PoW这种共识机制，挖矿实际是一个竞争记账权的过程，矿工们需要以最快的速度计算出符合要求的<code>Block Hash</code>(区块哈希值)，以此获得新区块的记账权以及相应的比特币的奖励。当然由于哈希函数是无法预测的随机散列函数，所以计算出来符合要求的哈希值具有一定的难度，需要耗费大量算力才能获得被认可的结果，矿工需要不停的变更区块头中的随机数，并对每次变更后的区块头做双重SHA256运算，将结果值与当前网络的目标值做对比，如果小于目标值，则解题成功，工作量证明完成。在整个过程中，矿工贡献的算力是其工作量，工作量体现在其计算得到的满足要求的哈希值，证明其确实经过大量的尝试和计算。当工作量证明完成后，挖矿节点马上对交易区块进行打包确认并广播给全部节点，然后获得相应的比特币奖励。但是这种过程是有可能存在两个矿工同时解出了题目的情况的，则这时将造成软分叉。从分叉的区块起，由于不同的矿工跟从了不同的区块，在分叉出来的两条不同链上，算力是有差别的，因此两条链的增长速度也是不一样的，在一段时间之后，总有一条链的长度要超过另一条。此时一旦矿工发现存在一条更长的链，则会在这条链的基础上继续挖矿，而另一条分叉则会被抛弃。到目前为此PoW技术在区块链中起着至关重要的作用，它也成为了加密货币中主流的共识机制之一，不仅仅应用在比特币上，像以太坊等加密货币都有使用。</p><p>为什么要采用PoW这种共识机制呢？首先，很多人都认为挖矿过程中浪费大量的计算机资源去计算一个似乎没有很大意义的值，得到仅仅是一些虚拟货币而已（虽然现在比较值钱）。不可否认，PoW共识机制确实存在比较多的缺点。首先，其造成巨额支出，挖矿需要高度专业化的计算机硬件来运行复杂的算法，当然普通的计算机也可以使用，只是基本不可能挖到矿，算力根本不是一个级别的。同时，挖矿耗费大量的电力。在2017年全球矿工用于比特币挖矿的电力已经超过159个国家的年度电费输出，这是十分浪费资源且不环保的。同时，这些计算是“无用”。矿工做很多工作来生成块并消耗大量电力。但是，他们的计算在其他任何地方都不适用。它们保证了网络的安全性，但不能应用于商业，科学或任何其他领域。但是，PoW共识机制还是有一些好处的，其主要好处是反DoS攻击和保证采矿的公平性。PoW对网络中的操作施加了一些限制。他们需要付出很多努力才能被执行。高效的攻击需要大量的计算能力和大量的时间来进行计算。因此，攻击是可能的，攻击者必须投入超过总体51%的运算力才能保证篡改结果，攻击成本是相当高的，效益也不高。同时PoW也保证了挖矿的公平性，每位矿工获得记账权的概率与其投入的算力有关，投入越多收获也越多。</p><p>对于PoW存在问题，主要是存在着浪费过多资源在无用的计算中，对于这个问题，个人感觉难以从根源上解决，PoW的机制使得注定做出很多无用的计算，浪费很多资源，我们是否可以考虑使用别的共识机制代替掉PoW共识机制呢。例如PoS(<code>Proof of Stake</code>)股权证明机制或者DPoS（<code>Delegated Proof of Stake</code>）：授权股权证明机制，这两种都可以减少大量的能耗，对于PoS甚至可以不用挖矿，不需要大量耗费电力和能源，收益与个人持有加密货币数量与持有时间相关，但是也有可能导致马太效应。对于PoW共识机制存在的问题，目前似乎难以找到从根源上解决的办法，最理想的似乎是使用PoS或者DPoS共识机制，当然如果能够充分的利用其中的计算机资源，将每次计算一个”无用”的值变成计算一些有价值的东西，这样也是有一定的改进的。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;PoW(&lt;code&gt;Proof of Work&lt;/code&gt;)工作量证明，最早应用于Adam Back 1996年提出的&lt;code&gt;Hashcash&lt;/code&gt;中，而后被中本聪改造为以“挖矿”形式实现区块链一致性的共识机制。&lt;/p&gt;
-&lt;p&gt;PoW(&lt;code&gt;Proof 
-      
-    
-    </summary>
-    
-      <category term="区块链" scheme="http://yoursite.com/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
-    
-    
-      <category term="区块链" scheme="http://yoursite.com/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
     
   </entry>
   
