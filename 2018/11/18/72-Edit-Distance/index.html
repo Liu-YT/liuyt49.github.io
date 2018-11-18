@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="题目 Given a string, find the length of the longest substring without repeating characters. Example   1234Input: &amp;quot;pwwkew&amp;quot;Output: 3Explanation: The answer is &amp;quot;wke&amp;quot;, with the length of">
+<meta name="description" content="题目Given two words word1 and word2, find the minimum number of operations required to convert word1 to word2. You have the following 3 operations permitted on a word:  Insert a character Delete a chara">
 <meta name="keywords" content="leetcode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="3. Longest Substring Without Repeating Characters">
-<meta property="og:url" content="http://yoursite.com/2018/11/09/3-Longest-Substring-Without-Repeating-Characters/index.html">
+<meta property="og:title" content="72. Edit Distance">
+<meta property="og:url" content="http://yoursite.com/2018/11/18/72-Edit-Distance/index.html">
 <meta property="og:site_name" content="My Blog">
-<meta property="og:description" content="题目 Given a string, find the length of the longest substring without repeating characters. Example   1234Input: &amp;quot;pwwkew&amp;quot;Output: 3Explanation: The answer is &amp;quot;wke&amp;quot;, with the length of">
+<meta property="og:description" content="题目Given two words word1 and word2, find the minimum number of operations required to convert word1 to word2. You have the following 3 operations permitted on a word:  Insert a character Delete a chara">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-09T07:15:19.324Z">
+<meta property="og:updated_time" content="2018-11-18T05:50:49.874Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="3. Longest Substring Without Repeating Characters">
-<meta name="twitter:description" content="题目 Given a string, find the length of the longest substring without repeating characters. Example   1234Input: &amp;quot;pwwkew&amp;quot;Output: 3Explanation: The answer is &amp;quot;wke&amp;quot;, with the length of">
+<meta name="twitter:title" content="72. Edit Distance">
+<meta name="twitter:description" content="题目Given two words word1 and word2, find the minimum number of operations required to convert word1 to word2. You have the following 3 operations permitted on a word:  Insert a character Delete a chara">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/09/3-Longest-Substring-Without-Repeating-Characters/">
+  <link rel="canonical" href="http://yoursite.com/2018/11/18/72-Edit-Distance/">
 
 
 
 
 
-  <title>3. Longest Substring Without Repeating Characters | My Blog</title>
+  <title>72. Edit Distance | My Blog</title>
   
 
 
@@ -255,7 +255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/09/3-Longest-Substring-Without-Repeating-Characters/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/18/72-Edit-Distance/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liuyt49">
@@ -272,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">3. Longest Substring Without Repeating Characters</h1>
+          <h1 class="post-title" itemprop="name headline">72. Edit Distance</h1>
         
 
         <div class="post-meta">
@@ -284,8 +284,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-09T15:13:22+08:00">
-                2018-11-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-18T13:48:30+08:00">
+                2018-11-18
               </time>
             
 
@@ -344,21 +344,57 @@
       
 
       
-        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><ul>
-<li>Given a string, find the length of the longest substring without repeating characters.</li>
-<li>Example   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;pwwkew&quot;</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: The answer is &quot;wke&quot;, with the length of 3. </span><br><span class="line">Note that the answer must be a substring, &quot;pwke&quot; is a subsequence and not a substring.</span><br></pre></td></tr></table></figure>
+        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>Given two words word1 and word2, find the minimum number of operations required to convert <em>word1</em> to <em>word2</em>.</p>
+<p>You have the following 3 operations permitted on a word:</p>
+<ul>
+<li>Insert a character</li>
+<li>Delete a character</li>
+<li>Replace a character</li>
+</ul>
+<p><strong>Example 1:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: word1 = &quot;horse&quot;, word2 = &quot;ros&quot;</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: </span><br><span class="line">horse -&gt; rorse (replace &apos;h&apos; with &apos;r&apos;)</span><br><span class="line">rorse -&gt; rose (remove &apos;r&apos;)</span><br><span class="line">rose -&gt; ros (remove &apos;e&apos;)</span><br></pre></td></tr></table></figure></p>
+<p><strong>Example 2:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Input: word1 = &quot;intention&quot;, word2 = &quot;execution&quot;</span><br><span class="line">Output: 5</span><br><span class="line">Explanation: </span><br><span class="line">intention -&gt; inention (remove &apos;t&apos;)</span><br><span class="line">inention -&gt; enention (replace &apos;i&apos; with &apos;e&apos;)</span><br><span class="line">enention -&gt; exention (replace &apos;n&apos; with &apos;x&apos;)</span><br><span class="line">exention -&gt; exection (replace &apos;n&apos; with &apos;c&apos;)</span><br><span class="line">exection -&gt; execution (insert &apos;u&apos;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="思路解析"><a href="#思路解析" class="headerlink" title="思路解析"></a>思路解析</h3><ul>
+<li>这道题是一道动态规划的题，需要将一个字符串<code>word1</code>经过<code>add</code>、<code>delete</code>、<code>replace</code>三种操作变换成另一个字符串<code>word2</code>，求最小的编辑距离.</li>
+<li><p>解题思路：假设<code>word1=[123...n]</code>    ,<code>word2=[123...m]</code>，要求使得<code>word1</code>转换成<code>word2</code>。对于这个问题，我们将其分解为子问题求解。</p>
+<ul>
+<li>定义dis[i][j]<ul>
+<li>表示<code>word1&#39; = [1..i]</code>转换成<code>word2&#39; = [1...j]</code>的编辑距离（<code>i</code>代表<code>word1</code>前<code>i</code>个字符,<code>j</code>代表<code>word2</code>前<code>j</code>个字符）</li>
+<li>因此<code>word1</code>到<code>word2</code>的编辑距离为<code>dis[n][m]</code>        </li>
+</ul>
+</li>
+<li>求解<code>word1</code>到<code>word2</code>的编辑距离，我们可以求取<code>word1</code>的前<code>i</code>个字符(<code>0 &lt; i &lt; n</code>)到<code>word2</code>的前<code>j</code>个字符(<code>0 &lt; j &lt; m</code>)的编辑距离<code>dis[i][j]</code>。当然每个<code>dis[i][j]</code>都基于之前的计算。</li>
+<li><p>步骤</p>
+<ul>
+<li>初始化<ul>
+<li>dis[i, 0] = i</li>
+<li>dis[0, j] = j</li>
+</ul>
+</li>
+<li><p><strong>递推关系</strong>—<code>核心</code>    </p>
+<script type="math/tex; mode=display">dis[i][j] = min \begin{cases}
+      dis[i][j-1] + 1\\
+      dis[i-1][j] + 1\\
+      dis[i-1][j-1] + (word1[i-1] == word2[j-1] ? 0 : 1))\\
+      \end{cases}</script><p>  其中三个操作的表示</p>
+<ul>
+<li><strong>insert</strong>:     <code>dis[i, j] = dis[i][j-1] + 1</code>    </li>
+<li><strong>delete</strong>:    <code>dis[i, j] = dis[i-1][j] + 1</code></li>
+<li><p><strong>replace or no op</strong>：<code>dis[i, j] = dis[i-1][j-1] + (word1[i-1] == word2[j-1] ? 0 : 1)</code></p>
+<p>对于每<code>dis[i][j]</code>，我们选取最小编辑距离    </p>
 </li>
 </ul>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><ul>
-<li>本题目的是得到字符串里面没有重复字符的最长子串的长度，一开始首先想到的就是两个嵌套的循环，通过暴力破解，寻找每个字符开头的最大字串，时间复杂度比较高，为O(n^2)。</li>
-<li>通过与别人讨论得到一定的启发，从头开始遍历字符，类似滑窗思想来解决本题<ul>
-<li>利用一个数组来判断字符是否已经在子串中，其中字符的ASCII值作为数组的下标，其在字符串中的下标则存储在数组相应下标指向的位置</li>
-<li>假设当遇到一个字符‘a’已经出现当前子串中，则从该子串中的’a’的前一个字符继续当前子串的扩展，新的子串的初始长度为<code>i[第二个&#39;a&#39;的下标]-重复字符的下标[第一个&#39;a&#39;的下标]</code></li>
-<li>时间复杂度 O(n)</li>
+</li>
+</ul>
+</li>
+<li>最后得到的<code>dis[n][m]</code>就是<code>word1</code>到<code>word2</code>的编辑距离</li>
 </ul>
 </li>
 </ul>
-<h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> maxLength = <span class="number">0</span>;  <span class="comment">// 记录最长字串的长度</span></span><br><span class="line">    <span class="keyword">int</span> tmp = <span class="number">0</span>;        <span class="comment">// 遍历字符串时候记录当前字串的长度</span></span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">array</span>[<span class="number">128</span>];</span><br><span class="line">    <span class="built_in">memset</span>(<span class="built_in">array</span>, <span class="number">-1</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span>) * <span class="number">128</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">array</span>[s[i]] == <span class="number">-1</span>) </span><br><span class="line">            ++tmp;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; <span class="number">128</span>; ++j)</span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">array</span>[j] &lt; <span class="built_in">array</span>[s[i]])</span><br><span class="line">                    <span class="built_in">array</span>[j] = <span class="number">-1</span>;</span><br><span class="line">            tmp = i - <span class="built_in">array</span>[s[i]];</span><br><span class="line">        &#125;</span><br><span class="line">        maxLength = maxLength &gt; tmp ? maxLength : tmp;</span><br><span class="line">        <span class="built_in">array</span>[s[i]] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxLength;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minDistance</span><span class="params">(<span class="built_in">string</span> word1, <span class="built_in">string</span> word2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = word1.size();</span><br><span class="line">        <span class="keyword">int</span> n = word2.size();</span><br><span class="line">        <span class="keyword">int</span> dis[m+<span class="number">1</span>][n+<span class="number">1</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= m; ++i)</span><br><span class="line">            dis[i][<span class="number">0</span>] = i;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>;j &lt;= n; ++j)</span><br><span class="line">            dis[<span class="number">0</span>][j] = j;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// m or n equal 0</span></span><br><span class="line">        <span class="keyword">if</span> (!m &amp;&amp; !n)</span><br><span class="line">            <span class="keyword">return</span> max(m, n);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// insert: 	dis[i, j] = dis[i][j-1] + 1	</span></span><br><span class="line">        <span class="comment">// delete:	dis[i, j] = dis[i-1][j] + 1</span></span><br><span class="line">        <span class="comment">// replace or no op：	dis[i, j] = dis[i-1][j-1] + (word1[i-1] == word2[j-1] ? 0 : 1)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;			</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">                dis[i][j] = min(dis[i][j<span class="number">-1</span>] + <span class="number">1</span>,</span><br><span class="line">                    min(dis[i<span class="number">-1</span>][j] + <span class="number">1</span>, dis[i<span class="number">-1</span>][j<span class="number">-1</span>] + (word1[i<span class="number">-1</span>] == word2[j<span class="number">-1</span>] ? <span class="number">0</span> : <span class="number">1</span>)));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dis[m][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li><a href="https://web.stanford.edu/class/cs124/lec/med.pdf" target="_blank" rel="noopener">参考链接 - pdf</a></li>
+</ul>
+
       
     </div>
     
@@ -388,8 +424,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/09/67-Add-Binary/" rel="next" title="67. Add Binary">
-                <i class="fa fa-chevron-left"></i> 67. Add Binary
+              <a href="/2018/11/17/55-Jump-Game/" rel="next" title="55. Jump Game">
+                <i class="fa fa-chevron-left"></i> 55. Jump Game
               </a>
             
           </div>
@@ -397,10 +433,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/10/8-String-to-Integer-atoi/" rel="prev" title="8. String to Integer (atoi)">
-                8. String to Integer (atoi) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -551,7 +583,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现代码"><span class="nav-number">3.</span> <span class="nav-text">实现代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路解析"><span class="nav-number">2.</span> <span class="nav-text">思路解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现代码"><span class="nav-number">3.</span> <span class="nav-text">实现代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考链接"><span class="nav-number">4.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
             
 
           </div>

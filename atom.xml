@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-11-17T07:44:33.042Z</updated>
+  <updated>2018-11-18T05:50:49.874Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>72. Edit Distance</title>
+    <link href="http://yoursite.com/2018/11/18/72-Edit-Distance/"/>
+    <id>http://yoursite.com/2018/11/18/72-Edit-Distance/</id>
+    <published>2018-11-18T05:48:30.000Z</published>
+    <updated>2018-11-18T05:50:49.874Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>Given two words word1 and word2, find the minimum number of operations required to convert <em>word1</em> to <em>word2</em>.</p><p>You have the following 3 operations permitted on a word:</p><ul><li>Insert a character</li><li>Delete a character</li><li>Replace a character</li></ul><p><strong>Example 1:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: word1 = &quot;horse&quot;, word2 = &quot;ros&quot;</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: </span><br><span class="line">horse -&gt; rorse (replace &apos;h&apos; with &apos;r&apos;)</span><br><span class="line">rorse -&gt; rose (remove &apos;r&apos;)</span><br><span class="line">rose -&gt; ros (remove &apos;e&apos;)</span><br></pre></td></tr></table></figure></p><p><strong>Example 2:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Input: word1 = &quot;intention&quot;, word2 = &quot;execution&quot;</span><br><span class="line">Output: 5</span><br><span class="line">Explanation: </span><br><span class="line">intention -&gt; inention (remove &apos;t&apos;)</span><br><span class="line">inention -&gt; enention (replace &apos;i&apos; with &apos;e&apos;)</span><br><span class="line">enention -&gt; exention (replace &apos;n&apos; with &apos;x&apos;)</span><br><span class="line">exention -&gt; exection (replace &apos;n&apos; with &apos;c&apos;)</span><br><span class="line">exection -&gt; execution (insert &apos;u&apos;)</span><br></pre></td></tr></table></figure></p><h3 id="思路解析"><a href="#思路解析" class="headerlink" title="思路解析"></a>思路解析</h3><ul><li>这道题是一道动态规划的题，需要将一个字符串<code>word1</code>经过<code>add</code>、<code>delete</code>、<code>replace</code>三种操作变换成另一个字符串<code>word2</code>，求最小的编辑距离.</li><li><p>解题思路：假设<code>word1=[123...n]</code>    ,<code>word2=[123...m]</code>，要求使得<code>word1</code>转换成<code>word2</code>。对于这个问题，我们将其分解为子问题求解。</p><ul><li>定义dis[i][j]<ul><li>表示<code>word1&#39; = [1..i]</code>转换成<code>word2&#39; = [1...j]</code>的编辑距离（<code>i</code>代表<code>word1</code>前<code>i</code>个字符,<code>j</code>代表<code>word2</code>前<code>j</code>个字符）</li><li>因此<code>word1</code>到<code>word2</code>的编辑距离为<code>dis[n][m]</code>        </li></ul></li><li>求解<code>word1</code>到<code>word2</code>的编辑距离，我们可以求取<code>word1</code>的前<code>i</code>个字符(<code>0 &lt; i &lt; n</code>)到<code>word2</code>的前<code>j</code>个字符(<code>0 &lt; j &lt; m</code>)的编辑距离<code>dis[i][j]</code>。当然每个<code>dis[i][j]</code>都基于之前的计算。</li><li><p>步骤</p><ul><li>初始化<ul><li>dis[i, 0] = i</li><li>dis[0, j] = j</li></ul></li><li><p><strong>递推关系</strong>—<code>核心</code>    </p><script type="math/tex; mode=display">dis[i][j] = min \begin{cases}      dis[i][j-1] + 1\\      dis[i-1][j] + 1\\      dis[i-1][j-1] + (word1[i-1] == word2[j-1] ? 0 : 1))\\      \end{cases}</script><p>  其中三个操作的表示</p><ul><li><strong>insert</strong>:     <code>dis[i, j] = dis[i][j-1] + 1</code>    </li><li><strong>delete</strong>:    <code>dis[i, j] = dis[i-1][j] + 1</code></li><li><p><strong>replace or no op</strong>：<code>dis[i, j] = dis[i-1][j-1] + (word1[i-1] == word2[j-1] ? 0 : 1)</code></p><p>对于每<code>dis[i][j]</code>，我们选取最小编辑距离    </p></li></ul></li></ul></li><li>最后得到的<code>dis[n][m]</code>就是<code>word1</code>到<code>word2</code>的编辑距离</li></ul></li></ul><h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minDistance</span><span class="params">(<span class="built_in">string</span> word1, <span class="built_in">string</span> word2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = word1.size();</span><br><span class="line">        <span class="keyword">int</span> n = word2.size();</span><br><span class="line">        <span class="keyword">int</span> dis[m+<span class="number">1</span>][n+<span class="number">1</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= m; ++i)</span><br><span class="line">            dis[i][<span class="number">0</span>] = i;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>;j &lt;= n; ++j)</span><br><span class="line">            dis[<span class="number">0</span>][j] = j;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// m or n equal 0</span></span><br><span class="line">        <span class="keyword">if</span> (!m &amp;&amp; !n)</span><br><span class="line">            <span class="keyword">return</span> max(m, n);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// insert: dis[i, j] = dis[i][j-1] + 1</span></span><br><span class="line">        <span class="comment">// delete:dis[i, j] = dis[i-1][j] + 1</span></span><br><span class="line">        <span class="comment">// replace or no op：dis[i, j] = dis[i-1][j-1] + (word1[i-1] == word2[j-1] ? 0 : 1)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">                dis[i][j] = min(dis[i][j<span class="number">-1</span>] + <span class="number">1</span>,</span><br><span class="line">                    min(dis[i<span class="number">-1</span>][j] + <span class="number">1</span>, dis[i<span class="number">-1</span>][j<span class="number">-1</span>] + (word1[i<span class="number">-1</span>] == word2[j<span class="number">-1</span>] ? <span class="number">0</span> : <span class="number">1</span>)));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dis[m][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul><li><a href="https://web.stanford.edu/class/cs124/lec/med.pdf" target="_blank" rel="noopener">参考链接 - pdf</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h3&gt;&lt;p&gt;Given two words word1 and word2, find the minimum number of operations
+      
+    
+    </summary>
+    
+      <category term="算法 | leetcode" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95-leetcode/"/>
+    
+    
+      <category term="leetcode" scheme="http://yoursite.com/tags/leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>55. Jump Game</title>
@@ -493,32 +518,6 @@
     
     
       <category term="区块链" scheme="http://yoursite.com/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>服务计算 - 4 持续集成服务 Travis CI</title>
-    <link href="http://yoursite.com/2018/11/08/%E6%9C%8D%E5%8A%A1%E8%AE%A1%E7%AE%97-4-%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E6%9C%8D%E5%8A%A1-Travis-CI/"/>
-    <id>http://yoursite.com/2018/11/08/服务计算-4-持续集成服务-Travis-CI/</id>
-    <published>2018-11-08T06:28:51.000Z</published>
-    <updated>2018-11-13T12:14:53.740Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="什么是持续集成服务"><a href="#什么是持续集成服务" class="headerlink" title="什么是持续集成服务"></a>什么是持续集成服务</h2><blockquote><p>Travis CI 提供的是持续集成服务（Continuous Integration，简称 CI）。它绑定 Github 上面的项目，只要有新的代码，就会自动抓取。然后，提供一个运行环境，执行测试，完成构建，还能部署到服务器。<br>持续集成指的是只要代码有变更，就自动运行构建和测试，反馈运行结果。确保符合预期以后，再将新代码”集成”到主干。<br>持续集成的好处在于，每次代码的小幅变更，就能看到运行结果，从而不断累积小的变更，而不是在开发周期结束时，一下子合并一大块代码。</p></blockquote><h2 id="创建一个简单的含测试的go项目"><a href="#创建一个简单的含测试的go项目" class="headerlink" title="创建一个简单的含测试的go项目"></a>创建一个简单的含测试的go项目</h2><pre><code>Travis CI 只支持 Github，不支持其他代码托管服务。</code></pre><ul><li>测试项目： <a href="https://github.com/Liu-YT/Hello-Go" target="_blank" rel="noopener">Hello-Go</a></li><li><code>README.md</code>包含详细的创建过程</li><li>Go test 测试结果<br><img src="/2018/11/08/服务计算-4-持续集成服务-Travis-CI/1.png" alt=""></li></ul><h2 id="Travis-CI的使用"><a href="#Travis-CI的使用" class="headerlink" title="Travis CI的使用"></a>Travis CI的使用</h2><ol><li>打开 <a href="https://travis-ci.org/" target="_blank" rel="noopener">Travis CI</a>，使用你的 Github 账号登录后它会同步你的仓库</li><li>找到你的 <code>Hello-Go</code> 仓库，打开仓库旁边的开关。一旦激活了一个仓库，Travis 会监听这个仓库的所有变化。<br><img src="/2018/11/08/服务计算-4-持续集成服务-Travis-CI/2.png" alt=""></li><li><p><code>Travis</code> 要求项目的根目录下面，必须有一个<code>.travis.yml</code>文件。这是配置文件，指定了<code>Travis</code>的行为。该文件必须保存在 Github 仓库里面，一旦代码仓库有新的 Commit，Travis 就会去找这个文件，执行里面的命令。在仓库的根目录添加.travis.yml文件，如下：</p> <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">language:</span> <span class="string">go</span></span><br><span class="line"><span class="attr">sudo:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">dist:</span> <span class="string">trusty</span></span><br><span class="line"><span class="attr">go:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="number">1.11</span></span><br><span class="line"></span><br><span class="line"><span class="attr">before_install:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">go</span> <span class="string">get</span> <span class="bullet">-v</span></span><br></pre></td></tr></table></figure></li><li><p>使用 <code>git</code> 完成一次提交</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add *</span><br><span class="line">git commit -m &quot;CI&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure></li><li><p>接着点击 <code>travis</code> 上 <code>Hello-Go</code>，可以看见由于提交触发的构建过程:</p><p> <img src="/2018/11/08/服务计算-4-持续集成服务-Travis-CI/3.png" alt="3"><br> 可以看到提交触发的构建过程，所以我们每次可以不用在本地上测试了，只需要提交然后然系统帮我们干活了啦。</p></li><li><p>关于如何弄出下面这样高大上的标志，其实也很简单。</p><p> <img src="/2018/11/08/服务计算-4-持续集成服务-Travis-CI/4.png" alt="4"><br> 点击项目旁边的<code>build|passing</code>标志，弹出一下对话框<br> <img src="/2018/11/08/服务计算-4-持续集成服务-Travis-CI/5.png" alt="5"><br> 将里面的链接在<code>README.md</code>中以链接图片方式就有了啦。</p> <figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">### Go 学习 ![build](https://travis-ci.org/Liu-YT/Hello-Go.svg?branch=master)</span></span><br></pre></td></tr></table></figure></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;什么是持续集成服务&quot;&gt;&lt;a href=&quot;#什么是持续集成服务&quot; class=&quot;headerlink&quot; title=&quot;什么是持续集成服务&quot;&gt;&lt;/a&gt;什么是持续集成服务&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;Travis CI 提供的是持续集成服务（Continuo
-      
-    
-    </summary>
-    
-      <category term="服务计算" scheme="http://yoursite.com/categories/%E6%9C%8D%E5%8A%A1%E8%AE%A1%E7%AE%97/"/>
-    
-    
-      <category term="服务计算" scheme="http://yoursite.com/tags/%E6%9C%8D%E5%8A%A1%E8%AE%A1%E7%AE%97/"/>
     
   </entry>
   
