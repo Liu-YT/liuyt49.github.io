@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="题目Given a string s1, we may represent it as a binary tree by partitioning it to two non-empty substrings recursively.  Below is one possible representation of s1 = &quot;great&quot;:      great     /    \     g">
+<meta name="description" content="题目Given a string s1, we may represent it as a binary tree by partitioning it to two non-empty substrings recursively.  Below is one possible representation of s1 = &quot;great&quot;:      great     /    \    gr">
 <meta name="keywords" content="leetcode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="87. Scramble String">
 <meta property="og:url" content="http://yoursite.com/2018/11/21/87-Scramble-String/index.html">
 <meta property="og:site_name" content="My Blog">
-<meta property="og:description" content="题目Given a string s1, we may represent it as a binary tree by partitioning it to two non-empty substrings recursively.  Below is one possible representation of s1 = &quot;great&quot;:      great     /    \     g">
+<meta property="og:description" content="题目Given a string s1, we may represent it as a binary tree by partitioning it to two non-empty substrings recursively.  Below is one possible representation of s1 = &quot;great&quot;:      great     /    \    gr">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-21T03:29:09.849Z">
+<meta property="og:updated_time" content="2018-11-21T03:33:45.682Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="87. Scramble String">
-<meta name="twitter:description" content="题目Given a string s1, we may represent it as a binary tree by partitioning it to two non-empty substrings recursively.  Below is one possible representation of s1 = &quot;great&quot;:      great     /    \     g">
+<meta name="twitter:description" content="题目Given a string s1, we may represent it as a binary tree by partitioning it to two non-empty substrings recursively.  Below is one possible representation of s1 = &quot;great&quot;:      great     /    \    gr">
 
 
 
@@ -350,11 +350,11 @@
 
 <pre>    great
     /    \
-    gr    eat
-    / \    /  \
-g   r  e   at
+   gr    eat
+  / \    /  \
+ g   r  e   at
             / \
-            a   t
+           a   t
 </pre>
 
 <p>To scramble the string, we may choose any non-leaf node and swap its two children.</p>
@@ -363,9 +363,9 @@ g   r  e   at
 
 <pre>    rgeat
     /    \
-    rg    eat
-    / \    /  \
-r   g  e   at
+   rg    eat
+  / \    /  \
+ r   g  e   at
             / \
             a   t
 </pre>
@@ -376,11 +376,11 @@ r   g  e   at
 
 <pre>    rgtae
     /    \
-    rg    tae
-    / \    /  \
-r   g  ta  e
+   rg    tae
+  / \    /  \
+ r   g  ta   e
         / \
-        t   a
+       t   a
 </pre>
 
 <p>We say that <code>"rgtae"</code> is a scrambled string of <code>"great"</code>.</p>
