@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-11-18T05:54:53.283Z</updated>
+  <updated>2018-11-21T03:26:00.672Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,49 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>87. Scramble String</title>
+    <link href="http://yoursite.com/2018/11/21/87-Scramble-String/"/>
+    <id>http://yoursite.com/2018/11/21/87-Scramble-String/</id>
+    <published>2018-11-21T03:25:51.000Z</published>
+    <updated>2018-11-21T03:26:00.672Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="算法 | leetcode" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95-leetcode/"/>
+    
+    
+      <category term="leetcode" scheme="http://yoursite.com/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>63. Unique Paths II</title>
+    <link href="http://yoursite.com/2018/11/21/63-Unique-Paths-II/"/>
+    <id>http://yoursite.com/2018/11/21/63-Unique-Paths-II/</id>
+    <published>2018-11-21T03:25:09.000Z</published>
+    <updated>2018-11-21T03:26:45.392Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>A robot is located at the top-left corner of a m x n grid (marked ‘Start’ in the diagram below).<br>The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked ‘Finish’ in the diagram below).<br>Now consider if some obstacles are added to the grids. How many unique paths would there be?<br>An obstacle and empty space is marked as <code>1</code> and <code>0</code>respectively in the grid.</p><p><strong>Note:</strong> m and n will be at most 100.</p><p><strong>Example 1:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Input:</span><br><span class="line">[</span><br><span class="line">    [0,0,0],</span><br><span class="line">    [0,1,0],</span><br><span class="line">    [0,0,0]</span><br><span class="line">]</span><br><span class="line">Output: 2</span><br><span class="line">Explanation:</span><br><span class="line">There is one obstacle in the middle of the 3x3 grid above.</span><br><span class="line">There are two ways to reach the bottom-right corner:</span><br><span class="line">1. Right -&gt; Right -&gt; Down -&gt; Down</span><br><span class="line">2. Down -&gt; Down -&gt; Right -&gt; Right</span><br></pre></td></tr></table></figure></p><h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><ul><li>题目的意思比较简单，给出一个网格图，以其左上角为起点，右下角为终点，求其左下角到右下角路径的数目。</li><li>题目显然是一道<strong>动态规划</strong>的题目，我们需要做的是理清其中的转移方程，首先题目还有一定的限制，某些格子是不能正常通过的（障碍物），并且只能向下或者向右移动，因此我们可以推出起点位置到当前格子的路径数目为：<code>path[i][j] = path[i-1][j] + path[i][j-1]</code>，对于第一排(<code>i = 0</code>)以及第一列(<code>j=0</code>)则需要额外计算，<strong>到达路径数目最多为1</strong>，其与前一个格子到达路径数目以及当前格子是否为障碍物有关。</li></ul><h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">uniquePathsWithObstacles</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; obstacleGrid)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        *path[i][j] = path[i-1][j] + path[i][j-1]</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> path[obstacleGrid.size()][obstacleGrid[<span class="number">0</span>].size()];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; obstacleGrid.size(); ++i)</span><br><span class="line">            <span class="keyword">if</span>(!obstacleGrid[i][<span class="number">0</span>])</span><br><span class="line">                path[i][<span class="number">0</span>] = i &gt;= <span class="number">1</span> ? path[i<span class="number">-1</span>][<span class="number">0</span>] : <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                path[i][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; obstacleGrid[<span class="number">0</span>].size(); ++j)</span><br><span class="line">            <span class="keyword">if</span>(!obstacleGrid[<span class="number">0</span>][j])</span><br><span class="line">                path[<span class="number">0</span>][j] = j &gt;= <span class="number">1</span> ? path[<span class="number">0</span>][j<span class="number">-1</span>] : <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                path[<span class="number">0</span>][j] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; obstacleGrid.size(); ++i)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; obstacleGrid[<span class="number">0</span>].size(); ++j)</span><br><span class="line">                <span class="keyword">if</span>(!obstacleGrid[i][j])</span><br><span class="line">                    path[i][j] = path[i<span class="number">-1</span>][j] + path[i][j<span class="number">-1</span>];</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    path[i][j] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> path[obstacleGrid.size() - <span class="number">1</span>][obstacleGrid[<span class="number">0</span>].size() - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h3&gt;&lt;p&gt;A robot is located at the top-left corner of a m x n grid (marked ‘Sta
+      
+    
+    </summary>
+    
+      <category term="算法 | leetcode" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95-leetcode/"/>
+    
+    
+      <category term="leetcode" scheme="http://yoursite.com/tags/leetcode/"/>
+    
+  </entry>
   
   <entry>
     <title>32. Longest Valid Parentheses</title>
@@ -458,57 +501,6 @@
       
         &lt;h3 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;Given a string, find the length of the longest substring without
-      
-    
-    </summary>
-    
-      <category term="算法 | leetcode" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95-leetcode/"/>
-    
-    
-      <category term="leetcode" scheme="http://yoursite.com/tags/leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>67. Add Binary</title>
-    <link href="http://yoursite.com/2018/11/09/67-Add-Binary/"/>
-    <id>http://yoursite.com/2018/11/09/67-Add-Binary/</id>
-    <published>2018-11-09T07:07:30.000Z</published>
-    <updated>2018-11-09T07:10:35.832Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><ul><li>Given two binary strings, return their sum (also a binary string).</li><li>The input strings are both non-empty and contains only characters 1 or 0.</li></ul><blockquote><p>example<br>Input: a = “11”, b = “1”<br>Output: “100”</p></blockquote><h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><ul><li>二进制的高精度加法，对字符对应数字从低位逐位的相加，同时加上低位相加得到的进位，不断计算得到新的进位以及相加的结果，最后得到结果。</li></ul><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 二进制高精度加法</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">addBinary</span><span class="params">(<span class="built_in">string</span> a, <span class="built_in">string</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">string</span> ans = <span class="string">""</span>; <span class="comment">// 答案字符串</span></span><br><span class="line">        <span class="keyword">int</span> carry = <span class="number">0</span>; <span class="comment">// 进位</span></span><br><span class="line">        <span class="keyword">int</span> i, j;</span><br><span class="line">        <span class="keyword">for</span>(i = a.length() - <span class="number">1</span>, j = b.length() - <span class="number">1</span>; i &gt;= <span class="number">0</span> &amp;&amp; j &gt;= <span class="number">0</span>; --i, --j) &#123;</span><br><span class="line">            ans += (a[i] - <span class="string">'0'</span> + b[j] - <span class="string">'0'</span> + carry) % <span class="number">2</span> + <span class="string">'0'</span>;</span><br><span class="line">            carry = a[i] - <span class="string">'0'</span> + b[j] - <span class="string">'0'</span> + carry &gt;= <span class="number">2</span> ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(a.length() &gt;= b.length()) &#123;</span><br><span class="line">            <span class="keyword">for</span>(; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">                ans += (a[i] - <span class="string">'0'</span> + carry) % <span class="number">2</span> + <span class="string">'0'</span>;</span><br><span class="line">                carry = a[i] - <span class="string">'0'</span> + carry &gt;= <span class="number">2</span> ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">for</span>(; j &gt;= <span class="number">0</span>; --j) &#123;</span><br><span class="line">                ans += (b[j] - <span class="string">'0'</span> + carry) % <span class="number">2</span> + <span class="string">'0'</span>;</span><br><span class="line">                carry = b[j] - <span class="string">'0'</span> + carry &gt;= <span class="number">2</span> ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(carry)</span><br><span class="line">            ans += carry + <span class="string">'0'</span>;</span><br><span class="line"></span><br><span class="line">        reverse(ans.begin(), ans.end()); </span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;Given two binary strings, return their sum (also a binary string
-      
-    
-    </summary>
-    
-      <category term="算法 | leetcode" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95-leetcode/"/>
-    
-    
-      <category term="leetcode" scheme="http://yoursite.com/tags/leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>1. Two Sum</title>
-    <link href="http://yoursite.com/2018/11/09/1-Two-Sum/"/>
-    <id>http://yoursite.com/2018/11/09/1-Two-Sum/</id>
-    <published>2018-11-09T06:43:50.000Z</published>
-    <updated>2018-11-09T07:05:29.145Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>Given an array of integers, return indices of the two numbers such that they add up to a specific target.</p><p>You may assume that each input would have exactly one solution, and you may not use the same element twice.</p><blockquote><p>Example:<br>    Given nums = [2, 7, 11, 15], target = 9,<br>   Because nums[0] + nums[1] = 2 + 7 = 9,     return [0, 1].</p></blockquote><h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><ul><li>暴力破解，遍历每个元素x并查找是否有另一个值等于target - x。</li><li>时间复杂度为 $O(n^2)$</li></ul><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; twoSum(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size() - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; nums.size(); ++j) &#123;</span><br><span class="line">                <span class="keyword">if</span>(target - nums[i] == nums[j]) &#123;</span><br><span class="line">                    ans.push_back(i);</span><br><span class="line">                    ans.push_back(j);</span><br><span class="line">                    <span class="keyword">return</span> ans;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="更优解法"><a href="#更优解法" class="headerlink" title="更优解法"></a>更优解法</h3><ul><li>这个是看了答案发现的，利用map的查找，节省时间。</li><li>时间复杂度为 $O(nlogn)$</li></ul><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; twoSum(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">        <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; myMap;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(myMap.count(target - nums[i])) &#123;</span><br><span class="line">                ans.push_back(myMap.find(target - nums[i])-&gt;second);</span><br><span class="line">                ans.push_back(i);</span><br><span class="line">                <span class="keyword">return</span> ans;</span><br><span class="line">            &#125; </span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                myMap.insert(make_pair(nums[i], i));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h3&gt;&lt;p&gt;Given an array of integers, return indices of the two numbers such tha
       
     
     </summary>
