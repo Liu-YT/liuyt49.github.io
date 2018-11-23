@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="题目Given an undirected graph, return true if and only if it is bipartite. Recall that a graph is bipartite if we can split it’s set of nodes into two independent subsets A and B such that every edge in">
+<meta name="description" content="题目Given an integer n, generate all structurally unique         BST&apos;s (binary search trees) that store values 1 ...&amp;nbsp;n.  Example:  Input: 3 Output: [ &amp;nbsp; [1,null,3,2], &amp;nbsp; [3,2,null,1], &amp;nbsp">
 <meta name="keywords" content="leetcode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="785. Is Graph Bipartite?">
-<meta property="og:url" content="http://yoursite.com/2018/11/14/785-Is-Graph-Bipartite/index.html">
+<meta property="og:title" content="95. Unique Binary Search Trees II">
+<meta property="og:url" content="http://yoursite.com/2018/11/23/95-Unique-Binary-Search-Trees-II/index.html">
 <meta property="og:site_name" content="My Blog">
-<meta property="og:description" content="题目Given an undirected graph, return true if and only if it is bipartite. Recall that a graph is bipartite if we can split it’s set of nodes into two independent subsets A and B such that every edge in">
+<meta property="og:description" content="题目Given an integer n, generate all structurally unique         BST&apos;s (binary search trees) that store values 1 ...&amp;nbsp;n.  Example:  Input: 3 Output: [ &amp;nbsp; [1,null,3,2], &amp;nbsp; [3,2,null,1], &amp;nbsp">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-14T03:30:31.166Z">
+<meta property="og:updated_time" content="2018-11-23T04:28:38.703Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="785. Is Graph Bipartite?">
-<meta name="twitter:description" content="题目Given an undirected graph, return true if and only if it is bipartite. Recall that a graph is bipartite if we can split it’s set of nodes into two independent subsets A and B such that every edge in">
+<meta name="twitter:title" content="95. Unique Binary Search Trees II">
+<meta name="twitter:description" content="题目Given an integer n, generate all structurally unique         BST&apos;s (binary search trees) that store values 1 ...&amp;nbsp;n.  Example:  Input: 3 Output: [ &amp;nbsp; [1,null,3,2], &amp;nbsp; [3,2,null,1], &amp;nbsp">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/14/785-Is-Graph-Bipartite/">
+  <link rel="canonical" href="http://yoursite.com/2018/11/23/95-Unique-Binary-Search-Trees-II/">
 
 
 
 
 
-  <title>785. Is Graph Bipartite? | My Blog</title>
+  <title>95. Unique Binary Search Trees II | My Blog</title>
   
 
 
@@ -255,7 +255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/14/785-Is-Graph-Bipartite/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/23/95-Unique-Binary-Search-Trees-II/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liuyt49">
@@ -272,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">785. Is Graph Bipartite?</h1>
+          <h1 class="post-title" itemprop="name headline">95. Unique Binary Search Trees II</h1>
         
 
         <div class="post-meta">
@@ -284,8 +284,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-14T11:28:31+08:00">
-                2018-11-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-23T12:26:28+08:00">
+                2018-11-23
               </time>
             
 
@@ -344,32 +344,39 @@
       
 
       
-        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>Given an undirected <code>graph</code>, return <code>true</code> if and only if it is bipartite.</p>
-<p>Recall that a graph is bipartite if we can split it’s set of nodes into two independent subsets A and B such that every edge in the graph has one node in A and another node in B.</p>
-<p>The graph is given in the following form: <code>graph[i]</code> is a list of indexes <code>j</code> for which the edge between nodes <code>i</code> and <code>j</code> exists.  Each node is an integer between <code>0</code> and <code>graph.length - 1</code>.  There are no self edges or parallel edges: <code>graph[i]</code> does not contain <code>i</code>, and it doesn’t contain any element twice.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Example 1:</span><br><span class="line">Input: [[1,3], [0,2], [1,3], [0,2]]</span><br><span class="line">Output: true</span><br><span class="line">Explanation: </span><br><span class="line">The graph looks like this:</span><br><span class="line">0----1</span><br><span class="line">|    |</span><br><span class="line">|    |</span><br><span class="line">3----2</span><br><span class="line">We can divide the vertices into two groups: &#123;0, 2&#125; and &#123;1, 3&#125;.</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Example 2:</span><br><span class="line">Input: [[1,2,3], [0,2], [0,1,3], [0,2]]</span><br><span class="line">Output: false</span><br><span class="line">Explanation: </span><br><span class="line">The graph looks like this:</span><br><span class="line">0----1</span><br><span class="line">| \  |</span><br><span class="line">|  \ |</span><br><span class="line">3----2</span><br><span class="line">We cannot find a way to divide the set of nodes into two independent subsets.</span><br></pre></td></tr></table></figure>
-<p><strong>Note:</strong></p>
-<ul>
-<li>graph will have length in range [1, 100].</li>
-<li>graph[i] will contain integers in range [0, graph.length - 1].</li>
-<li>graph[i] will not contain i or duplicate values.</li>
-<li>The graph is undirected: if any element j is in graph[i], then i will be in graph[j].</li>
-</ul>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><ul>
-<li>本题给了无向图的边，判断这个图是否是一个二分图</li>
-<li>什么是二分图？<blockquote>
-<p>二分图又称作二部图，是图论中的一种特殊模型。 设G=(V,E)是一个无向图，如果顶点V可分割为两个互不相交的子集(A,B)，并且图中的每条边（i，j）所关联的两个顶点i和j分别属于这两个不同的顶点集(i in A,j in B)，则称图G为一个二分图。孤立点可以任意划分在A或B集合。</p>
-</blockquote>
-</li>
-<li>解法：<ul>
-<li>使用<code>BFS + 染色法</code></li>
-<li><code>BFS</code>以未被染色且非孤立点的点作为<code>BFS</code>搜索的起点</li>
-<li>使用<code>染色法</code>，只使用两种颜色，将与该点相邻（存在一条边）且未被染色的点染成与其不同的颜色，假如相邻的点已被染色且颜色与该点相同，则证明该图不是二分图。</li>
-</ul>
-</li>
-</ul>
-<h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 染色法 + BFS</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isBipartite</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; graph)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> num = graph.size();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">bool</span> colors[num] = &#123;<span class="literal">false</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> visited[num] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(graph[i].size() &gt; <span class="number">0</span> &amp;&amp; visited[i] == <span class="number">0</span>) &#123;</span><br><span class="line">                q.push(i);</span><br><span class="line">                visited[i] = <span class="number">1</span>;</span><br><span class="line">                </span><br><span class="line">                <span class="comment">// bfs</span></span><br><span class="line">                <span class="keyword">while</span>(!q.empty()) &#123;</span><br><span class="line">                    <span class="keyword">int</span> top = q.front();</span><br><span class="line">                    q.pop();</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">auto</span> i : graph[top]) &#123;</span><br><span class="line">                        <span class="keyword">if</span>(!visited[i]) &#123;</span><br><span class="line">                            visited[i] = <span class="number">1</span>;</span><br><span class="line">                            colors[i] = !colors[top];</span><br><span class="line">                            q.push(i);</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">if</span>(colors[i] == colors[top])</span><br><span class="line">                            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><div><p>Given an integer <em>n</em>, generate all structurally unique         <strong>BST's</strong> (binary search trees) that store values 1 ...&nbsp;<em>n</em>.</p>
 
+<p><strong>Example:</strong></p>
+
+<pre><strong>Input:</strong> 3
+<strong>Output:</strong>
+[
+&nbsp; [1,null,3,2],
+&nbsp; [3,2,null,1],
+&nbsp; [3,1,null,null,2],
+&nbsp; [2,1,3],
+&nbsp; [1,null,2,null,3]
+]
+<strong>Explanation:</strong>
+The above output corresponds to the 5 unique BST's shown below:
+
+   1         3     3      2      1
+    \       /     /      / \      \
+     3     2     1      1   3      2
+    /     /       \                 \
+   2     1         2                 3
+</pre>
+</div>
+
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><ul>
+<li>本题的题意比较简单，给出二叉搜索树的节点数目<code>n</code>，求出可以构成多少中不同结构的二叉搜索树。</li>
+<li>其实实现起来还是比较简单的。对于其中一个节点<code>i</code>，将其作为该树的根节点，然后其左边的元素都作为其左子树的元素，右边的元素都作为其右子树的元素，再通过递归得到其左子树和右子树的可能出现的情况的集合，然后再组合起来。一些需要注意的情况：<ul>
+<li>递归的结束条件： 当该子树的起点大于终点的时候 — <code>start &gt; end</code>，递归结束，能够生成子树的情况为无，即为<code>NULL</code>。</li>
+<li>对得到的左子树和右子树的返回情况需要判断其是否为空（可能没有不存在左或右节点的情况)，如果不存在，需要推入一个<code>NULL</code>，然后再进行组合，否则遍历组合的时候<code>left.size * right.size = 0</code>，将导致结果不全，只有左右子树都存在的结果。</li>
+</ul>
+</li>
+</ul>
+<h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment">    * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment">    *     int val;</span></span><br><span class="line"><span class="comment">    *     TreeNode *left;</span></span><br><span class="line"><span class="comment">    *     TreeNode *right;</span></span><br><span class="line"><span class="comment">    *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment">    * &#125;;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;TreeNode*&gt; generateTrees(<span class="keyword">int</span> n) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!n) </span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">vector</span>&lt;TreeNode*&gt;();</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; v = myGenerate(<span class="number">1</span>, n);</span><br><span class="line">        <span class="keyword">return</span> v;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; myGenerate(<span class="keyword">int</span> start, <span class="keyword">int</span> end) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;TreeNode*&gt; v;</span><br><span class="line">        <span class="keyword">if</span>(start &gt; end)	<span class="keyword">return</span> v;</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = start; i &lt;= end; ++i) &#123;</span><br><span class="line">            <span class="built_in">vector</span>&lt;TreeNode*&gt; left = myGenerate(start, i<span class="number">-1</span>);</span><br><span class="line">            <span class="built_in">vector</span>&lt;TreeNode*&gt; right = myGenerate(i + <span class="number">1</span>, end);</span><br><span class="line">    </span><br><span class="line">            <span class="keyword">if</span>(!left.size())	left.push_back(<span class="literal">NULL</span>);</span><br><span class="line">            <span class="keyword">if</span>(!right.size())	right.push_back(<span class="literal">NULL</span>);</span><br><span class="line">    </span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; left.size(); ++j) &#123;				</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; right.size(); ++k) &#123;</span><br><span class="line">                    TreeNode* node = <span class="keyword">new</span> TreeNode(i);</span><br><span class="line">                    node-&gt;left = left[j];</span><br><span class="line">                    node-&gt;right = right[k];</span><br><span class="line">                    v.push_back(node);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">            <span class="keyword">return</span> v;	</span><br><span class="line">        &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -399,8 +406,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/14/207-Course-Schedule/" rel="next" title="207. Course Schedule">
-                <i class="fa fa-chevron-left"></i> 207. Course Schedule
+              <a href="/2018/11/21/87-Scramble-String/" rel="next" title="87. Scramble String">
+                <i class="fa fa-chevron-left"></i> 87. Scramble String
               </a>
             
           </div>
@@ -408,10 +415,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/15/210-Course-Schedule-II/" rel="prev" title="210. Course Schedule II">
-                210. Course Schedule II <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -562,7 +565,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现代码"><span class="nav-number">3.</span> <span class="nav-text">实现代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题解"><span class="nav-number">2.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现代码"><span class="nav-number">3.</span> <span class="nav-text">实现代码</span></a></li></ol></div>
             
 
           </div>
