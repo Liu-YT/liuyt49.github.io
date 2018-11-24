@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="My Blog">
 <meta property="og:description" content="题目Given a string S and a string T, count the number of distinct subsequences of Swhich equals T. A subsequence of a string is a new string which is formed from the original string by deleting some (ca">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-24T12:49:23.913Z">
+<meta property="og:updated_time" content="2018-11-24T12:57:47.381Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="115. Distinct Subsequences">
 <meta name="twitter:description" content="题目Given a string S and a string T, count the number of distinct subsequences of Swhich equals T. A subsequence of a string is a new string which is formed from the original string by deleting some (ca">
@@ -349,16 +349,172 @@
 <p><strong>Example 2:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Input: S = &quot;babgbag&quot;, T = &quot;bag&quot;</span><br><span class="line">Output: 5</span><br><span class="line">Explanation:</span><br><span class="line"></span><br><span class="line">As shown below, there are 5 ways you can generate &quot;bag&quot; from S.</span><br><span class="line">(The caret symbol ^ means the chosen letters)</span><br><span class="line"></span><br><span class="line">babgbag</span><br><span class="line">^^ ^</span><br><span class="line">babgbag</span><br><span class="line">^^    ^</span><br><span class="line">babgbag</span><br><span class="line">^    ^^</span><br><span class="line">babgbag</span><br><span class="line">    ^  ^^</span><br><span class="line">babgbag</span><br><span class="line">    ^^^</span><br></pre></td></tr></table></figure></p>
 <h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><ul>
 <li>本题是一道动态规划类型的问题，给出两个字符串<code>s</code>、<code>t</code>，计算<code>S</code>的不同子序列中等于<code>T</code>的子序列数量。</li>
-<li><p>一开始有点迷茫，不知道其中的转移方程是怎样的，只能举例然后观察一下其中的状态转移方程了。使用<code>dp[i][j]</code>记录字符串<code>S</code>的前<code>i</code>个字符的子串中有多少个与字符串<code>T</code>的前<code>j</code>个字符构成的子串相等的子序列。</p>
-<ul>
-<li><p><strong>Example 1</strong></p>
-<p>  |T \ S | $\emptyset$ |r|a|b|b|b|i|t|<br>  |-|-|-|-|-|-|-|-|-|<br>  |$\emptyset$|1|1|1|1|1|1|1|1|<br>  |r|0|1|1|1|1|1|1|1|<br>  |a|0|0|1|1|1|1|1|1|<br>  |b|0|0|0|1|2|3|3|3|<br>  |b|0|0|0|0|1|3|3|3|<br>  |i|0|0|0|0|0|0|3|3|<br>  |t|0|0|0|0|0|0|0|3|</p>
-</li>
-<li><p><strong>Example 2</strong></p>
-<p>  |T \ S | $\emptyset$ |b|a|b|g|b|a|g|<br>  |-|-|-|-|-|-|-|-|-|<br>  |$\emptyset$|1|1|1|1|1|1|1|1|<br>  |b|0|1|1|2|2|3|3|3|<br>  |a|0|0|1|1|1|1|4|4|<br>  |g|0|0|0|0|1|1|1|5|</p>
-</li>
+<li>一开始有点迷茫，不知道其中的转移方程是怎样的，只能举例然后观察一下其中的状态转移方程了。使用<code>dp[i][j]</code>记录字符串<code>S</code>的前<code>i</code>个字符的子串中有多少个与字符串<code>T</code>的前<code>j</code>个字符构成的子串相等的子序列。</li>
+<li><strong>Example 1</strong> - <code>S = &quot;rabbbit&quot;, T = &quot;rabbit&quot;</code></li>
 </ul>
-</li>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>T \ S</th>
+<th>$\emptyset$</th>
+<th>r</th>
+<th>a</th>
+<th>b</th>
+<th>b</th>
+<th>b</th>
+<th>i</th>
+<th>t</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\emptyset$</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>r</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>a</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>b</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>b</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>i</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>t</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><strong>Example 2</strong> - <code>S = &quot;babgbag&quot;, T = &quot;bag&quot;</code></li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>T \ S</th>
+<th>$\emptyset$</th>
+<th>b</th>
+<th>a</th>
+<th>b</th>
+<th>g</th>
+<th>b</th>
+<th>a</th>
+<th>g</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\emptyset$</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>b</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>a</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td>g</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
 <li>通过对样例的分析，我们可以得到<code>dp[i][j] &gt;= dp[i][j-1]</code>在<code>j-1&gt;=0</code>的条件下。同时当<code>T</code>为空串的时候，<code>dp[i][0] = 1</code>，因为空串是任一字符串的子串。再仔细观察，可以得到当<code>s[i-1] == t[j-1]</code>的时候，<code>dp[i][j] = dp[i-1][j] + dp[i-1][j-1]</code>。综合起来，我们可以得到状态转移的表示:<code>dp[i][j] = dp[i-1][j] + (s[i-1] == t[j-1] ? dp[i-1][j-1] : 0);</code></li>
 </ul>
 <h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numDistinct</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> t)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> dp[s.size() + <span class="number">1</span>][t.size() + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= s.size(); ++i) &#123;</span><br><span class="line">            dp[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        &#125;	</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= t.size(); ++j) &#123;</span><br><span class="line">            dp[<span class="number">0</span>][j] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= s.size(); ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= t.size(); ++j) &#123;</span><br><span class="line">                dp[i][j] = dp[i<span class="number">-1</span>][j] + (s[i<span class="number">-1</span>] == t[j<span class="number">-1</span>] ? dp[i<span class="number">-1</span>][j<span class="number">-1</span>] : <span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[s.size()][t.size()];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
