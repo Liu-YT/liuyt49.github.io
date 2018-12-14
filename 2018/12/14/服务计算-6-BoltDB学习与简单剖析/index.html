@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="服务计算,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="My Blog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="BoltDB 介绍 Bolt is a pure Go key/value store inspired by Howard Chu’s LMDB project. The goal of the project is to provide a simple, fast, and reliable database for projects that don’t require a full da">
+<meta name="keywords" content="服务计算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="服务计算 - 6 BoltDB学习与简单剖析">
+<meta property="og:url" content="http://yoursite.com/2018/12/14/服务计算-6-BoltDB学习与简单剖析/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="BoltDB 介绍 Bolt is a pure Go key/value store inspired by Howard Chu’s LMDB project. The goal of the project is to provide a simple, fast, and reliable database for projects that don’t require a full da">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-12-14T13:08:54.668Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="服务计算 - 6 BoltDB学习与简单剖析">
+<meta name="twitter:description" content="BoltDB 介绍 Bolt is a pure Go key/value store inspired by Howard Chu’s LMDB project. The goal of the project is to provide a simple, fast, and reliable database for projects that don’t require a full da">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/14/服务计算-6-BoltDB学习与简单剖析/">
+
+
+
+
+
+  <title>服务计算 - 6 BoltDB学习与简单剖析 | My Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">My Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/14/服务计算-6-BoltDB学习与简单剖析/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liuyt49">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">服务计算 - 6 BoltDB学习与简单剖析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-14T15:29:51+08:00">
+                2018-12-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务计算/" itemprop="url" rel="index">
+                    <span itemprop="name">服务计算</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="BoltDB-介绍"><a href="#BoltDB-介绍" class="headerlink" title="BoltDB 介绍"></a>BoltDB 介绍</h1><blockquote>
+<p>Bolt is a pure Go key/value store inspired by Howard Chu’s LMDB project. The goal of the project is to provide a simple, fast, and reliable database for projects that don’t require a full database server such as Postgres or MySQL.<br>Since Bolt is meant to be used as such a low-level piece of functionality, simplicity is key. The API will be small and only focus on getting values and setting values. That’s it.</p>
+</blockquote>
+<p><code>BoltDB</code>是一个嵌入式<code>key/value</code>的数据库，即只需要将其链接到你的应用程序代码中即可使用<code>BoltDB</code>提供的<code>API</code>来高效的存取数据。而且<code>BoltDB</code>支持完全可序列化的<code>ACID事务</code>，让应用程序可以更简单的处理复杂操作</p>
+<h1 id="BoltDB-使用"><a href="#BoltDB-使用" class="headerlink" title="BoltDB 使用"></a>BoltDB 使用</h1><p><strong><code>BoltDB</code>使用<code>Golang</code>开发</strong></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> go get github.com/boltdb/bolt</span></span><br></pre></td></tr></table></figure>
+<h2 id="创建和启动数据库"><a href="#创建和启动数据库" class="headerlink" title="创建和启动数据库"></a>创建和启动数据库</h2><p>使用<code>bolt.Open()</code>函数进行创建或者打开数据库<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db, err := bolt.Open(<span class="string">"data.db"</span>, <span class="number">0600</span>, <span class="literal">nil</span>)</span><br></pre></td></tr></table></figure></p>
+<p>该命令将打开当前目录下<code>data.db</code>文件，<strong>如果该文件不存在，则将被创建</strong>。</p>
+<p><code>Open</code>方法三个参数</p>
+<ul>
+<li>第一个参数为路径，指定需要打开的数据库，不存在将会被创建</li>
+<li>第二个参数为文件操作权限</li>
+<li>第三个参数为可选参数，内部可以配置只读和超时等</li>
+</ul>
+<p><code>BoltDB</code>是文件操作类型的数据库，打开数据库后将有一个文件锁，不允许多个进程同时打开同一个数据库。如果多个同时操作的话后者会被挂起直到前者关闭操作为止，为了避免无限等待，在打开数据库的时候可以配置超时时间<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db, err := bolt.Open(<span class="string">"my.db"</span>, <span class="number">0600</span>, &amp;bolt.Options&#123;Timeout: <span class="number">1</span> * time.Second&#125;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="读写事务"><a href="#读写事务" class="headerlink" title="读写事务"></a>读写事务</h2><p>对于读写事务，可以使用<code>DB.Update</code>来完成<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">err := db.Update(<span class="function"><span class="keyword">func</span><span class="params">(tx *bolt.Tx)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p><code>DB.Update</code>方法可以对数据库进行读写操作。在闭包内部，可以获得数据库的一致视图。 在结尾返回<code>nil</code>来提交事务，也可以通过返回错误随时回滚事务。 读写事务中允许所有数据库操作，始终检查返回错误，因为它将报告可能导致您的事务无法完成的任何磁盘故障。 如果您在关闭中返回错误，它将被传递。</p>
+<ul>
+<li><p><strong>Example</strong><br>  需要注意在读写事务以及只读事务中，如果没有相应的<code>Bucket</code>，是不能直接对其进行操作的，必须先创建</p>
+  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// create bucket</span></span><br><span class="line">db.Update(<span class="function"><span class="keyword">func</span><span class="params">(tx *bolt.Tx)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">    _, err := tx.CreateBucketIfNotExists([]<span class="keyword">byte</span>(peopleBucket))</span><br><span class="line">    CheckErr(err)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>  往<code>peopleBucket</code>桶中插入一个<code>People</code>，其<code>key</code>值为其ID，<code>value</code>为People的序列化后的字符串</p>
+  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">it = model.People&#123;&#125;</span><br><span class="line">it.ID = <span class="string">"1"</span></span><br><span class="line">db.Update(<span class="function"><span class="keyword">func</span><span class="params">(tx *bolt.Tx)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">    b := tx.Bucket([]<span class="keyword">byte</span>(peopleBucket))</span><br><span class="line">    jsons, errs := json.Marshal(it)</span><br><span class="line">    CheckErr(errs)</span><br><span class="line">    err := b.Put([]<span class="keyword">byte</span>(it.ID), jsons)</span><br><span class="line">    <span class="keyword">return</span> err</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="只读事务"><a href="#只读事务" class="headerlink" title="只读事务"></a>只读事务</h2><p>对于只读事务，使用<code>DB.View</code>来完成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">err := db.View(func(tx *bolt.Tx) error &#123;</span><br><span class="line">    ...</span><br><span class="line">    return nil</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>在此闭包中获得数据库的一致视图，但是，只读事务中不允许进行变更操作。 只能在只读事务中检索存储桶，检索值和复制数据库。需要注意的是读写事务和只读事务不应该在同一个<code>goroutine</code>里同时打开，这是由于读写事务需要周期性重新映射数据文件，与只读事务发生冲突，可能造成死锁。<code>BoltDB</code>一次只允许一个读写事务，单一次允许多个只读事务，保持数据一致性。</p>
+<ul>
+<li><strong>Example</strong><br>  获取<code>peopleBucket</code>桶中<code>key</code>值为<code>&quot;1&quot;</code>的<code>value</code>  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db.View(<span class="function"><span class="keyword">func</span><span class="params">(tx *bolt.Tx)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">    b := tx.Bucket([]<span class="keyword">byte</span>(peopleBucket))</span><br><span class="line">    v := b.Get([]<span class="keyword">byte</span>(<span class="string">"1"</span>))</span><br><span class="line">    fmt.Printf(<span class="string">"%s\n"</span>, v)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="批量更新事务"><a href="#批量更新事务" class="headerlink" title="批量更新事务"></a>批量更新事务</h2><p>每个<code>DB.Update()</code>等待磁盘提交写入。 通过将多个更新与<code>DB.Batch()</code>函数组合，可以最大限度地减少此开销<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">err := db.Batch(func(tx *bolt.Tx) error &#123;</span><br><span class="line">    ...</span><br><span class="line">    return nil</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>在整个批处理的过程中，如果某个事务失败了，批处理将会多次调用给定的函数。函数只有在<code>DB.Batch</code>返回成功才表示成功完成。如果批处理中途失败了，整个事务将会回滚。</p>
+<h2 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h2><p>更多详细的用法请参考 <a href="https://github.com/boltdb/bolt" target="_blank" rel="noopener">boltdb/bolt</a></p>
+<h1 id="BoltDB-源码简单剖析"><a href="#BoltDB-源码简单剖析" class="headerlink" title="BoltDB 源码简单剖析"></a>BoltDB 源码简单剖析</h1><p>关于源码部分，纯属一些个人的理解以及网上相关一些讲解，对于某些部分可能理解不是很到位，还望多多指正，源码部分设计到比较底层具体文件存储部分感觉还是很难理解的，此部分只是简单的摸索一下其中的机制与一些方法的执行过程</p>
+<p>首先先探索一下一开始启动数据库中其是设置文件锁<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Lock file so that other processes using Bolt in read-write mode cannot</span></span><br><span class="line"><span class="comment">// use the database  at the same time. This would cause corruption since</span></span><br><span class="line"><span class="comment">// the two processes would write meta pages and free pages separately.</span></span><br><span class="line"><span class="comment">// The database file is locked exclusively (only one process can grab the lock)</span></span><br><span class="line"><span class="comment">// if !options.ReadOnly.</span></span><br><span class="line"><span class="comment">// The database file is locked using the shared lock (more than one process may</span></span><br><span class="line"><span class="comment">// hold a lock at the same time) otherwise (options.ReadOnly is set).</span></span><br><span class="line"><span class="keyword">if</span> err := flock(db, mode, !db.readOnly, options.Timeout); err != <span class="literal">nil</span> &#123;</span><br><span class="line">    _ = db.<span class="built_in">close</span>()</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>呃其实这部分注释已经解释的很明确了，但是还是看看这个<code>flock</code>函数吧<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// flock acquires an advisory lock on a file descriptor.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">flock</span><span class="params">(db *DB, mode os.FileMode, exclusive <span class="keyword">bool</span>, timeout time.Duration)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> t time.Time</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="comment">// If we're beyond our timeout then return an error.</span></span><br><span class="line">		<span class="comment">// This can only occur after we've attempted a flock once.</span></span><br><span class="line">		<span class="keyword">if</span> t.IsZero() &#123;</span><br><span class="line">			t = time.Now()</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> timeout &gt; <span class="number">0</span> &amp;&amp; time.Since(t) &gt; timeout &#123;</span><br><span class="line">			<span class="keyword">return</span> ErrTimeout</span><br><span class="line">		&#125;</span><br><span class="line">		flag := syscall.LOCK_SH</span><br><span class="line">		<span class="keyword">if</span> exclusive &#123;</span><br><span class="line">			flag = syscall.LOCK_EX</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Otherwise attempt to obtain an exclusive lock.</span></span><br><span class="line">		err := syscall.Flock(<span class="keyword">int</span>(db.file.Fd()), flag|syscall.LOCK_NB)</span><br><span class="line">		<span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> err != syscall.EWOULDBLOCK &#123;</span><br><span class="line">			<span class="keyword">return</span> err</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Wait for a bit and try again.</span></span><br><span class="line">		time.Sleep(<span class="number">50</span> * time.Millisecond)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>原来其一开始先定义一个变量，用一个死循环在运行这段代码，如果在设置的<code>timeout</code>时间段内仍然得不到这个文件的锁，则将返回一个超时错误，如果没有设置<code>timeout</code>，则其将一直等待，直到获得该文件的锁，即获得该文件的使用权，其实这与操作系统中的进程同步异步使用一个互斥锁的机制是相似的。接着再来看看其对于未创建过的数据库是如何创建的以及如何对其初始化<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Initialize the database if it doesn't exist.</span></span><br><span class="line"><span class="keyword">if</span> info, err := db.file.Stat(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> info.Size() == <span class="number">0</span> &#123;</span><br><span class="line">    <span class="comment">// Initialize new files with meta pages.</span></span><br><span class="line">    <span class="keyword">if</span> err := db.init(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// Read the first meta page to determine the page size.</span></span><br><span class="line">    <span class="keyword">var</span> buf [<span class="number">0x1000</span>]<span class="keyword">byte</span></span><br><span class="line">    <span class="keyword">if</span> _, err := db.file.ReadAt(buf[:], <span class="number">0</span>); err == <span class="literal">nil</span> &#123;</span><br><span class="line">        m := db.pageInBuffer(buf[:], <span class="number">0</span>).meta()</span><br><span class="line">        <span class="keyword">if</span> err := m.validate(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="comment">// If we can't read the page size, we can assume it's the same</span></span><br><span class="line">            <span class="comment">// as the OS -- since that's how the page size was chosen in the</span></span><br><span class="line">            <span class="comment">// first place.</span></span><br><span class="line">            <span class="comment">//</span></span><br><span class="line">            <span class="comment">// If the first page is invalid and this OS uses a different</span></span><br><span class="line">            <span class="comment">// page size than what the database was created with then we</span></span><br><span class="line">            <span class="comment">// are out of luck and cannot access the database.</span></span><br><span class="line">            db.pageSize = os.Getpagesize()</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            db.pageSize = <span class="keyword">int</span>(m.pageSize)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其首先先对文件是否存在以及文件的类型进行判断，调用<code>db.file.Stat</code><br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Stat returns the FileInfo structure describing file.</span></span><br><span class="line"><span class="comment">// If there is an error, it will be of type *PathError.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(file *File)</span> <span class="title">Stat</span><span class="params">()</span> <span class="params">(FileInfo, error)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> file == <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, ErrInvalid</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> file.isdir() &#123;</span><br><span class="line">        <span class="comment">// I don't know any better way to do that for directory</span></span><br><span class="line">        <span class="keyword">return</span> Stat(file.dirinfo.path)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> isNulName(file.name) &#123;</span><br><span class="line">        <span class="keyword">return</span> &amp;devNullStat, <span class="literal">nil</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ft, err := file.pfd.GetFileType()</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, &amp;PathError&#123;<span class="string">"GetFileType"</span>, file.name, err&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">switch</span> ft &#123;</span><br><span class="line">    <span class="keyword">case</span> syscall.FILE_TYPE_PIPE, syscall.FILE_TYPE_CHAR:</span><br><span class="line">        <span class="keyword">return</span> &amp;fileStat&#123;name: basename(file.name), filetype: ft&#125;, <span class="literal">nil</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fs, err := newFileStatFromGetFileInformationByHandle(file.name, file.pfd.Sysfd)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">    &#125;</span><br><span class="line">    fs.filetype = ft</span><br><span class="line">    <span class="keyword">return</span> fs, err</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>判断其实也是比较简单的吧，还是接着看其是如何初始化一个新的数据库<code>db.init()</code><br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// init creates a new database file and initializes its meta pages.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(db *DB)</span> <span class="title">init</span><span class="params">()</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	<span class="comment">// Set the page size to the OS page size.</span></span><br><span class="line">	db.pageSize = os.Getpagesize()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Create two meta pages on a buffer.</span></span><br><span class="line">	buf := <span class="built_in">make</span>([]<span class="keyword">byte</span>, db.pageSize*<span class="number">4</span>)</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">2</span>; i++ &#123;</span><br><span class="line">		p := db.pageInBuffer(buf[:], pgid(i))</span><br><span class="line">		p.id = pgid(i)</span><br><span class="line">		p.flags = metaPageFlag</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Initialize the meta page.</span></span><br><span class="line">		m := p.meta()</span><br><span class="line">		m.magic = magic</span><br><span class="line">		m.version = version</span><br><span class="line">		m.pageSize = <span class="keyword">uint32</span>(db.pageSize)</span><br><span class="line">		m.freelist = <span class="number">2</span></span><br><span class="line">		m.root = bucket&#123;root: <span class="number">3</span>&#125;</span><br><span class="line">		m.pgid = <span class="number">4</span></span><br><span class="line">		m.txid = txid(i)</span><br><span class="line">		m.checksum = m.sum64()</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Write an empty freelist at page 3.</span></span><br><span class="line">	p := db.pageInBuffer(buf[:], pgid(<span class="number">2</span>))</span><br><span class="line">	p.id = pgid(<span class="number">2</span>)</span><br><span class="line">	p.flags = freelistPageFlag</span><br><span class="line">	p.count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Write an empty leaf page at page 4.</span></span><br><span class="line">	p = db.pageInBuffer(buf[:], pgid(<span class="number">3</span>))</span><br><span class="line">	p.id = pgid(<span class="number">3</span>)</span><br><span class="line">	p.flags = leafPageFlag</span><br><span class="line">	p.count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// Write the buffer to our data file.</span></span><br><span class="line">	<span class="keyword">if</span> _, err := db.ops.writeAt(buf, <span class="number">0</span>); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> err := fdatasync(db); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>看到这感觉还是能明白在干嘛的，其采用单个文件来将数据存储在磁盘上，该文件的前4个<code>page</code>是固定的，分别是 <code>meta page</code>、<code>meta page</code>、<code>freelist</code>、<code>leaf page</code>，但是对于这4个<code>page</code>，到底是什么就让人很头大了。先看<code>meta page</code>的定义<code>p.meta()</code><br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// meta returns a pointer to the metadata section of the page.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p *page)</span> <span class="title">meta</span><span class="params">()</span> *<span class="title">meta</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> (*meta)(unsafe.Pointer(&amp;p.ptr))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>还是先看看其基础的<code>page</code>的定义<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> page <span class="keyword">struct</span> &#123;</span><br><span class="line">    id       pgid</span><br><span class="line">    flags    <span class="keyword">uint16</span></span><br><span class="line">    count    <span class="keyword">uint16</span></span><br><span class="line">    overflow <span class="keyword">uint32</span></span><br><span class="line">    ptr      <span class="keyword">uintptr</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><code>page</code>是<code>boltdb</code>持久化时，与磁盘相关的数据结构。<code>page</code>的大小采用操作系统内存页的大小，即<code>getpagesize</code>系统调用的返回值。<code>id</code>为<code>page</code>的序号，<code>flags</code>表示<code>page</code>的类型，有<code>branchPageFlag/leafPageFlag/metaPageFlag/freelistPageFlag</code>几种，<code>count</code>当<code>page</code>是<code>freelistPageFlag</code>类型时，存储的是<code>freelist</code>中<code>pgid</code>数组中元素的个数;当<code>page</code>时其他类型时，存储的是<code>inode</code>的个数，<code>overflow</code>记录<code>page</code>中数据量超过一个<code>page</code>所能存储的大小时候需要额外的<code>page</code>的数目<br>每个page对应对应一个磁盘上的数据块。这个数据块的layout为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">| page struct data | page element items | k-v pairs |</span><br></pre></td></tr></table></figure></p>
+<p>其分为3个部分：</p>
+<ul>
+<li>第一部分<code>page struct data</code>是该<code>page</code>的<code>header</code>，存储的就是<code>pagestruct</code>的数据。</li>
+<li>第二部分<code>page element items</code>其实就是<code>node</code>的里<code>inode</code>的持久化部分数据。</li>
+<li>第三部分<code>k-v pairs</code>存储的是<code>inode</code>里具体的<code>key-value</code>数据。</li>
+</ul>
+</blockquote>
+<p>接着就可以探索一下<code>meta page</code>是什么玩意了<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> meta <span class="keyword">struct</span> &#123;</span><br><span class="line">    magic    <span class="keyword">uint32</span>  <span class="comment">// 存储魔数0xED0CDAED</span></span><br><span class="line">    version  <span class="keyword">uint32</span>  <span class="comment">// 标明存储格式的版本，现在是2</span></span><br><span class="line">    pageSize <span class="keyword">uint32</span>  <span class="comment">// 标明每个page的大小</span></span><br><span class="line">    flags    <span class="keyword">uint32</span>  <span class="comment">// 当前已无用</span></span><br><span class="line">    root     bucket  <span class="comment">// 根Bucket</span></span><br><span class="line">    freelist pgid    <span class="comment">// 标明当前freelist数据存在哪个page中</span></span><br><span class="line">    pgid     pgid    <span class="comment">//</span></span><br><span class="line">    txid     txid    <span class="comment">//</span></span><br><span class="line">    checksum <span class="keyword">uint64</span>  <span class="comment">// 以上数据的校验和，校验数据是否损坏</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接着再看看<code>freelist</code>是什么，关于<code>freelist</code>的定义需要一层层不断找，比较繁琐<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// freelist represents a list of all pages that are available for allocation.</span></span><br><span class="line"><span class="comment">// It also tracks pages that have been freed but are still in use by open transactions.</span></span><br><span class="line"><span class="keyword">type</span> freelist <span class="keyword">struct</span> &#123;</span><br><span class="line">	ids     []pgid          <span class="comment">// all free and available free page ids.</span></span><br><span class="line">	pending <span class="keyword">map</span>[txid][]pgid <span class="comment">// mapping of soon-to-be free page ids by tx.</span></span><br><span class="line">	cache   <span class="keyword">map</span>[pgid]<span class="keyword">bool</span>   <span class="comment">// fast lookup of all free and pending page ids.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>依赖注释我们已经可以大概猜测出<code>freelist</code>的作用，其是<code>BoltDb</code>实现磁盘空间的重复利用机制中需要用到的文件<code>page</code>缓存</p>
+<blockquote>
+<p><code>ids</code>记录了当前缓存着的空闲<code>page</code>的<code>pgid</code>，<code>cache</code>中记录的也是这些<code>pgid</code>，采用<code>map</code>记录 方便快速查找。</p>
+<p>当用户需要<code>page</code>时，调用<code>freelist.allocate(n int) pgid</code>，其中n为需要的<code>page</code>数量，其会遍历<code>ids</code>，从中 挑选出连续n个空闲的<code>page</code>，然后将其从缓存中剔除，然后将其实的<code>page-id</code>返回给调用者。当不存在满足需求的 page时，返回0，因为文件的起始2个page固定为meta page，因此有效的page-id不可能为0。</p>
+<p>当某个写事务产生无用page时，将调用<code>freelist.free(txid txid, p *page)</code>将指定page p放入pending池和 cache中。当下一个写事务开启时，会将没有Tx引用的pending中的page搬移到ids缓存中。之所以这样做， 是为了支持事务的回滚和并发读事务，从而实现<code>MVCC</code>。</p>
+<p>当发起一个读事务时，<code>Tx</code>单独复制一份<code>meta</code>信息，从这份独有的<code>meta</code>作为入口，可以读出该<code>meta</code>指向的数据， 此时即使有一个写事务修改了相关key的数据，新修改的数据只会被写入新的page，读事务持有的page会进入pending 池，因此该读事务相关的数据并不会被修改。只有该page相关的读事务都结束时，才会从pending池进入到cache池 中，从而被复用修改。</p>
+<p>当写事务更新数据时，并不直接覆盖老数据，而且分配一个新的page将更新后的数据写入，然后将老数据占用的page 放入pending池，建立新的索引。当事务需要回滚时，只需要将pending池中的page释放，将索引回滚即完成数据的 回滚。这样加速了事务的回滚。减少了事务缓存的内存使用，同时避免了对正在读的事务的干扰。</p>
+</blockquote>
+<p>到这里我们也大概了解到<code>BoltDb</code>中部分的机制，说实话关于一些涉及底层方面的有点难以理解，主要关于数据库存储以及操作系统方面的知识面太浅了，之前没有好好学习，还是得先去好好看看数据库和文件系统相关以及存储相关的知识再继续尝试学习源码了吧</p>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a href="https://github.com/boltdb/bolt" target="_blank" rel="noopener">boltdb/bolt</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/27444660" target="_blank" rel="noopener">聊聊BoltDB：简单使用</a></li>
+<li><a href="https://studygolang.com/articles/9939" target="_blank" rel="noopener">boltdb持久化</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/服务计算/" rel="tag"># 服务计算</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/06/132-Palindrome-Partitioning-II/" rel="next" title="132. Palindrome Partitioning II">
+                <i class="fa fa-chevron-left"></i> 132. Palindrome Partitioning II
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="liuyt49">
+            
+              <p class="site-author-name" itemprop="name">liuyt49</p>
+              <p class="site-description motion-element" itemprop="description">一个菜鸟的成长记录</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Liu-YT" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BoltDB-介绍"><span class="nav-number">1.</span> <span class="nav-text">BoltDB 介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BoltDB-使用"><span class="nav-number">2.</span> <span class="nav-text">BoltDB 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建和启动数据库"><span class="nav-number">2.2.</span> <span class="nav-text">创建和启动数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读写事务"><span class="nav-number">2.3.</span> <span class="nav-text">读写事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#只读事务"><span class="nav-number">2.4.</span> <span class="nav-text">只读事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#批量更新事务"><span class="nav-number">2.5.</span> <span class="nav-text">批量更新事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多"><span class="nav-number">2.6.</span> <span class="nav-text">更多</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BoltDB-源码简单剖析"><span class="nav-number">3.</span> <span class="nav-text">BoltDB 源码简单剖析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接"><span class="nav-number">4.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liuyt49</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
