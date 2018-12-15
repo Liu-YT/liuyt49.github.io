@@ -781,7 +781,8 @@ The above output corresponds to the 5 unique BST's shown below:
   
     <script type="text/javascript">
       var livere = {
-        load : (function(d, s) {
+        load : function() {
+            (function(d, s) {
             var j, e = d.getElementsByTagName(s)[0];
             if (typeof LivereTower === 'function') { return; }
             j = d.createElement(s);
@@ -790,6 +791,7 @@ The above output corresponds to the 5 unique BST's shown below:
             e.parentNode.insertBefore(j, e);
           })(document, 'script');
           $('#load-livere').remove(); ///加载后移除按钮
+        }
       }
     </script>
   
