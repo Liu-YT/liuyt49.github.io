@@ -149,7 +149,7 @@
 
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
-
+    <a href="https://github.com/Liu-YT"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
@@ -320,6 +320,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/09/67-Add-Binary/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/09/67-Add-Binary/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -327,6 +337,37 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  249
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1
+                </span>
+              
+            </div>
           
 
           
@@ -424,6 +465,20 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div style="text-align:center;">
+        <button class="btn" id="load-disqus" onclick="disqus.load();">加载评论</button>
+      </div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+      <div id="lv-container" data-id="city" data-uid=""></div> ///livere行
+    </div>
 
   
 
@@ -703,6 +758,38 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus = {
+          load : function disqus(){
+                var disqus_config = function () {
+                  this.page.url = 'http://yoursite.com/2018/11/09/67-Add-Binary/';
+                  this.page.identifier = '2018/11/09/67-Add-Binary/';
+                  this.page.title = '67. Add Binary';
+                };
+                var d = document, s = d.createElement('script');
+                s.src = 'https://.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', '' + +new Date());
+                (d.head || d.body).appendChild(s);
+              (function(d, s) {
+                var j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') { return; }
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+                e.parentNode.insertBefore(j, e);
+              })(document, 'script');
+        $('#load-disqus').remove(); ///加载后移除按钮
+            }
+        }
+      </script>
+    
+
+  
 
 
 
