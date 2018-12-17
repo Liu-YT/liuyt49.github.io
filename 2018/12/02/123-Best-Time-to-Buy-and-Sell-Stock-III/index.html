@@ -525,10 +525,10 @@
           
 
   
-    <div style="text-align:center;">
-      <button class="btn" id="load-livere" onclick="livere.load();">加载评论</button>
-    </div>
     <div class="comments" id="comments">
+      <div style="text-align:center;">
+        <button class="btn" id="load-livere" onclick="livere.load();">加载评论</button>
+      </div>
       <div id="lv-container" data-id="city" data-uid="MTAyMC80MTY4MS8xODIyNw=="></div>
     </div>
 
@@ -846,19 +846,19 @@
 
   
     <script type="text/javascript">
-      var livere = {
-        load : function() {
-            (function(d, s) {
-            var j, e = d.getElementsByTagName(s)[0];
-            if (typeof LivereTower === 'function') { return; }
-            j = d.createElement(s);
-            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-            j.async = true;
-            e.parentNode.insertBefore(j, e);
-          })(document, 'script');
-          $('#load-livere').remove(); ///加载后移除按钮
-        }
+    var livere = {
+      load : function() {
+          (function(d, s) {
+          var j, e = d.getElementsByTagName(s)[0];
+          if (typeof LivereTower === 'function') { return; }
+          j = d.createElement(s);
+          j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+          j.async = true;
+          e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+        $('#load-livere').remove(); ///加载后移除按钮
       }
+    }
     </script>
   
 
