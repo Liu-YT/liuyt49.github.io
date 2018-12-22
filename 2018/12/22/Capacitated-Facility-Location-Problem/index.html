@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="NP-hard,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="My Blog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="项目地址  介绍Suppose there are n facilities and m customers. We wish to choose:   which of the n facilities to open  the assignment of customers to facilities   The objective is to minimize the sum of the">
+<meta name="keywords" content="NP-hard">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Capacitated Facility Location Problem">
+<meta property="og:url" content="http://yoursite.com/2018/12/22/Capacitated-Facility-Location-Problem/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="项目地址  介绍Suppose there are n facilities and m customers. We wish to choose:   which of the n facilities to open  the assignment of customers to facilities   The objective is to minimize the sum of the">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2018/12/22/Capacitated-Facility-Location-Problem/GA.png">
+<meta property="og:updated_time" content="2018-12-22T17:48:19.346Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Capacitated Facility Location Problem">
+<meta name="twitter:description" content="项目地址  介绍Suppose there are n facilities and m customers. We wish to choose:   which of the n facilities to open  the assignment of customers to facilities   The objective is to minimize the sum of the">
+<meta name="twitter:image" content="http://yoursite.com/2018/12/22/Capacitated-Facility-Location-Problem/GA.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/22/Capacitated-Facility-Location-Problem/">
+
+
+
+
+
+  <title>Capacitated Facility Location Problem | My Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?dd7561cc103d4f0d4f23d16cf9774edd";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/Liu-YT" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">My Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/22/Capacitated-Facility-Location-Problem/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liuyt49">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Capacitated Facility Location Problem</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-22T21:24:46+08:00">
+                2018-12-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p><a href="https://github.com/Liu-YT/CFL-Problem" target="_blank" rel="noopener">项目地址</a></p>
+</blockquote>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Suppose there are n facilities and m customers. We wish to choose: </p>
+<ul>
+<li>which of the n facilities to open </li>
+<li>the assignment of customers to facilities </li>
+</ul>
+<p>The objective is to minimize the sum of the opening cost and the assignment cost. </p>
+<p><strong>The total demand assigned to a facility must not exceed its capacity.</strong> </p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>该问题阐述的比较明确，目前有<code>n</code>个设备，每个设备开启需要一个固定的费用，然后又有<code>m</code>个顾客，每个顾客有一定的需求，但是每个设备能够提供的资源是有限的，并且每个顾客使用相应的设备的时候还需要提供一笔附加的费用，此处还有一个前提条件是一个顾客所有需求只能被一个设备处理。目前的问题是，如何给顾客分配设备，使得最后总费用最小。</p>
+<p>这是一个<code>NP-hard</code>的问题，给出一种分配方式，我们可以比较容易的确定其是否可行，但是如果想要找到一个最理想的分配方案，则是非常的难的，我们只能尽可能的找到一个比较理想的解。最近在用<code>模拟退火(SA)</code>与<code>遗传算法(GA)</code>解决另一个比较经典的问题-<code>TSP</code>问题，所以本次也就优先想到使用这两种算法来搜索得到一个比较理想的解，但是这些<strong>最终解都是当前解里面最优的，为相应算法中的最优解，并非全局最优</strong> 。</p>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><blockquote>
+<p>关于<a href="https://baike.baidu.com/item/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/355508?fr=aladdin" target="_blank" rel="noopener">模拟退火算法</a>以及<a href="https://baike.baidu.com/item/%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95/838140?fr=aladdin" target="_blank" rel="noopener">遗传算法</a>的具体流程就不再详细，都是比较经典的算法，接下来主要讲讲与问题相关联的核心部分思路与实现</p>
+</blockquote>
+<h2 id="模拟退火-SA"><a href="#模拟退火-SA" class="headerlink" title="模拟退火 (SA)"></a>模拟退火 (SA)</h2><blockquote>
+<p>模拟退火算法以一定的概率来接受一个比当前解要差的解，因此有可能会跳出这个局部的最优解，达到全局的最优解。</p>
+</blockquote>
+<p>在本次算法设计中，比较关键的点在于搜索中<strong>领域操作</strong>的设计上，领域操作影响着最终结果的好坏，通过邻域动作。产生初始解的邻居解，然后根据某种策略选择邻居解。一直重复以上过程，直到达到终止条件。对于本次场景而言，对于产生的解，只要是新解所需要的费用小于目前的费用，则直接选择该接。而对于一些比当前的解要差的解，以一定的概率接受，采纳的概率为:</p>
+<script type="math/tex; mode=display">P_k = e^{(-\Delta E_k) / T}</script><p>本次模拟退火算法设计中，所设计的领域操作位<strong>在用户序列中随机选择两个位置，对于在此之间的用户为其重新随机选择一次所选择的设备，如果随机到的设备所能提供的容量不满足，则再次随机选择设备，直到选择到合适的为止</strong>，该领域操作尽可能的涉及到了各种可能的分配方案，尽可能的扰动当前结果以及概率接受差解，使其可能跳出局部最优解，已得到比较理想的解。</p>
+<p><a href="https://github.com/Liu-YT/CFL-Problem/blob/master/src/SA.hpp" target="_blank" rel="noopener">模拟退火算法主要核心代码</a><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模拟退火</span></span><br><span class="line"><span class="keyword">while</span>(T &gt; <span class="number">0.01</span>) &#123;</span><br><span class="line">    <span class="comment">/* 扰动获得寻找较优解，并且可能接收差解 */</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i++ &lt; SEARCHTIMES) &#123;</span><br><span class="line">        <span class="keyword">int</span> first = rand() % (p-&gt;numOfCus);</span><br><span class="line">        <span class="keyword">int</span> second = rand() % (p-&gt;numOfCus - first) + first;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; newCusToFac = cusToFac;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; newFreeCapacity = freeCapacity;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 回收容量</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = first; j &lt;= second; ++j)</span><br><span class="line">            newFreeCapacity[newCusToFac[j]] += p-&gt;cusDemand[j];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 随机分配一个新的工厂</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = first; j &lt;= second; ++j) &#123;</span><br><span class="line">            <span class="keyword">int</span> newFac = rand() % (p-&gt;numOfFac);</span><br><span class="line">            <span class="keyword">while</span> (p-&gt;cusDemand[j] &gt; newFreeCapacity[newFac])</span><br><span class="line">                newFac = rand() % (p-&gt;numOfFac);</span><br><span class="line">            newCusToFac[j] = newFac;</span><br><span class="line">            newFreeCapacity[newFac] -= p-&gt;cusDemand[j];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> cost = calCost(p, newCusToFac, newFreeCapacity);</span><br><span class="line">        <span class="keyword">double</span> probability = (rand() % <span class="number">100</span>) * <span class="number">1.0</span> / <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 处理当前解，一定概率接受</span></span><br><span class="line">        <span class="keyword">if</span> (cost &lt;= totalCost || probability &lt; <span class="built_in">exp</span>(-<span class="built_in">abs</span>(cost-totalCost) / T)) &#123;</span><br><span class="line">            cusToFac = newCusToFac;</span><br><span class="line">            freeCapacity = newFreeCapacity;</span><br><span class="line">            totalCost = cost;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 降温</span></span><br><span class="line">    T *= alpha;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>关于<code>SEARCHTIMES</code>，局部搜索的次数设置也比较关键，搜索次数也影响着结果的好坏，如果次数太少则可能造成遗漏比较多，而次数设置的比较大的话，对于数据量比较小的情况将造成算力浪费。因此考虑到可能出现的随机情况$C^2_n$，因此对于不同问题，动态设置局部搜索的次数为<code>SEARCHTIMES = n * (n-1) / 2</code>，但是其实还是很耗时，但是效果还可以。</p>
+<h2 id="遗传算法-GA"><a href="#遗传算法-GA" class="headerlink" title="遗传算法 (GA)"></a>遗传算法 (GA)</h2><blockquote>
+<p>关于遗传算法解决，其实个人认为普通的遗传算法效率并不高，并且如果没有针对问题有一定的设计的话，很难达到比较好的状态。</p>
+</blockquote>
+<p>首先需要大概的了解遗传算法的主要流程<br><img src="/2018/12/22/Capacitated-Facility-Location-Problem/GA.png" alt="GA"></p>
+<p><code>Code</code><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化种群</span></span><br><span class="line">initPopulation(p);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模拟遗传</span></span><br><span class="line"><span class="keyword">int</span> curGen = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(curGen &lt; MAXGEN) &#123;</span><br><span class="line">    <span class="comment">// 选择</span></span><br><span class="line">    select(p);</span><br><span class="line">    <span class="comment">// 交叉</span></span><br><span class="line">    crosscover(p);</span><br><span class="line">    <span class="comment">// 变异</span></span><br><span class="line">    mutate(p);</span><br><span class="line">    ++curGen; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>关于<strong>适应度评估</strong>，其适应度等于该方案费用<code>cost</code>的倒数，即<code>1 / cost</code></p>
+<hr>
+<p>关于<strong>选择</strong>，使用比较通用的<a href="https://www.cnblogs.com/legend1130/archive/2016/03/29/5333087.html" target="_blank" rel="noopener">轮盘赌</a>，同时选择其他的选择策略的效果也是不错的</p>
+<hr>
+<p>关于<strong>种群初始化</strong>，其实默认是比较容易的，即随机生成种群即可，但是实验起来发现随机生成初始种群，其收敛效果很差并且效率很低。因此<strong>在初始化种群的时候加入部分贪心生成的个体</strong>，加快种群成熟速度，也保证了种群中个体的多样性。关于贪心生成个体的思路也比较简单，打乱顾客挑选设备的顺序，每次未顾客挑选当前所需要费用最小的设备。但是关于贪心生成的较优个体的占额也需要注意，如果占的比列比较大，可能会导致过早收敛，出现早熟现象。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化种群</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initPopulation</span><span class="params">(problem* p)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 为提高效率，初始时候通过贪心加入一部分较优个体</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 随机生成解</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; POSIZE / <span class="number">2</span>; ++i) &#123;</span><br><span class="line">        individual* ind = <span class="keyword">new</span> individual(p);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; p-&gt;numOfCus; ++j) &#123;</span><br><span class="line">            <span class="keyword">int</span> fac = rand() % (p-&gt;numOfFac);</span><br><span class="line">            <span class="keyword">while</span> (p-&gt;cusDemand[j] &gt; ind-&gt;freeCapacity[fac])</span><br><span class="line">                fac = rand() % (p-&gt;numOfFac);</span><br><span class="line">            ind-&gt;freeCapacity[fac] -= p-&gt;cusDemand[j];</span><br><span class="line">            ind-&gt;cusToFac[j] = fac;</span><br><span class="line">        &#125; </span><br><span class="line">        evalute(p, ind);</span><br><span class="line">        population.push_back(ind);      </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 贪心生成解</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; temp;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; p-&gt;numOfCus; ++i) temp.push_back(i);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; POSIZE / <span class="number">2</span>; ++i) &#123;</span><br><span class="line">        individual *ind = <span class="keyword">new</span> individual(p);</span><br><span class="line">        random_shuffle(temp.begin(), temp.end());</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; p-&gt;numOfCus; ++j) &#123;</span><br><span class="line">            <span class="keyword">int</span> mixCost = INT_MAX;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; p-&gt;numOfFac; ++k) &#123;</span><br><span class="line">                <span class="keyword">if</span> (p-&gt;cusDemand[temp[j]] &lt;= ind-&gt;freeCapacity[k] &amp;&amp; mixCost &gt;= p-&gt;useCost[temp[j]][k]) &#123;</span><br><span class="line">                    mixCost = p-&gt;useCost[temp[j]][k];</span><br><span class="line">                    ind-&gt;freeCapacity[k] -= p-&gt;cusDemand[temp[j]];</span><br><span class="line">                    ind-&gt;cusToFac[temp[j]] = k;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        evalute(p, ind);</span><br><span class="line">        population.push_back(ind);</span><br><span class="line">    &#125;</span><br><span class="line">    random_shuffle(population.begin(), population.end());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>关于<strong>交叉操作</strong>，第<code>n</code>条染色体与第<code>n+1</code>条染色体有一定的概率进行交叉<code>(n = 0, 2, 4, ..., 2n)</code>。这部分使用<strong>两点交叉</strong></p>
+<blockquote>
+<p>两点交叉（Two-point Crossover）：在个体编码串中随机设置了两个交叉点，然后再进行部分基因交换</p>
+</blockquote>
+<p>但是交叉后的结果可能是不可行的方案，我们需要判断一下交叉后的解是否可行，然后再进行一定的策略操作<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 交叉</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">crosscover</span><span class="params">(problem* p)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 两点交叉 </span></span><br><span class="line">    <span class="built_in">vector</span>&lt;individual*&gt; subPopulation;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; POSIZE / <span class="number">2</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((rand() % <span class="number">100</span>) * <span class="number">1.0</span> / <span class="number">100</span> &lt;= PXOVER) &#123;</span><br><span class="line">            <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span>(count++ &lt; <span class="number">100</span>) &#123;</span><br><span class="line">                individual *a = <span class="keyword">new</span> individual(population[i*<span class="number">2</span>]);</span><br><span class="line">                individual *b = <span class="keyword">new</span> individual(population[i*<span class="number">2</span>+<span class="number">1</span>]);</span><br><span class="line">                <span class="keyword">int</span> geneFirst = rand() % (p-&gt;numOfCus);</span><br><span class="line">                <span class="keyword">int</span> geneSecond = rand() % (p-&gt;numOfCus - geneFirst) + geneFirst;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k = geneFirst; k &lt;= geneSecond; k++) &#123;</span><br><span class="line">                    <span class="keyword">int</span> temp = a-&gt;cusToFac[k];</span><br><span class="line">                    a-&gt;cusToFac[k] = b-&gt;cusToFac[k];</span><br><span class="line">                    b-&gt;cusToFac[k] = temp;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (validCover(p, a) &amp;&amp; validCover(p, b)) &#123;</span><br><span class="line">                    evalute(p, a);</span><br><span class="line">                    evalute(p, b);</span><br><span class="line">                    subPopulation.push_back(a);</span><br><span class="line">                    subPopulation.push_back(b);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(subPopulation.begin(), subPopulation.end(), [&amp;](<span class="keyword">const</span> individual* a, <span class="keyword">const</span> individual* b) -&gt; <span class="keyword">bool</span>&#123; <span class="keyword">return</span> a-&gt;cost &lt; b-&gt;cost;&#125;);</span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; subPopulation.size(); ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; POSIZE; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span>(population[j]-&gt;cost &gt; subPopulation[i]-&gt;cost) &#123;</span><br><span class="line">                individual* temp = population[j];</span><br><span class="line">                population[j] = subPopulation[i];</span><br><span class="line">                ++num;</span><br><span class="line">                <span class="keyword">delete</span> temp;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = num; i &lt; subPopulation.size(); ++i)</span><br><span class="line">        <span class="keyword">delete</span> subPopulation[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>关于<strong>变异</strong>，使用最基本的基因变异的原理，种群中每个个体的每个顾客看作一个基因，基因突变则看成为该顾客重新选择一个对应的可用的设备<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 变异</span><br><span class="line">void mutate(problem* p) &#123;</span><br><span class="line">    for(int i = 0; i &lt; POSIZE; ++i) &#123;</span><br><span class="line">        double pro = (rand() % 100) * 1.0 / 100;</span><br><span class="line">        if(pro &lt;= PMUTATION) &#123;</span><br><span class="line">            for(int j = 0; j &lt; p-&gt;numOfCus; ++j) &#123;</span><br><span class="line">                int newFac = rand() % p-&gt;numOfFac;</span><br><span class="line">                population[i]-&gt;freeCapacity[population[i]-&gt;cusToFac[j]] += p-&gt;cusDemand[j];</span><br><span class="line">                while (p-&gt;cusDemand[j] &gt; population[i]-&gt;freeCapacity[newFac])</span><br><span class="line">                    newFac = rand() % (p-&gt;numOfFac);</span><br><span class="line">                population[i]-&gt;freeCapacity[newFac] -= p-&gt;cusDemand[j];</span><br><span class="line">                population[i]-&gt;cusToFac[j] = newFac;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h1><blockquote>
+<p><a href="https://github.com/Liu-YT/CFL-Problem/tree/master/result/csv" target="_blank" rel="noopener">完整结果</a></p>
+<h2 id="模拟退火算法"><a href="#模拟退火算法" class="headerlink" title="模拟退火算法"></a>模拟退火算法</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Result</th>
+<th>Time(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>p1</td>
+<td>9075</td>
+<td>0.729</td>
+</tr>
+<tr>
+<td>p2</td>
+<td>8315</td>
+<td>0.685</td>
+</tr>
+<tr>
+<td>p3</td>
+<td>10076</td>
+<td>0.684</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr>
+<td>p68</td>
+<td>26452</td>
+<td>51.886</td>
+</tr>
+<tr>
+<td>p69</td>
+<td>35383</td>
+<td>54.413</td>
+</tr>
+<tr>
+<td>p70</td>
+<td>50826</td>
+<td>51.292</td>
+</tr>
+<tr>
+<td>p71</td>
+<td>39417</td>
+<td>51.519</td>
+</tr>
+</tbody>
+</table>
+</div>
+</blockquote>
+<h2 id="遗传算法"><a href="#遗传算法" class="headerlink" title="遗传算法"></a>遗传算法</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Result</th>
+<th>Time(s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>p1</td>
+<td>10220</td>
+<td>10.727</td>
+</tr>
+<tr>
+<td>p2</td>
+<td>9493</td>
+<td>11.888</td>
+</tr>
+<tr>
+<td>p3</td>
+<td>11653</td>
+<td>10.831</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr>
+<td>p68</td>
+<td>33324</td>
+<td>43.275</td>
+</tr>
+<tr>
+<td>p69</td>
+<td>38309</td>
+<td>44.419</td>
+</tr>
+<tr>
+<td>p70</td>
+<td>59304</td>
+<td>38.904</td>
+</tr>
+<tr>
+<td>p71</td>
+<td>46541</td>
+<td>37.729</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>从结果的运行时间可用比较直观的看出两个算法对于数据量比较大的时候都比较费时，可以控制时间但是会导致解的变差，增大运算此时解可能会更加好，但是时间太长，难以接受</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NP-hard/" rel="tag"># NP-hard</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/14/服务计算-6-BoltDB学习与简单剖析/" rel="next" title="服务计算 - 6 BoltDB学习与简单剖析">
+                <i class="fa fa-chevron-left"></i> 服务计算 - 6 BoltDB学习与简单剖析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div style="text-align:center;">
+        <button class="btn" id="load-livere" onclick="livere.load();">加载评论</button>
+      </div>
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTY4MS8xODIyNw=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="liuyt49">
+            
+              <p class="site-author-name" itemprop="name">liuyt49</p>
+              <p class="site-description motion-element" itemprop="description">一个菜鸟的成长记录</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Liu-YT" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决"><span class="nav-number">3.</span> <span class="nav-text">解决</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模拟退火-SA"><span class="nav-number">3.1.</span> <span class="nav-text">模拟退火 (SA)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遗传算法-GA"><span class="nav-number">3.2.</span> <span class="nav-text">遗传算法 (GA)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结果"><span class="nav-number">4.</span> <span class="nav-text">结果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模拟退火算法"><span class="nav-number">4.1.</span> <span class="nav-text">模拟退火算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遗传算法"><span class="nav-number">4.2.</span> <span class="nav-text">遗传算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liuyt49</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+    var livere = {
+      load : function() {
+          (function(d, s) {
+          var j, e = d.getElementsByTagName(s)[0];
+          if (typeof LivereTower === 'function') { return; }
+          j = d.createElement(s);
+          j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+          j.async = true;
+          e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+        $('#load-livere').remove(); ///加载后移除按钮
+      }
+    }
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
