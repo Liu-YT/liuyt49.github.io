@@ -112,7 +112,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/11/07/区块链初探/19.png">
 <meta property="og:image" content="http://yoursite.com/2018/11/07/区块链初探/20.png">
 <meta property="og:image" content="http://yoursite.com/2018/11/07/区块链初探/22.png">
-<meta property="og:updated_time" content="2018-11-07T14:31:19.784Z">
+<meta property="og:updated_time" content="2018-12-24T06:36:56.694Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="区块链初探">
 <meta name="twitter:description" content="0. 实验环境 虚拟机： ubuntu-17.10.1-desktop-amd64  go的版本: go1.11   1. 以太坊的安装，安装geth客户端 geth是用go语言写的，编译geth源码需要go语言和C语言编译器，因此需要先安装go语言，go语言版本推荐用go1.7及以上，go语言的安装配置教程。  将github仓库克隆源文件：   1git clone https://githu">
@@ -523,14 +523,14 @@
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin.sleepBlocks(1)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>停止挖矿</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">miner.stop()</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
 <p><img src="/2018/11/07/区块链初探/3.png" alt="preview">        </p>
 </li>
 <li>返回null不代表没有开始挖矿，实际正在进行中，在日志文件中有输出，详细解释<a href="https://ethereum.stackexchange.com/questions/16040/why-did-it-returned-null-after-call-miner-start" target="_blank" rel="noopener">why did it returned null after call miner.start()</a></li>
 </ul>
 </li>
 <li><p>查看余额</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eth.getBalance(eth.accounts[0])</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">eth.getBalance(eth.accounts[0])</span><br><span class="line">    miner.stop()</span><br></pre></td></tr></table></figure>
 <p>  <img src="/2018/11/07/区块链初探/4.png" alt="preview"></p>
 </li>
 <li><p>账号转账</p>
@@ -540,7 +540,7 @@
 <li>新手的一些小总结<ul>
 <li>关于如何中断一个挖矿过程的具体操作<br>  输入<code>miner.start()</code>即启动挖矿，挖矿后，会不停刷屏，输入<code>miner.stop()</code>即停止，不用管刷屏导致的命令不全，命令会正常执行。</li>
 <li>正常退出<code>Geth</code><br>  输入<code>exit</code>即可</li>
-<li>退出以后如何再次进入<br>  <code>geth  --datadir myData/00 console</code><br>  当然其中<code>datadir</code>需要对应自己区块链网络数据存放的位置</li>
+<li>退出以后如何再次进入<br>  <code>geth -datadir myData/00 -networkid 2018 -rpc --rpcport &quot;8545&quot; --port &quot;30303&quot; -rpcaddr 你的IP -rpccorsdomain &quot;*&quot; console</code><br>  当然其中<code>datadir</code>需要对应自己区块链网络数据存放的位置</li>
 </ul>
 </li>
 </ul>
@@ -867,7 +867,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
