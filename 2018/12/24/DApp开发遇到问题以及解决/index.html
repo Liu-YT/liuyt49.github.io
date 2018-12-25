@@ -73,6 +73,8 @@
 
 
 
+  
+
 
   <link rel="alternate" href="/atom.xml" title="My Blog" type="application/atom+xml">
 
@@ -92,7 +94,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/12/24/DApp开发遇到问题以及解决/newAccountError1.png">
 <meta property="og:image" content="http://yoursite.com/2018/12/24/DApp开发遇到问题以及解决/newAccountError2.png">
 <meta property="og:image" content="http://yoursite.com/2018/12/24/DApp开发遇到问题以及解决/newAccount.png">
-<meta property="og:updated_time" content="2018-12-24T13:08:19.388Z">
+<meta property="og:updated_time" content="2018-12-25T05:50:03.838Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DApp开发遇到问题以及解决">
 <meta name="twitter:description" content="前言本次博客简单记录下开发DApp过程中遇到的一些问题，以及相应的解决方案，因此写的也是很随意，仅供参考  项目地址  Vue如何使用Web3 安装Web3的依赖   1npm install web3@^0.20.0 --save  项目里创建全局web3对象  写一个插件，例如命名为Web3.js 123456789101112import Web3 from &quot;web3&quot;export def">
@@ -357,7 +359,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  572
+                  573
                 </span>
               
 
@@ -446,7 +448,7 @@
 <li><p>解决方案</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Run your node with --rpc and --rpcapi personal,web3 flags.</span><br><span class="line">i.e. geth --dev --rpcapi personal,web3,eth --rpc</span><br><span class="line">You may need to add --rpccorsdomain &quot;&lt;your-domain&gt;&quot;, in case you are using web3 in the web.</span><br><span class="line">geth --dev --rpcapi personal,web3,eth --rpccorsdomain &quot;your-domain&quot;</span><br></pre></td></tr></table></figure>
 <p>  参照dalao的提示，使用<code>geth</code>启动私有链的时候需要加入<code>--rpcapi personal,web3,eth</code></p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geth -datadir myData/00 -networkid 2018 -rpcapi personal,web3,eth --rpcport &quot;8545&quot; --port &quot;30303&quot; -rpcaddr YOUR_IP -rpccorsdomain &quot;*&quot; console</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geth -datadir myData/00 -networkid 2018 -rpc -rpcapi personal,web3,eth --rpcport &quot;8545&quot; --port &quot;30303&quot; -rpcaddr YOUR_IP -rpccorsdomain &quot;*&quot; console</span><br></pre></td></tr></table></figure>
 <p>  然后再次测试<br>  <img src="/2018/12/24/DApp开发遇到问题以及解决/newAccount.png" alt="newAccount"></p>
 </li>
 <li><p>参考链接 - <a href="https://github.com/ethereum/go-ethereum/issues/2723#event-698940135" target="_blank" rel="noopener">personal_newAccount does not exist/is not available</a></p>
