@@ -73,8 +73,6 @@
 
 
 
-  
-
 
   <link rel="alternate" href="/atom.xml" title="My Blog" type="application/atom+xml">
 
@@ -94,7 +92,9 @@
 <meta property="og:image" content="http://yoursite.com/2018/12/24/DApp开发遇到问题以及解决/newAccountError1.png">
 <meta property="og:image" content="http://yoursite.com/2018/12/24/DApp开发遇到问题以及解决/newAccountError2.png">
 <meta property="og:image" content="http://yoursite.com/2018/12/24/DApp开发遇到问题以及解决/newAccount.png">
-<meta property="og:updated_time" content="2018-12-26T03:21:49.702Z">
+<meta property="og:image" content="http://yoursite.com/2018/12/24/DApp开发遇到问题以及解决/remixE0.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/24/DApp开发遇到问题以及解决/remixE1.png">
+<meta property="og:updated_time" content="2018-12-26T04:40:19.049Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DApp开发遇到问题以及解决">
 <meta name="twitter:description" content="前言本次博客简单记录下开发DApp过程中遇到的一些问题，以及相应的解决方案，因此写的也是很随意，仅供参考  项目地址  Vue如何使用Web3 安装Web3的依赖   1npm install web3@^0.20.0 --save  项目里创建全局web3对象  写一个插件，例如命名为Web3.js 123456789101112import Web3 from &quot;web3&quot;export def">
@@ -359,7 +359,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  668
+                  842
                 </span>
               
 
@@ -459,8 +459,11 @@
 <h1 id="Web3-js-0-2XX版本-与-Web3-js-1-0版本"><a href="#Web3-js-0-2XX版本-与-Web3-js-1-0版本" class="headerlink" title="Web3.js 0.2XX版本 与 Web3.js 1.0版本"></a>Web3.js 0.2XX版本 与 Web3.js 1.0版本</h1><ul>
 <li><a href="https://web3.learnblockchain.cn/0.2x.x/" target="_blank" rel="noopener">Web3.js 0.2x.x API 中文版手册</a></li>
 <li><a href="http://cw.hubwiz.com/card/c/web3.js-1.0/1/1/1/" target="_blank" rel="noopener">Web3.js 1.0 中文手册</a> </li>
-<li>二者关于<code>API</code>的使用有较多的区别，不能混用。个人后面发现<code>Web3.js 1.0</code>更加好用，然后就果断上车了。</li>
+<li>二者关于<code>API</code>的使用有较多的区别，不能混用。个人后面发现<code>Web3.js 1.0</code>更加好用，然后就果断上车了</li>
 </ul>
+<h1 id="Remix连接私有链出现的问题"><a href="#Remix连接私有链出现的问题" class="headerlink" title="Remix连接私有链出现的问题"></a>Remix连接私有链出现的问题</h1><h2 id="问题1-Not-possible-to-connect-to-the-Web3-provider"><a href="#问题1-Not-possible-to-connect-to-the-Web3-provider" class="headerlink" title="问题1: Not possible to connect to the Web3 provider"></a>问题1: Not possible to connect to the Web3 provider</h2><p>Not possible to connect to the Web3 provider. Make sure the provider is running and a connection is open (via IPC or RPC).<br>    <img src="/2018/12/24/DApp开发遇到问题以及解决/remixE0.png" alt="remix"><br>错误原因： 在使用<code>geth</code>启动私有链结点的时候没有<code>--rpc</code><br>解决:<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geth -datadir myData/00 -networkid 2018 -rpc -rpcapi personal,web3,eth,net --rpcport &quot;8545&quot; --port &quot;30303&quot; -rpcaddr 127.0.0.1 -rpccorsdomain &quot;*&quot; console</span><br></pre></td></tr></table></figure></p>
+<pre><code>加入以后可以正常连接了
+</code></pre><h2 id="问题2-成功连接后显示can-39-t-detect-network"><a href="#问题2-成功连接后显示can-39-t-detect-network" class="headerlink" title="问题2: 成功连接后显示can&#39;t detect network"></a>问题2: 成功连接后显示<code>can&#39;t detect network</code></h2><p><img src="/2018/12/24/DApp开发遇到问题以及解决/remixE1.png" alt="remix"><br>错误原因： 在使用<code>geth</code>启动私有链结点的时候没有zding开启<code>net</code><br>解决:<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geth -datadir myData/00 -networkid 2018 -rpc -rpcapi personal,web3,eth,net --rpcport &quot;8545&quot; --port &quot;30303&quot; -rpcaddr 127.0.0.1 -rpccorsdomain &quot;*&quot; console</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -657,7 +660,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue如何使用Web3"><span class="nav-number">2.</span> <span class="nav-text">Vue如何使用Web3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建账号失败问题"><span class="nav-number">3.</span> <span class="nav-text">创建账号失败问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web3-js-0-2XX版本-与-Web3-js-1-0版本"><span class="nav-number">4.</span> <span class="nav-text">Web3.js 0.2XX版本 与 Web3.js 1.0版本</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue如何使用Web3"><span class="nav-number">2.</span> <span class="nav-text">Vue如何使用Web3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建账号失败问题"><span class="nav-number">3.</span> <span class="nav-text">创建账号失败问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web3-js-0-2XX版本-与-Web3-js-1-0版本"><span class="nav-number">4.</span> <span class="nav-text">Web3.js 0.2XX版本 与 Web3.js 1.0版本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Remix连接私有链出现的问题"><span class="nav-number">5.</span> <span class="nav-text">Remix连接私有链出现的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题1-Not-possible-to-connect-to-the-Web3-provider"><span class="nav-number">5.1.</span> <span class="nav-text">问题1: Not possible to connect to the Web3 provider</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题2-成功连接后显示can-39-t-detect-network"><span class="nav-number">5.2.</span> <span class="nav-text">问题2: 成功连接后显示can&#39;t detect network</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -677,7 +680,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
