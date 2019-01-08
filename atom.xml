@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-01-07T07:03:57.492Z</updated>
+  <updated>2019-01-08T10:46:17.932Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>区块链发展与现状</title>
+    <link href="http://yoursite.com/2019/01/08/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%8F%91%E5%B1%95%E4%B8%8E%E7%8E%B0%E7%8A%B6/"/>
+    <id>http://yoursite.com/2019/01/08/区块链发展与现状/</id>
+    <published>2019-01-08T10:46:04.000Z</published>
+    <updated>2019-01-08T10:46:17.932Z</updated>
+    
+    <content type="html"><![CDATA[<p>​本次主要阅读了三篇论文，所探讨的主题与当前区块链的安全性以及区块链市场相关。论文<sup><a href="#fn_1" id="reffn_1">1</a></sup>主要以Mt.Gox交易所的交易网络作为样本分析加密货币市场中的市场操纵以及操纵模式，其将交易历史通过一系列的分析以及构造成需要的图，将所有账号分成三类：高账户（EHA）、低账户（ELA）、一般账户（NMA），数据分析发现不正常的账户交易和比特币的价格有关联，此外异常账户存在许多奇怪的事务模式（如自循环、双向、三角形等），这些模式证明了交易市场中存在大量的市场操纵行为。论文<sup><a href="#fn_2" id="reffn_2">2</a></sup>主要通过数据处理和机器学习方法来检测庞氏骗局，其主要基于分析用户交易信息得到用户特征以及反解智能合约的字节码得到操作码，该方法对于检测不提供源代码的智能合约（用户无法之间了解真正的合约内容）是否为庞氏骗局有较大的意义。论文<sup><a href="#fn_3" id="reffn_3">3</a></sup>主要利用图分析技术对区块链中的用户特征进行分类，并用交叉图技术研究以太坊安全问题。</p><p>​区块链可以说是当今最热门的研究方向之一，很多区块链项目也已经落地。但是目前区块链市场方面还是比较混乱的，区块链因为其匿名性以及去中心化吸引大量关注，但是也因为其特性而导致其更加的难以管控与更多安全性问题。目前区块链市场情况比较复杂，很多人只是利用区块链项目圈钱，割完“韭菜”就跑路，也有部分人通过ICO(首次代币发行)进行非法集资，同时存在许多欺诈行为，受害者被骗以后也难以追究到具体的责任（匿名性），更别说挽回损失，更多的只能在各大论坛上发自己被骗了发发牢骚。同时，对于Mt.Gox交易所泄露的交易信息分析中也发现了大量操纵行为，侧面说明区块链市场操纵盛行。操纵市场行为，原本是指个人或机构背离市场自由竞争和供求关系原则，人为地操纵证券价格，以引诱他人参与证券交易，为自己牟取私利的行为，在区块链市场里面主要是部分人通过某些操纵手段（例如：不正常的事务）来引起加密数字货币的价格浮动，从而从中谋取私利。目前证券市场方面由于国家的严加管控已经难以发生市场操纵的行为，而对于区块链这个去中心化的领域而言，如果不能合理的解决市场操纵的问题，则将会称为少部分人的游戏，将造成巨大的不良影响，也将限制区块链的发展与应用。</p><p>​对于区块链领域，目前国家也出台了相关的文件，对一些违法行为进行了监管与约束，例如严禁通过ICO来进行非法融资，同时也发布相应的科普文章《区块链能做什么、不能做什么？》来避免群众过于盲目而被诈骗，当然国家也大力支持区块链技术的发展。但是区块链方面还是有许多的安全性问题尚未解决，区块链因为其匿名性以及去中心化的特性，让用户更加的自由，但是这也带来一系列的问题。如何保留着区块链的特性的前提下让其亦能够健康的发展是一个难题，不过相信随着研究的更加深入，对于区块链骗局与欺诈将会有更多有效的方法来检测与约束，同时对于市场操纵现象也会有相应合理的管控，使得区块链技术得以更加健康的发展。</p><p>参考文献：<br><sup><a href="#fn_1" id="reffn_1">1</a></sup>: Market Manipulation of Bitcoin: Evidence from Mining the Mt. Gox Transaction Network<br><sup><a href="#fn_2" id="reffn_2">2</a></sup>: Detecting Ponzi Schemes on Ethereum: Towards Healthier BlockchainTechnology<br><sup><a href="#fn_3" id="reffn_3">3</a></sup>: Understanding Ethereum via Graph Analysis</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;​本次主要阅读了三篇论文，所探讨的主题与当前区块链的安全性以及区块链市场相关。论文&lt;sup&gt;&lt;a href=&quot;#fn_1&quot; id=&quot;reffn_1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;主要以Mt.Gox交易所的交易网络作为样本分析加密货币市场中的市场操纵以及操纵模式，其将交易历史通过一
+      
+    
+    </summary>
+    
+      <category term="区块链" scheme="http://yoursite.com/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    
+      <category term="区块链" scheme="http://yoursite.com/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+  </entry>
   
   <entry>
     <title>高性能区块链拓展方法</title>
@@ -41,29 +66,6 @@
     
     
       <category term="区块链" scheme="http://yoursite.com/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://yoursite.com/2019/01/04/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%8F%91%E5%B1%95%E4%B8%8E%E7%8E%B0%E7%8A%B6/"/>
-    <id>http://yoursite.com/2019/01/04/区块链发展与现状/</id>
-    <published>2019-01-04T14:21:31.500Z</published>
-    <updated>2019-01-07T07:00:30.296Z</updated>
-    
-    <content type="html"><![CDATA[<hr><p>title: 区块链发展与现状<br>date: 2019-01-04 22:21:31<br>tags: 区块链</p><h2 id="categories-区块链"><a href="#categories-区块链" class="headerlink" title="categories: 区块链"></a>categories: 区块链</h2><p>​本次主要阅读了三篇论文，所探讨的主题与当前区块链的安全性以及区块链市场相关。论文<sup><a href="#fn_1" id="reffn_1">1</a></sup>主要以Mt.Gox交易所的交易网络作为样本分析加密货币市场中的市场操纵以及操纵模式，其将交易历史通过一系列的分析以及构造成需要的图，将所有账号分成三类：高账户（EHA）、低账户（ELA）、一般账户（NMA），数据分析发现不正常的账户交易和比特币的价格有关联，此外异常账户存在许多奇怪的事务模式（如自循环、双向、三角形等），这些模式证明了交易市场中存在大量的市场操纵行为。论文<sup><a href="#fn_2" id="reffn_2">2</a></sup>主要通过数据处理和机器学习方法来检测庞氏骗局，其主要基于分析用户交易信息得到用户特征以及反解智能合约的字节码得到操作码，该方法对于检测不提供源代码的智能合约（用户无法之间了解真正的合约内容）是否为庞氏骗局有较大的意义。论文<sup><a href="#fn_3" id="reffn_3">3</a></sup>主要利用图分析技术对区块链中的用户特征进行分类，并用交叉图技术研究以太坊安全问题。</p><p>​区块链可以说是当今最热门的研究方向之一，很多区块链项目也已经落地。但是目前区块链市场方面还是比较混乱的，区块链因为其匿名性以及去中心化吸引大量关注，但是也因为其特性而导致其更加的难以管控与更多安全性问题。目前区块链市场情况比较复杂，很多人只是利用区块链项目圈钱，割完“韭菜”就跑路，也有部分人通过ICO(首次代币发行)进行非法集资，同时存在许多欺诈行为，受害者被骗以后也难以追究到具体的责任（匿名性），更别说挽回损失，更多的只能在各大论坛上发自己被骗了发发牢骚。同时，对于Mt.Gox交易所泄露的交易信息分析中也发现了大量操纵行为，侧面说明区块链市场操纵盛行。操纵市场行为，原本是指个人或机构背离市场自由竞争和供求关系原则，人为地操纵证券价格，以引诱他人参与证券交易，为自己牟取私利的行为，在区块链市场里面主要是部分人通过某些操纵手段（例如：不正常的事务）来引起加密数字货币的价格浮动，从而从中谋取私利。目前证券市场方面由于国家的严加管控已经难以发生市场操纵的行为，而对于区块链这个去中心化的领域而言，如果不能合理的解决市场操纵的问题，则将会称为少部分人的游戏，将造成巨大的不良影响，也将限制区块链的发展与应用。</p><p>​对于区块链领域，目前国家也出台了相关的文件，对一些违法行为进行了监管与约束，例如严禁通过ICO来进行非法融资，同时也发布相应的科普文章《区块链能做什么、不能做什么？》来避免群众过于盲目而被诈骗，当然国家也大力支持区块链技术的发展。但是区块链方面还是有许多的安全性问题尚未解决，区块链因为其匿名性以及去中心化的特性，让用户更加的自由，但是这也带来一系列的问题。如何保留着区块链的特性的前提下让其亦能够健康的发展是一个难题，不过相信随着研究的更加深入，对于区块链骗局与欺诈将会有更多有效的方法来检测与约束，同时对于市场操纵现象也会有相应合理的管控，使得区块链技术得以更加健康的发展。</p><p>参考文献：<br><sup><a href="#fn_1" id="reffn_1">1</a></sup>: Market Manipulation of Bitcoin: Evidence from Mining the Mt. Gox Transaction Network<br><sup><a href="#fn_2" id="reffn_2">2</a></sup>: Detecting Ponzi Schemes on Ethereum: Towards Healthier BlockchainTechnology<br><sup><a href="#fn_3" id="reffn_3">3</a></sup>: Understanding Ethereum via Graph Analysis</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;hr&gt;
-&lt;p&gt;title: 区块链发展与现状&lt;br&gt;date: 2019-01-04 22:21:31&lt;br&gt;tags: 区块链&lt;/p&gt;
-&lt;h2 id=&quot;categories-区块链&quot;&gt;&lt;a href=&quot;#categories-区块链&quot; class=&quot;headerlink&quot; t
-      
-    
-    </summary>
-    
     
   </entry>
   
