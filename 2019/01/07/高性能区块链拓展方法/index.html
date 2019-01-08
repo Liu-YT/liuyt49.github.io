@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="PoW(Proof of Work)工作量证明，最早应用于Adam Back 1996年提出的Hashcash中，而后被中本聪改造为以“挖矿”形式实现区块链一致性的共识机制。 PoW(Proof of Work)机制，其核心设计思路是提出一个复杂度计算值的运算过程，用户需要消耗大量的算力才能计算出一个满意的值并提供给服务方快速验证。在比特币网络中，就应用了PoW这种共识机制，挖矿实际是一个竞争记账">
+<meta name="description" content="总结当前区块链研究中用于提高区块链系统性能和可扩展性的方法。并详细说明侧链技术，以及通过以太坊构建侧链的方法  如今，性能过低是当前区块链技术面临的主要挑战之一。区块链的性能指标主要包括交易吞吐量和延时。比特币理论上每秒最多只能处理七笔交易，每十分钟出一个区块，相当于交易吞吐量为7，交易延时为10分钟，实际上，等待最终确认需要6个左右的区块，也就是说实际交易延时是1个小时。以太坊稍有提高，但也远">
 <meta name="keywords" content="区块链">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PoW共识机制原理及优缺点">
-<meta property="og:url" content="http://yoursite.com/2018/11/07/PoW共识机制原理及优缺点/index.html">
+<meta property="og:title" content="高性能区块链拓展方法">
+<meta property="og:url" content="http://yoursite.com/2019/01/07/高性能区块链拓展方法/index.html">
 <meta property="og:site_name" content="My Blog">
-<meta property="og:description" content="PoW(Proof of Work)工作量证明，最早应用于Adam Back 1996年提出的Hashcash中，而后被中本聪改造为以“挖矿”形式实现区块链一致性的共识机制。 PoW(Proof of Work)机制，其核心设计思路是提出一个复杂度计算值的运算过程，用户需要消耗大量的算力才能计算出一个满意的值并提供给服务方快速验证。在比特币网络中，就应用了PoW这种共识机制，挖矿实际是一个竞争记账">
+<meta property="og:description" content="总结当前区块链研究中用于提高区块链系统性能和可扩展性的方法。并详细说明侧链技术，以及通过以太坊构建侧链的方法  如今，性能过低是当前区块链技术面临的主要挑战之一。区块链的性能指标主要包括交易吞吐量和延时。比特币理论上每秒最多只能处理七笔交易，每十分钟出一个区块，相当于交易吞吐量为7，交易延时为10分钟，实际上，等待最终确认需要6个左右的区块，也就是说实际交易延时是1个小时。以太坊稍有提高，但也远">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-08T11:48:24.389Z">
+<meta property="og:updated_time" content="2019-01-07T07:03:57.492Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PoW共识机制原理及优缺点">
-<meta name="twitter:description" content="PoW(Proof of Work)工作量证明，最早应用于Adam Back 1996年提出的Hashcash中，而后被中本聪改造为以“挖矿”形式实现区块链一致性的共识机制。 PoW(Proof of Work)机制，其核心设计思路是提出一个复杂度计算值的运算过程，用户需要消耗大量的算力才能计算出一个满意的值并提供给服务方快速验证。在比特币网络中，就应用了PoW这种共识机制，挖矿实际是一个竞争记账">
+<meta name="twitter:title" content="高性能区块链拓展方法">
+<meta name="twitter:description" content="总结当前区块链研究中用于提高区块链系统性能和可扩展性的方法。并详细说明侧链技术，以及通过以太坊构建侧链的方法  如今，性能过低是当前区块链技术面临的主要挑战之一。区块链的性能指标主要包括交易吞吐量和延时。比特币理论上每秒最多只能处理七笔交易，每十分钟出一个区块，相当于交易吞吐量为7，交易延时为10分钟，实际上，等待最终确认需要6个左右的区块，也就是说实际交易延时是1个小时。以太坊稍有提高，但也远">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/07/PoW共识机制原理及优缺点/">
+  <link rel="canonical" href="http://yoursite.com/2019/01/07/高性能区块链拓展方法/">
 
 
 
 
 
-  <title>PoW共识机制原理及优缺点 | My Blog</title>
+  <title>高性能区块链拓展方法 | My Blog</title>
   
 
 
@@ -265,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/07/PoW共识机制原理及优缺点/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/07/高性能区块链拓展方法/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liuyt49">
@@ -282,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">PoW共识机制原理及优缺点</h1>
+          <h1 class="post-title" itemprop="name headline">高性能区块链拓展方法</h1>
         
 
         <div class="post-meta">
@@ -294,8 +294,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-07T22:39:21+08:00">
-                2018-11-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-07T14:59:26+08:00">
+                2019-01-07
               </time>
             
 
@@ -353,7 +353,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.4k
+                  1.8k
                 </span>
               
 
@@ -369,7 +369,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  4
+                  6
                 </span>
               
             </div>
@@ -390,10 +390,36 @@
       
 
       
-        <p>PoW(<code>Proof of Work</code>)工作量证明，最早应用于Adam Back 1996年提出的<code>Hashcash</code>中，而后被中本聪改造为以“挖矿”形式实现区块链一致性的共识机制。</p>
-<p>PoW(<code>Proof of Work</code>)机制，其核心设计思路是提出一个复杂度计算值的运算过程，用户需要消耗大量的算力才能计算出一个满意的值并提供给服务方快速验证。在比特币网络中，就应用了PoW这种共识机制，挖矿实际是一个竞争记账权的过程，矿工们需要以最快的速度计算出符合要求的<code>Block Hash</code>(区块哈希值)，以此获得新区块的记账权以及相应的比特币的奖励。当然由于哈希函数是无法预测的随机散列函数，所以计算出来符合要求的哈希值具有一定的难度，需要耗费大量算力才能获得被认可的结果，矿工需要不停的变更区块头中的随机数，并对每次变更后的区块头做双重SHA256运算，将结果值与当前网络的目标值做对比，如果小于目标值，则解题成功，工作量证明完成。在整个过程中，矿工贡献的算力是其工作量，工作量体现在其计算得到的满足要求的哈希值，证明其确实经过大量的尝试和计算。当工作量证明完成后，挖矿节点马上对交易区块进行打包确认并广播给全部节点，然后获得相应的比特币奖励。但是这种过程是有可能存在两个矿工同时解出了题目的情况的，则这时将造成软分叉。从分叉的区块起，由于不同的矿工跟从了不同的区块，在分叉出来的两条不同链上，算力是有差别的，因此两条链的增长速度也是不一样的，在一段时间之后，总有一条链的长度要超过另一条。此时一旦矿工发现存在一条更长的链，则会在这条链的基础上继续挖矿，而另一条分叉则会被抛弃。到目前为此PoW技术在区块链中起着至关重要的作用，它也成为了加密货币中主流的共识机制之一，不仅仅应用在比特币上，像以太坊等加密货币都有使用。</p>
-<p>为什么要采用PoW这种共识机制呢？首先，很多人都认为挖矿过程中浪费大量的计算机资源去计算一个似乎没有很大意义的值，得到仅仅是一些虚拟货币而已（虽然现在比较值钱）。不可否认，PoW共识机制确实存在比较多的缺点。首先，其造成巨额支出，挖矿需要高度专业化的计算机硬件来运行复杂的算法，当然普通的计算机也可以使用，只是基本不可能挖到矿，算力根本不是一个级别的。同时，挖矿耗费大量的电力。在2017年全球矿工用于比特币挖矿的电力已经超过159个国家的年度电费输出，这是十分浪费资源且不环保的。同时，这些计算是“无用”。矿工做很多工作来生成块并消耗大量电力。但是，他们的计算在其他任何地方都不适用。它们保证了网络的安全性，但不能应用于商业，科学或任何其他领域。但是，PoW共识机制还是有一些好处的，其主要好处是反DoS攻击和保证采矿的公平性。PoW对网络中的操作施加了一些限制。他们需要付出很多努力才能被执行。高效的攻击需要大量的计算能力和大量的时间来进行计算。因此，攻击是可能的，攻击者必须投入超过总体51%的运算力才能保证篡改结果，攻击成本是相当高的，效益也不高。同时PoW也保证了挖矿的公平性，每位矿工获得记账权的概率与其投入的算力有关，投入越多收获也越多。</p>
-<p>对于PoW存在问题，主要是存在着浪费过多资源在无用的计算中，对于这个问题，个人感觉难以从根源上解决，PoW的机制使得注定做出很多无用的计算，浪费很多资源，我们是否可以考虑使用别的共识机制代替掉PoW共识机制呢。例如PoS(<code>Proof of Stake</code>)股权证明机制或者DPoS（<code>Delegated Proof of Stake</code>）：授权股权证明机制，这两种都可以减少大量的能耗，对于PoS甚至可以不用挖矿，不需要大量耗费电力和能源，收益与个人持有加密货币数量与持有时间相关，但是也有可能导致马太效应。对于PoW共识机制存在的问题，目前似乎难以找到从根源上解决的办法，最理想的似乎是使用PoS或者DPoS共识机制，当然如果能够充分的利用其中的计算机资源，将每次计算一个”无用”的值变成计算一些有价值的东西，这样也是有一定的改进的。</p>
+        <blockquote>
+<p>总结当前区块链研究中用于提高区块链系统性能和可扩展性的方法。并详细说明侧链技术，以及通过以太坊构建侧链的方法</p>
+</blockquote>
+<p>如今，性能过低是当前区块链技术面临的主要挑战之一。区块链的性能指标主要包括交易吞吐量和延时。比特币理论上每秒最多只能处理七笔交易，每十分钟出一个区块，相当于交易吞吐量为7，交易延时为10分钟，实际上，等待最终确认需要6个左右的区块，也就是说实际交易延时是1个小时。以太坊稍有提高，但也远远不能满足应用需求。从区块链技术来看，目前影响区块链性能因素主要包括广播通信、信息加解密、共识机制、交易验证机制等几个环节。目前提高区块链性能与扩展性已经提出几种方法，主要包括<strong>分片（Sharding）、离链计算（Off-chain computing）及侧链（Slidechain）、有向无环结构（DAG）</strong>等等，这些方式主要是通过将部分链上任务转到链下或其他链进行处理，或者将整个交易分为几个部分并分别处理，另一种思路是<strong>调整共识机制</strong>，采用新的可扩展的共识协议，从PoW到PoS再到DPoS和各种BFT类算法，共识机制不断创新，区块链平台性能也得到大幅提升，或者<strong>系统优化</strong>，通过优化系统 架构、代码结构、 数据存储效率、 网络发送效率等， 提高区块链性能。</p>
+<ul>
+<li><p>分片（Sharding）。分片技术是一种基于数据库分片传统概念的扩容技术，它将数据库分割成多个碎片并将这些碎片放置在不同的服务器上。在公共区块链的情境中，网络上的交易将被分成不同的碎片，其由网络上的不同节点组成。因此，每个节点只需处理一小部分传入的交易，并且通过与网络上的其他节点并行处理就能完成大量的验证工作。将网络分割为碎片会使得更多的交易同时被处理和验证。因此，随着网络的增长，区块链处理越来越多的交易将成为可能。这种属性也称为水平扩容。</p>
+</li>
+<li><p>有向无环结构（DAG）。DAG区块链技术没有区块概念，不是把所有数据打包成区块，再用区块链接区块，而是每个用户都可以提交一个数据单元，这个数据单元里可以有很多东西，比如交易、消息等等。数据单元间通过引用关系链接起来，从而形成具有半序关系的DAG（有向无环图）。DAG的特点是把数据单元的写入操作异步化，大量的钱包客户端可以自主异步地把交易数据写入DAG，从而可以支持极大的并发量和极高的速度。</p>
+</li>
+<li><p><strong>离链计算/侧链</strong>。在主链之下进行交易，中间交 易不进入主链确认，待最后一 笔交易完成后回归到主链。</p>
+<ul>
+<li><p><strong>什么是侧链？</strong></p>
+<p>侧链本质上是一种<strong>跨区块链解决方案</strong>。通过这种解决方案，可以实现数字资产从第一个区块链到第二个区块链的转移，又可以在稍后的时间点从第二个区块链安全返回到第一个区块链。其中第一个区块链通常被称为主区块链或者主链，每二个区块链则被称为侧链。最初，主链通常指的是比特币区块链，而现在主链可以是任何区块链。侧链协议被设想为一种允许数字资产在主链与侧链之间进行转移的方式，其实现的技术基础是<strong>双向锚定（Two-way Peg）</strong>，通过双向锚定技术，可以实现暂时的将数字资产在主链中锁定，同时将等价的数字资产在侧链中释放，同样当等价的数字资产在侧链中被锁定的时候，主链的数字资产也可以被释放。双向锚定实现的最大难点是协议改造需兼容现有主链，也就是不能对现有主链的工作造成影响，其具体实现方式可以分为以下几类：单一托管模式、联盟模式、SPV模式、驱动链模式、混合模式。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="以太坊构建侧链的方法"><a href="#以太坊构建侧链的方法" class="headerlink" title="以太坊构建侧链的方法"></a>以太坊构建侧链的方法</h2><p>在以太坊上构建侧链，我们可以使用到Plasma。Plasma是一种处理链下交易的技术，需要依赖以太坊底层技术去对其安全性进行保障，它可以允许在以太坊主链上创建“子链”，同时这些“子链”也可以创建它们自己的“子链”。</p>
+<p>任何人都可以在以太坊主链上创建个人化的 Plasma 智能合约，Plasma智能合约运行在根链（以太坊主网）之上，形成一个可靠的侧链链接网络连接到一个分层和树状结构的根链，强制执行区块链历史和 MapReducible 计算进入一系列的 merkle 证明。同时Plasma 链的一个关键属性是所谓的退出机制，它允许用户放弃子链，一旦出现任何问题时可以将资金提取到根链。所有在 Plasma 链上的交易完成都是依靠加密签章，不需要经过主链的共识，经过一段时间后才批次性的广播并写入主链中。因此大量在 Plasma 上的所有交易最后只会浓缩成少数比交易打包进主链中，大幅度降低区块链膨胀问题。</p>
+<p>更加通俗的说明一下Plasma运作：</p>
+<ul>
+<li>首先，我们需要在以太坊主链创建一套智能合约，作为服务于我们Plasma子链的Root。Plasma Root包含了子链的基本状态交易规则，记录了子链状态的哈希值，并且让用户在以太坊主链和子链之间转移资产。</li>
+<li>然后，在将子链根植于主链上之后，子链就被创造出来了。这个子链拥有自己的共识算法，且独立于以太坊主链。然后，我们就可以依据自己的需求来使用了。</li>
+</ul>
+<p>当然现在也有更加好的平台和工具，例如Loom Network，其被称为以太坊上的EOS，其核心产品是一款SDK - Loom SDK。Loom SDK会生成一个称为DApp链的产物（DApp链使用基于Plasma的中继来与以太坊之间来回转移资产），它是一个用以太坊作为基础层的第二层区块链，同时SDK允许开发者选择他们自己的共识算法和规则集。</p>
+<p>参考文献</p>
+<ul>
+<li><a href="https://plasma.io/plasma.pdf" target="_blank" rel="noopener">Plasma: Scalable Autonomous Smart Contracts</a></li>
+<li><a href="https://medium.com/@argongroup/ethereum-plasma-explained-608720d3c60e" target="_blank" rel="noopener">Explained: Ethereum Plasma</a></li>
+</ul>
 
       
     </div>
@@ -424,8 +450,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/07/区块链个人认识/" rel="next" title="区块链个人认识">
-                <i class="fa fa-chevron-left"></i> 区块链个人认识
+              <a href="/2019/01/04/区块链发展与现状/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
               </a>
             
           </div>
@@ -433,10 +459,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/08/VirtualBox安装Centos7虚拟机教程/" rel="prev" title="VirtualBox安装Centos7虚拟机教程">
-                VirtualBox安装Centos7虚拟机教程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -495,8 +517,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -575,6 +606,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#以太坊构建侧链的方法"><span class="nav-number">1.</span> <span class="nav-text">以太坊构建侧链的方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

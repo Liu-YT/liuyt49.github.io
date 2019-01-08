@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-01-07T06:55:42.110Z</updated>
+  <updated>2019-01-07T07:03:57.492Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,19 +17,22 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>区块链发展与现状</title>
-    <link href="http://yoursite.com/2019/01/04/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%8F%91%E5%B1%95%E4%B8%8E%E7%8E%B0%E7%8A%B6/"/>
-    <id>http://yoursite.com/2019/01/04/区块链发展与现状/</id>
-    <published>2019-01-04T14:21:31.000Z</published>
-    <updated>2019-01-07T06:55:42.110Z</updated>
+    <title>高性能区块链拓展方法</title>
+    <link href="http://yoursite.com/2019/01/07/%E9%AB%98%E6%80%A7%E8%83%BD%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8B%93%E5%B1%95%E6%96%B9%E6%B3%95/"/>
+    <id>http://yoursite.com/2019/01/07/高性能区块链拓展方法/</id>
+    <published>2019-01-07T06:59:26.000Z</published>
+    <updated>2019-01-07T07:03:57.492Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="区块链现状与发展"><a href="#区块链现状与发展" class="headerlink" title="区块链现状与发展"></a>区块链现状与发展</h2><p>​本次主要阅读了三篇论文，所探讨的主题与当前区块链的安全性以及区块链市场相关。论文<sup><a href="#fn_1" id="reffn_1">1</a></sup>主要以Mt.Gox交易所的交易网络作为样本分析加密货币市场中的市场操纵以及操纵模式，其将交易历史通过一系列的分析以及构造成需要的图，将所有账号分成三类：高账户（EHA）、低账户（ELA）、一般账户（NMA），数据分析发现不正常的账户交易和比特币的价格有关联，此外异常账户存在许多奇怪的事务模式（如自循环、双向、三角形等），这些模式证明了交易市场中存在大量的市场操纵行为。论文<sup><a href="#fn_2" id="reffn_2">2</a></sup>主要通过数据处理和机器学习方法来检测庞氏骗局，其主要基于分析用户交易信息得到用户特征以及反解智能合约的字节码得到操作码，该方法对于检测不提供源代码的智能合约（用户无法之间了解真正的合约内容）是否为庞氏骗局有较大的意义。论文<sup><a href="#fn_3" id="reffn_3">3</a></sup>主要利用图分析技术对区块链中的用户特征进行分类，并用交叉图技术研究以太坊安全问题。</p><p>​区块链可以说是当今最热门的研究方向之一，很多区块链项目也已经落地。但是目前区块链市场方面还是比较混乱的，区块链因为其匿名性以及去中心化吸引大量关注，但是也因为其特性而导致其更加的难以管控与更多安全性问题。目前区块链市场情况比较复杂，很多人只是利用区块链项目圈钱，割完“韭菜”就跑路，也有部分人通过ICO(首次代币发行)进行非法集资，同时存在许多欺诈行为，受害者被骗以后也难以追究到具体的责任（匿名性），更别说挽回损失，更多的只能在各大论坛上发自己被骗了发发牢骚。同时，对于Mt.Gox交易所泄露的交易信息分析中也发现了大量操纵行为，侧面说明区块链市场操纵盛行。操纵市场行为，原本是指个人或机构背离市场自由竞争和供求关系原则，人为地操纵证券价格，以引诱他人参与证券交易，为自己牟取私利的行为，在区块链市场里面主要是部分人通过某些操纵手段（例如：不正常的事务）来引起加密数字货币的价格浮动，从而从中谋取私利。目前证券市场方面由于国家的严加管控已经难以发生市场操纵的行为，而对于区块链这个去中心化的领域而言，如果不能合理的解决市场操纵的问题，则将会称为少部分人的游戏，将造成巨大的不良影响，也将限制区块链的发展与应用。</p><p>​对于区块链领域，目前国家也出台了相关的文件，对一些违法行为进行了监管与约束，例如严禁通过ICO来进行非法融资，同时也发布相应的科普文章《区块链能做什么、不能做什么？》来避免群众过于盲目而被诈骗，当然国家也大力支持区块链技术的发展。但是区块链方面还是有许多的安全性问题尚未解决，区块链因为其匿名性以及去中心化的特性，让用户更加的自由，但是这也带来一系列的问题。如何保留着区块链的特性的前提下让其亦能够健康的发展是一个难题，不过相信随着研究的更加深入，对于区块链骗局与欺诈将会有更多有效的方法来检测与约束，同时对于市场操纵现象也会有相应合理的管控，使得区块链技术得以更加健康的发展。</p><p>参考文献：</p><blockquote id="fn_1"><sup>1</sup>. Market Manipulation of Bitcoin: Evidence from Mining the Mt. Gox Transaction Network<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a></blockquote><blockquote id="fn_2"><sup>2</sup>. Detecting Ponzi Schemes on Ethereum: Towards Healthier BlockchainTechnology <a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a></blockquote><blockquote id="fn_3"><sup>3</sup>. Understanding Ethereum via Graph Analysis<a href="#reffn_3" title="Jump back to footnote [3] in the text."> &#8617;</a></blockquote>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>总结当前区块链研究中用于提高区块链系统性能和可扩展性的方法。并详细说明侧链技术，以及通过以太坊构建侧链的方法</p></blockquote><p>如今，性能过低是当前区块链技术面临的主要挑战之一。区块链的性能指标主要包括交易吞吐量和延时。比特币理论上每秒最多只能处理七笔交易，每十分钟出一个区块，相当于交易吞吐量为7，交易延时为10分钟，实际上，等待最终确认需要6个左右的区块，也就是说实际交易延时是1个小时。以太坊稍有提高，但也远远不能满足应用需求。从区块链技术来看，目前影响区块链性能因素主要包括广播通信、信息加解密、共识机制、交易验证机制等几个环节。目前提高区块链性能与扩展性已经提出几种方法，主要包括<strong>分片（Sharding）、离链计算（Off-chain computing）及侧链（Slidechain）、有向无环结构（DAG）</strong>等等，这些方式主要是通过将部分链上任务转到链下或其他链进行处理，或者将整个交易分为几个部分并分别处理，另一种思路是<strong>调整共识机制</strong>，采用新的可扩展的共识协议，从PoW到PoS再到DPoS和各种BFT类算法，共识机制不断创新，区块链平台性能也得到大幅提升，或者<strong>系统优化</strong>，通过优化系统 架构、代码结构、 数据存储效率、 网络发送效率等， 提高区块链性能。</p><ul><li><p>分片（Sharding）。分片技术是一种基于数据库分片传统概念的扩容技术，它将数据库分割成多个碎片并将这些碎片放置在不同的服务器上。在公共区块链的情境中，网络上的交易将被分成不同的碎片，其由网络上的不同节点组成。因此，每个节点只需处理一小部分传入的交易，并且通过与网络上的其他节点并行处理就能完成大量的验证工作。将网络分割为碎片会使得更多的交易同时被处理和验证。因此，随着网络的增长，区块链处理越来越多的交易将成为可能。这种属性也称为水平扩容。</p></li><li><p>有向无环结构（DAG）。DAG区块链技术没有区块概念，不是把所有数据打包成区块，再用区块链接区块，而是每个用户都可以提交一个数据单元，这个数据单元里可以有很多东西，比如交易、消息等等。数据单元间通过引用关系链接起来，从而形成具有半序关系的DAG（有向无环图）。DAG的特点是把数据单元的写入操作异步化，大量的钱包客户端可以自主异步地把交易数据写入DAG，从而可以支持极大的并发量和极高的速度。</p></li><li><p><strong>离链计算/侧链</strong>。在主链之下进行交易，中间交 易不进入主链确认，待最后一 笔交易完成后回归到主链。</p><ul><li><p><strong>什么是侧链？</strong></p><p>侧链本质上是一种<strong>跨区块链解决方案</strong>。通过这种解决方案，可以实现数字资产从第一个区块链到第二个区块链的转移，又可以在稍后的时间点从第二个区块链安全返回到第一个区块链。其中第一个区块链通常被称为主区块链或者主链，每二个区块链则被称为侧链。最初，主链通常指的是比特币区块链，而现在主链可以是任何区块链。侧链协议被设想为一种允许数字资产在主链与侧链之间进行转移的方式，其实现的技术基础是<strong>双向锚定（Two-way Peg）</strong>，通过双向锚定技术，可以实现暂时的将数字资产在主链中锁定，同时将等价的数字资产在侧链中释放，同样当等价的数字资产在侧链中被锁定的时候，主链的数字资产也可以被释放。双向锚定实现的最大难点是协议改造需兼容现有主链，也就是不能对现有主链的工作造成影响，其具体实现方式可以分为以下几类：单一托管模式、联盟模式、SPV模式、驱动链模式、混合模式。</p></li></ul></li></ul><h2 id="以太坊构建侧链的方法"><a href="#以太坊构建侧链的方法" class="headerlink" title="以太坊构建侧链的方法"></a>以太坊构建侧链的方法</h2><p>在以太坊上构建侧链，我们可以使用到Plasma。Plasma是一种处理链下交易的技术，需要依赖以太坊底层技术去对其安全性进行保障，它可以允许在以太坊主链上创建“子链”，同时这些“子链”也可以创建它们自己的“子链”。</p><p>任何人都可以在以太坊主链上创建个人化的 Plasma 智能合约，Plasma智能合约运行在根链（以太坊主网）之上，形成一个可靠的侧链链接网络连接到一个分层和树状结构的根链，强制执行区块链历史和 MapReducible 计算进入一系列的 merkle 证明。同时Plasma 链的一个关键属性是所谓的退出机制，它允许用户放弃子链，一旦出现任何问题时可以将资金提取到根链。所有在 Plasma 链上的交易完成都是依靠加密签章，不需要经过主链的共识，经过一段时间后才批次性的广播并写入主链中。因此大量在 Plasma 上的所有交易最后只会浓缩成少数比交易打包进主链中，大幅度降低区块链膨胀问题。</p><p>更加通俗的说明一下Plasma运作：</p><ul><li>首先，我们需要在以太坊主链创建一套智能合约，作为服务于我们Plasma子链的Root。Plasma Root包含了子链的基本状态交易规则，记录了子链状态的哈希值，并且让用户在以太坊主链和子链之间转移资产。</li><li>然后，在将子链根植于主链上之后，子链就被创造出来了。这个子链拥有自己的共识算法，且独立于以太坊主链。然后，我们就可以依据自己的需求来使用了。</li></ul><p>当然现在也有更加好的平台和工具，例如Loom Network，其被称为以太坊上的EOS，其核心产品是一款SDK - Loom SDK。Loom SDK会生成一个称为DApp链的产物（DApp链使用基于Plasma的中继来与以太坊之间来回转移资产），它是一个用以太坊作为基础层的第二层区块链，同时SDK允许开发者选择他们自己的共识算法和规则集。</p><p>参考文献</p><ul><li><a href="https://plasma.io/plasma.pdf" target="_blank" rel="noopener">Plasma: Scalable Autonomous Smart Contracts</a></li><li><a href="https://medium.com/@argongroup/ethereum-plasma-explained-608720d3c60e" target="_blank" rel="noopener">Explained: Ethereum Plasma</a></li></ul>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h2 id=&quot;区块链现状与发展&quot;&gt;&lt;a href=&quot;#区块链现状与发展&quot; class=&quot;headerlink&quot; title=&quot;区块链现状与发展&quot;&gt;&lt;/a&gt;区块链现状与发展&lt;/h2&gt;&lt;p&gt;​本次主要阅读了三篇论文，所探讨的主题与当前区块链的安全性以及区块链市场相关。论文&lt;sup&gt;
+        &lt;blockquote&gt;
+&lt;p&gt;总结当前区块链研究中用于提高区块链系统性能和可扩展性的方法。并详细说明侧链技术，以及通过以太坊构建侧链的方法&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如今，性能过低是当前区块链技术面临的主要挑战之一。区块链的性能指标主要包括交易吞吐量和延时。比特
       
     
     </summary>
@@ -38,6 +41,29 @@
     
     
       <category term="区块链" scheme="http://yoursite.com/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2019/01/04/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%8F%91%E5%B1%95%E4%B8%8E%E7%8E%B0%E7%8A%B6/"/>
+    <id>http://yoursite.com/2019/01/04/区块链发展与现状/</id>
+    <published>2019-01-04T14:21:31.500Z</published>
+    <updated>2019-01-07T07:00:30.296Z</updated>
+    
+    <content type="html"><![CDATA[<hr><p>title: 区块链发展与现状<br>date: 2019-01-04 22:21:31<br>tags: 区块链</p><h2 id="categories-区块链"><a href="#categories-区块链" class="headerlink" title="categories: 区块链"></a>categories: 区块链</h2><p>​本次主要阅读了三篇论文，所探讨的主题与当前区块链的安全性以及区块链市场相关。论文<sup><a href="#fn_1" id="reffn_1">1</a></sup>主要以Mt.Gox交易所的交易网络作为样本分析加密货币市场中的市场操纵以及操纵模式，其将交易历史通过一系列的分析以及构造成需要的图，将所有账号分成三类：高账户（EHA）、低账户（ELA）、一般账户（NMA），数据分析发现不正常的账户交易和比特币的价格有关联，此外异常账户存在许多奇怪的事务模式（如自循环、双向、三角形等），这些模式证明了交易市场中存在大量的市场操纵行为。论文<sup><a href="#fn_2" id="reffn_2">2</a></sup>主要通过数据处理和机器学习方法来检测庞氏骗局，其主要基于分析用户交易信息得到用户特征以及反解智能合约的字节码得到操作码，该方法对于检测不提供源代码的智能合约（用户无法之间了解真正的合约内容）是否为庞氏骗局有较大的意义。论文<sup><a href="#fn_3" id="reffn_3">3</a></sup>主要利用图分析技术对区块链中的用户特征进行分类，并用交叉图技术研究以太坊安全问题。</p><p>​区块链可以说是当今最热门的研究方向之一，很多区块链项目也已经落地。但是目前区块链市场方面还是比较混乱的，区块链因为其匿名性以及去中心化吸引大量关注，但是也因为其特性而导致其更加的难以管控与更多安全性问题。目前区块链市场情况比较复杂，很多人只是利用区块链项目圈钱，割完“韭菜”就跑路，也有部分人通过ICO(首次代币发行)进行非法集资，同时存在许多欺诈行为，受害者被骗以后也难以追究到具体的责任（匿名性），更别说挽回损失，更多的只能在各大论坛上发自己被骗了发发牢骚。同时，对于Mt.Gox交易所泄露的交易信息分析中也发现了大量操纵行为，侧面说明区块链市场操纵盛行。操纵市场行为，原本是指个人或机构背离市场自由竞争和供求关系原则，人为地操纵证券价格，以引诱他人参与证券交易，为自己牟取私利的行为，在区块链市场里面主要是部分人通过某些操纵手段（例如：不正常的事务）来引起加密数字货币的价格浮动，从而从中谋取私利。目前证券市场方面由于国家的严加管控已经难以发生市场操纵的行为，而对于区块链这个去中心化的领域而言，如果不能合理的解决市场操纵的问题，则将会称为少部分人的游戏，将造成巨大的不良影响，也将限制区块链的发展与应用。</p><p>​对于区块链领域，目前国家也出台了相关的文件，对一些违法行为进行了监管与约束，例如严禁通过ICO来进行非法融资，同时也发布相应的科普文章《区块链能做什么、不能做什么？》来避免群众过于盲目而被诈骗，当然国家也大力支持区块链技术的发展。但是区块链方面还是有许多的安全性问题尚未解决，区块链因为其匿名性以及去中心化的特性，让用户更加的自由，但是这也带来一系列的问题。如何保留着区块链的特性的前提下让其亦能够健康的发展是一个难题，不过相信随着研究的更加深入，对于区块链骗局与欺诈将会有更多有效的方法来检测与约束，同时对于市场操纵现象也会有相应合理的管控，使得区块链技术得以更加健康的发展。</p><p>参考文献：<br><sup><a href="#fn_1" id="reffn_1">1</a></sup>: Market Manipulation of Bitcoin: Evidence from Mining the Mt. Gox Transaction Network<br><sup><a href="#fn_2" id="reffn_2">2</a></sup>: Detecting Ponzi Schemes on Ethereum: Towards Healthier BlockchainTechnology<br><sup><a href="#fn_3" id="reffn_3">3</a></sup>: Understanding Ethereum via Graph Analysis</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;hr&gt;
+&lt;p&gt;title: 区块链发展与现状&lt;br&gt;date: 2019-01-04 22:21:31&lt;br&gt;tags: 区块链&lt;/p&gt;
+&lt;h2 id=&quot;categories-区块链&quot;&gt;&lt;a href=&quot;#categories-区块链&quot; class=&quot;headerlink&quot; t
+      
+    
+    </summary>
+    
     
   </entry>
   
@@ -486,31 +512,6 @@
       
       
         &lt;h3 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h3&gt;&lt;p&gt;There are N gas stations along a circular route, where the amount of g
-      
-    
-    </summary>
-    
-      <category term="算法 | leetcode" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95-leetcode/"/>
-    
-    
-      <category term="leetcode" scheme="http://yoursite.com/tags/leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>210. Course Schedule II</title>
-    <link href="http://yoursite.com/2018/11/15/210-Course-Schedule-II/"/>
-    <id>http://yoursite.com/2018/11/15/210-Course-Schedule-II/</id>
-    <published>2018-11-15T05:16:40.000Z</published>
-    <updated>2018-11-18T12:59:32.353Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>There are a total of n courses you have to take, labeled from <code>0</code> to <code>n-1</code>.</p><p>Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair: <code>[0,1]</code></p><p>Given the total number of courses and a list of <code>prerequisite pairs</code>, return the ordering of courses you should take to finish all courses.</p><p>There may be multiple correct orders, you just need to return one of them. If it is impossible to finish all courses, return an empty array.</p><p><strong>Example 1:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: 2, [[1,0]] </span><br><span class="line">Output: [0,1]</span><br><span class="line">Explanation: There are a total of 2 courses to take. To take course 1 you should have finished course 0. So the correct course order is [0,1] .</span><br></pre></td></tr></table></figure></p><p><strong>Example 2:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Input: 4, [[1,0],[2,0],[3,1],[3,2]]</span><br><span class="line">Output: [0,1,2,3] or [0,2,1,3]</span><br><span class="line">Explanation: There are a total of 4 courses to take. To take course 3 you should have finished both     </span><br><span class="line">                courses 1 and 2. Both courses 1 and 2 should be taken after you finished course 0. </span><br><span class="line">                So one correct course order is [0,1,2,3]. Another correct ordering is [0,2,1,3] .</span><br></pre></td></tr></table></figure></p><p><strong>Note:</strong>    </p><ul><li>The input prerequisites is a graph represented by a list of edges, not adjacency matrices. Read more about <a href="https://www.khanacademy.org/computing/computer-science/algorithms/graph-representation/a/representing-graphs" target="_blank" rel="noopener">how a graph is represented</a>.</li><li>You may assume that there are no duplicate edges in the input prerequisites.</li></ul><h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><ul><li>这题与之前的<a href="https://liu-yt.github.io/2018/11/14/207-Course-Schedule/" target="_blank" rel="noopener">207. Course Schedule</a>题意差不多，只不过<code>Course Schedule</code>只需判断能否顺利修完课程，<code>Course Schedule ll</code>需要先判断能否修完，能修完需要返回一个选修的顺序，否则返回一个空的。</li><li>思路与上周介绍的实现相同，只是对代码进行优化。</li><li>具体步骤    <ul><li>建立邻接表，关系为后修过程，即每个课程存储需先修完该课程才能修的课程。同时得出每个课程的入度，即每个课程需要的先修课程的数目</li><li>将入度为0的课程加入队列中，同时将该课程邻接表存储的后修课程的入度减1，判断修改后的节点的度数是否为0，为0则加入队列中（注：每当节点加入到队列中，同时也加入到拓扑排序的数组中）</li><li>重复上述步骤，直到队列为空</li><li>判断数组与课程的数是否相等，相等则证明可以拓扑排序，否则证明存在未被加入的课程并且无法完成的课程（课程选修关系存在环）</li></ul></li></ul><h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; findOrder(<span class="keyword">int</span> numCourses, <span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;&gt;&amp; prerequisites) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v;</span><br><span class="line">        <span class="keyword">int</span> inDegree[numCourses] = &#123;<span class="number">0</span>&#125;; <span class="comment">// 记录课程需要先修课程的数量</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 对应存储需要修完该课程才能修的课程</span></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; myVec(numCourses);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> it : prerequisites) &#123;</span><br><span class="line">            inDegree[it.first]++;</span><br><span class="line">            myVec[it.second].push_back(it.first);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; numCourses; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(inDegree[i] == <span class="number">0</span>) &#123;</span><br><span class="line">                v.push_back(i);</span><br><span class="line">                q.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(!q.empty()) &#123;</span><br><span class="line">            <span class="keyword">int</span> size = q.size();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; ++i) &#123;</span><br><span class="line">                <span class="keyword">int</span> tmp = q.front();</span><br><span class="line">                q.pop();</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; myVec[tmp].size(); ++j) &#123;</span><br><span class="line">                    inDegree[myVec[tmp][j]]--;</span><br><span class="line">                    <span class="keyword">if</span>(inDegree[myVec[tmp][j]] == <span class="number">0</span>) &#123;</span><br><span class="line">                        v.push_back(myVec[tmp][j]);</span><br><span class="line">                        q.push(myVec[tmp][j]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(v.size() == numCourses) </span><br><span class="line">            <span class="keyword">return</span> v;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            v.clear();</span><br><span class="line">            <span class="keyword">return</span> v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><img src="/2018/11/15/210-Course-Schedule-II/1.png" alt="在这里插入图片描述"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h3&gt;&lt;p&gt;There are a total of n courses you have to take, labeled from &lt;code&gt;0&lt;
       
     
     </summary>
