@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="My Blog">
 <meta property="og:description" content="题目Given s1, s2, s3, find whether s3 is formed by the interleaving of s1 and s2.  Example 1:  Input: s1 = &quot;aabcc&quot;, s2 = &quot;dbbca&quot;, s3 = &quot;aadbbcbcac&quot; Output: true   Example 2:  Input: s1 = &quot;aabcc&quot;, s2 = &quot;">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-23T04:31:02.807Z">
+<meta property="og:updated_time" content="2019-01-15T04:24:44.650Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="97. Interleaving String">
 <meta name="twitter:description" content="题目Given s1, s2, s3, find whether s3 is formed by the interleaving of s1 and s2.  Example 1:  Input: s1 = &quot;aabcc&quot;, s2 = &quot;dbbca&quot;, s3 = &quot;aadbbcbcac&quot; Output: true   Example 2:  Input: s1 = &quot;aabcc&quot;, s2 = &quot;">
@@ -422,8 +422,8 @@
 </ul>
 </li>
 <li><code>i = 0 &amp;&amp; j != 0</code><ul>
-<li>此时可以看成s2的前j个字符串与s3的前i个字符串的匹配情况。</li>
-<li><code>dp[i][0] = dp[i-1][0] &amp;&amp; (s1[i-1] == s3[i-1])</code></li>
+<li>此时可以看成s2的前j个字符串与s3的前j个字符串的匹配情况。</li>
+<li><code>dp[0][j] = dp[0][j-1] &amp;&amp; (s2[j-1] == s3[j-1])</code></li>
 </ul>
 </li>
 <li><code>i &gt; 0 &amp;&amp; j &gt; 0</code><ul>
