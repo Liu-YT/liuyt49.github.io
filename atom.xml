@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-03-30T08:57:25.990Z</updated>
+  <updated>2019-04-14T12:42:47.551Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>系统分析与设计-作业3</title>
+    <link href="http://yoursite.com/2019/04/13/%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1-%E4%BD%9C%E4%B8%9A3/"/>
+    <id>http://yoursite.com/2019/04/13/系统分析与设计-作业3/</id>
+    <published>2019-04-13T11:38:47.000Z</published>
+    <updated>2019-04-14T12:42:47.551Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="简单题"><a href="#简单题" class="headerlink" title="简单题"></a>简单题</h1><ul><li><p><strong>简述瀑布模型、增量模型、螺旋模型（含原型方法），并分析优缺点</strong></p><blockquote><p>从项目特点、风险特征、人力资源利用角度思考</p></blockquote><ul><li><strong>瀑布模型</strong><br>瀑布模型是将软件生存周期的各项活动规定为按固定顺序而连接的若干阶段工作，形如瀑布流水，最终得到软件产品。<ul><li><code>优点</code>：定义了软件开发基本流程与活动，降低软件开发的复杂程度，提高软件开发过程的透明性，提高开发过程的可管理性。</li><li><code>缺点</code>：强调过程活动的线性顺序，缺乏灵活性，尤其无法解决软件需求不明确的问题，对于风险的控制能力较弱。瀑布模型中的软件活动是文档驱动的，当阶段之间规定过多的文档时，会极大地增加系统的工作量，同时管理人员如果仅仅以文档的完成情况来评估项目完成进度，往往会产生错误的结论。</li></ul></li><li><strong>增量模型</strong><br>增量模型是把待开发的软件系统模块化，将每个模块作为一个增量组件，从而分批次地分析、设计、编码和测试这些增量组件，同时每个中间版本都要执行必需的过程、活动和任务。<ul><li><code>优点</code>：以组件为单位进行开发降低了软件开发的风险，一个开发周期内的错误不会影响到整个软件系统，降低系统失败风险以及提高系统的可靠性、稳定性喝可维护性。开发顺序灵活，开发人员可以对组件的实现顺序进行优先级排序，先完成需求稳定的核心组件，当组件的优先级发生变化时，还能及时地对实现顺序进行调，对于人力资源的调度更加灵活。</li><li><code>缺点</code>：建立初始模型时，作为增量基础的基本业务服务的确定有一定难度，同时对于增量粒度难以选择。</li></ul></li><li><strong>螺旋模型（含原型方法）</strong><br>螺旋模型采用一种周期性的方法来进行系统开发，其是风险驱动的迭代过程，强调可选方案和约束条件从而支持软件的重用，有助于将软件质量作为特殊目标融入产品开发之中。<ul><li><code>优点</code>：适用于需求功能复杂、开发周期长的大项目。引入了明确的风险管理机制。设计上的灵活性,可以在项目的各个阶段进行变更。客户始终参与每个阶段的开发,保证了项目不偏离正确方向以及项目的可控性。以小的分段来构建大型系统,使成本计算变得简单容易。</li><li><code>缺点</code>：螺旋模型强调风险分析，但说服外部客户接受和相信分析结果并做出相关反应并不容易，因此螺旋模型往往比较适合内部的大规模软件开发。风险分析需要耗费相当的成本，同时失误的风险分析可能带来更大的风险。 </li></ul></li></ul></li><li><p><strong>简述统一过程三大特点，与面向对象的方法有什么关系？</strong></p><ul><li><p><strong>统一过程的三大特点</strong></p><ul><li><p>统一过程是迭代和增量的过程<br>  RUP强调采用迭代和增量方式来开发软件，把整个项目开发分为多个迭代过程。在每一次迭代中，只考虑系统的一部分需求，进行分析、设计、实现、测试、部署等过程，每次迭代是在已完成部分的基础上进行的，每次增加一些新的功能实现，以此进行下去，直至最后项目的完成。</p></li><li><p>统一过程是用例驱动的<br>  Use Case模型表达了系统的需求。开发过程是沿着一系列从用例得到的工作流前进的：用例被确定、用例被设计、最后用例又称为测试人员构造测试用例的基础。</p></li><li><p>统一过程是以构架为中心的<br>  软件构架的作用与建筑构架所起的作用类似，软件系统的构架是从不同的角度描述即将构造的系统，构架刻画了系统的整体设计，去掉了细节部分，突出了系统的重要特性。</p></li></ul></li><li><p><strong>与面向对象的联系</strong> 统一软件过程是一个面向对象且基于网络的程序开发方法论，其可以为所有方面和层次的程序开发提供指导方针，模版以及事例支持。</p></li></ul></li><li><p><strong>简述统一过程四个阶段的划分准则是什么？每个阶段关键的里程碑是什么？</strong></p><p>  RUP中的软件生命周期在<strong>时间维度</strong>上被分解为四个顺序的阶段： <strong>初始阶段(Inception)</strong>、<strong>精化阶段(Elaboration)</strong>、<strong>构建阶段 (Construction)</strong>和<strong>产品交付阶段(Transition)</strong>。每个阶段结束于一个主要的里程碑(Major Milestone)，并在阶段结尾执行一次评估以确定这个阶段的目标是否已经满足。如果评估结果令人满意的话，可以允许项目进入下一个阶段</p><p>  <strong>里程碑</strong></p><ul><li><strong>初始阶段</strong>里程碑：生命周期目标(Lifecycle Objective)里程碑，包括一些重要的文档，如：项目构想(Vision)、原始用例模型、原始业务风险评估、一个或者多个原型、原始业务案例等。通过对文档的评审确定用例需求理解正确、项目风险评估合理、阶段计划可行等</li><li><strong>精华阶段</strong>里程碑：生命周期体系结构(Lifecycle Architecture)里程碑，包括风险分析文档、软件体系结构基线、项目计划、可执行的进化原型、初始版本的用户手册等。通过评审确定软 件体系结构已经稳定、高风险的业务需求和技术机制已经解决、修订的项目计划可行等。</li><li><strong>构建阶段</strong>里程碑：初始运行能力(Initial Operational Capability) 里程碑， 包括可以运行的软件产品、用户手册等，它决定了产品是否可以在测试环境中进行部署。此刻，要确定软件、环境、用户是否可以开始系统的运行。</li><li><strong>产品化阶段/移交阶段</strong>里程碑：产品发布(Product Release) 里程碑，确定最终目标 是否实现，是否应该开始产品下一个版本的另一个开发周期。在一些情况下这个里程碑可能与下一个周期的初始阶段相重合。</li></ul></li><li><p><strong>软件企业为什么能按固定节奏生产、固定周期发布软件产品？它给企业项目管理带来哪些好处？</strong><br>  利用软件产品范围的弹性，合理规划范围（20%业务决定80%满意度），使得软件生产按固定节奏运行，固定迭代周期、固定开发周期、固定升级周期。</p><p>  固定节奏生产明确了不同阶段迭代的里程碑与目标，使得开发团队更加明确当前的开发目标，更加容易确定当前进度，同时更加利于人力等各种资源的分配，利于管理，利于提高整体的开发效率。同时固定周期发布软件产品，能提高客户的信任度。</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;简单题&quot;&gt;&lt;a href=&quot;#简单题&quot; class=&quot;headerlink&quot; title=&quot;简单题&quot;&gt;&lt;/a&gt;简单题&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;简述瀑布模型、增量模型、螺旋模型（含原型方法），并分析优缺点&lt;/strong&gt;&lt;/p&gt;
+&lt;bloc
+      
+    
+    </summary>
+    
+      <category term="系统分析与设计" scheme="http://yoursite.com/categories/%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1/"/>
+    
+    
+      <category term="系统分析与设计" scheme="http://yoursite.com/tags/%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%BE%E8%AE%A1/"/>
+    
+  </entry>
   
   <entry>
     <title>系统分析与设计 作业2</title>
@@ -490,31 +517,6 @@
       
       
         &lt;h3 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h3&gt;&lt;p&gt;Given an array of non-negative integers, you are initially positioned 
-      
-    
-    </summary>
-    
-      <category term="算法 | leetcode" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95-leetcode/"/>
-    
-    
-      <category term="leetcode" scheme="http://yoursite.com/tags/leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>330. Patching Array</title>
-    <link href="http://yoursite.com/2018/11/17/330-Patching-Array/"/>
-    <id>http://yoursite.com/2018/11/17/330-Patching-Array/</id>
-    <published>2018-11-17T07:37:21.000Z</published>
-    <updated>2018-11-18T13:02:34.883Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>Given a sorted positive integer array nums and an integer n, add/patch elements to the array such that any number in range <code>[1, n]</code> inclusive can be formed by the sum of some elements in the array. Return the minimum number of patches required.</p><p><strong>Example 1:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: nums = [1,3], n = 6</span><br><span class="line">Output: 1 </span><br><span class="line">Explanation:</span><br><span class="line">Combinations of nums are [1], [3], [1,3], which form possible sums of: 1, 3, 4.</span><br><span class="line">Now if we add/patch 2 to nums, the combinations are: [1], [2], [3], [1,3], [2,3], [1,2,3].</span><br><span class="line">Possible sums are 1, 2, 3, 4, 5, 6, which now covers the range [1, 6].</span><br><span class="line">So we only need 1 patch.</span><br></pre></td></tr></table></figure></p><p><strong>Example 2:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: nums = [1,5,10], n = 20</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: The two patches can be [2, 4].</span><br></pre></td></tr></table></figure></p><p><strong>Example 3:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: nums = [1,2,2], n = 5</span><br><span class="line">Output: 0</span><br></pre></td></tr></table></figure></p><h3 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h3><ul><li>题意：题目指给出一个有序的正整数的数列<code>nums</code>，以及一个正整数<code>n</code>，最少需要额外添加的多少个数字才能使得<code>[1,n]</code>中每一个数字能够被数列中若干个数字的和表示，求出最少需要添加的数字数。</li><li><p>解题思路：假设当前<code>[0, t)</code>中每个数字可以由数列中的数字以及额外添加的数字的和表示，则当其选择到下一个<code>num[i]</code>的时候，分两种情况讨论</p><ul><li><code>num[i] &lt;= t</code><ul><li>此时可以将维护的区间扩展到<code>[0 , t+num[i] ]</code></li></ul></li><li><p><code>num[i] &gt; t</code> </p><ul><li>此时不能直接扩展区间，因为中间有一段数字<code>[t, num[i] - 1]</code>是无法表示的。因此此时需要加一个额外的数字，加的数字应该尽可能的大，否则将可能会增加额外需要数字的数目。<strong>当前能够加的最大数字是<code>t</code></strong>，因为如果额外添加的数字<code>newNum</code>大于<code>t</code>，则对于区间<code>[t, newNum - 1]</code>这一段的数字则无法表示，因此每次最多加<code>t</code>，区间扩展到<code>[t, t+t]</code>，同时统计添加数字<code>addNum + 1</code>.</li></ul><p>当前维护的<code>t &gt; n</code>的时候，可以直接输出结果</p></li><li>然而，问题并没有解决，出现了超时的问题。对于测试数据感觉还是比较小的，不太可能是由于时间复杂度出错。然后最后的结果是<code>2147483647</code>，接近了<code>int</code>的最大值，考虑到是区间扩展<code>t + t</code>的时候导致溢出，一直导致<code>t &lt; n</code>，出现死循环了，因此将<code>t</code>改为<code>long long</code>类型<br><img src="/2018/11/17/330-Patching-Array/1.png" alt="在这里插入图片描述"></li></ul></li></ul><h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">minPatches</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// [0, rightSide)</span></span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> rightSide = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> addNums = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> num : nums) &#123;</span><br><span class="line">        <span class="keyword">if</span>(rightSide &gt; n)<span class="keyword">return</span> addNums;</span><br><span class="line">        <span class="keyword">while</span> (num &gt; rightSide &amp;&amp; rightSide &lt;= n) &#123;</span><br><span class="line">            rightSide += rightSide;</span><br><span class="line">            addNums++;</span><br><span class="line">        &#125;</span><br><span class="line">        rightSide += num;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (rightSide &lt;= n) &#123;</span><br><span class="line">        rightSide += rightSide;</span><br><span class="line">        addNums++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> addNums;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><img src="/2018/11/17/330-Patching-Array/2.png" alt="在这里插入图片描述"></p><ul><li>感觉写的思路还是比较混乱，然后稍微优化一下代码的结构</li><li>优化代码</li><li>谈一个新发现： 本来对于区间扩展部分都是使用<code>+=</code>操作，但是最后运行时间与未优化的没有区别，然后看了下提交的dalao们的代码，发现都是<code>a = a + b</code>这样形式的操作，不使用<code>+=</code>操作的，然后就惊奇的发现运行时间神奇的减少大半了</li></ul><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="function"><span class="keyword">int</span> <span class="title">minPatches</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// [0, rightSide)</span></span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> rightSide = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> addNums = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> size = nums.size();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (rightSide &lt;= n) &#123;</span><br><span class="line">            <span class="keyword">if</span>(i &lt; size &amp;&amp; rightSide &gt;= nums[i]) &#123;</span><br><span class="line">                rightSide = rightSide + nums[i];</span><br><span class="line">                ++i;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                rightSide = rightSide + rightSide;</span><br><span class="line">                ++addNums; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> addNums;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p><img src="/2018/11/17/330-Patching-Array/3.png" alt="在这里插入图片描述"></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h3&gt;&lt;p&gt;Given a sorted positive integer array nums and an integer n, add/patch
       
     
     </summary>
