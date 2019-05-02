@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-04-25T15:52:18.496Z</updated>
+  <updated>2019-05-02T08:49:52.364Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Flask服务器部署的踩坑记录</title>
+    <link href="http://yoursite.com/2019/05/02/Flask%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E7%9A%84%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/"/>
+    <id>http://yoursite.com/2019/05/02/Flask服务器部署的踩坑记录/</id>
+    <published>2019-05-02T08:34:25.000Z</published>
+    <updated>2019-05-02T08:49:52.364Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天在腾讯云进行flask后台进行配置的时候，按照官方的方法无论如何都无法访问到服务器</p><h2 id="官方关于外部可访问的服务器配置"><a href="#官方关于外部可访问的服务器配置" class="headerlink" title="官方关于外部可访问的服务器配置"></a>官方关于外部可访问的服务器配置</h2><blockquote><p><a href="http://docs.jinkan.org/docs/flask/quickstart.html" target="_blank" rel="noopener">快速入门 — Flask 0.10.1 文档</a></p><p>如果你运行了这个服务器，你会发现它只能从你自己的计算机上访问，网络中其它任何的地方都不能访问。在调试模式下，用户可以在你的计算机上执行任意 Python 代码。因此，这个行为是默认的。</p><p>如果你禁用了 debug 或信任你所在网络的用户，你可以简单修改调用 <a href="http://docs.jinkan.org/docs/flask/api.html#flask.Flask.run" target="_blank" rel="noopener"><code>run()</code></a> 的方法使你的服务器公开可用，如下:</p><p><code>app.run(host=&#39;0.0.0.0&#39;)</code></p><p>这会让操作系统监听所有公网 IP。</p></blockquote><p>然而并不行，接着看了网上各种相关问题，主要有几种方面的问题</p><ul><li><p>防火墙是否开放</p><p>这个是与自己的云服务配置相关，需要配置相应的安全组，或者内部直接开启相应的防火墙端口</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 添加 --permanent永久生效，没有此参数重启后失效</span><br><span class="line">firewall-cmd --zone=public --add-port=80/tcp --permanent   </span><br><span class="line"><span class="meta">#</span> 重新载入</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure><p>当然也可以暴力点把防火墙直接关掉</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 启动</span><br><span class="line">systemctl start firewalld</span><br><span class="line"><span class="meta">#</span> 关闭</span><br><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure></li><li><p>是否修改了默认的IP为<code>0.0.0.0</code></p></li></ul><p>然而尽管这些都弄好了，问题还是没有解决。接下来将介绍<strong>Window 10</strong>以及<strong>Centos 7</strong>下我的解决方法</p><h2 id="Window-10"><a href="#Window-10" class="headerlink" title="Window 10"></a>Window 10</h2><blockquote><p>Pycharm</p></blockquote><p>需要修改项目的一些配置，流程如下图</p><p><img src="/2019/05/02/Flask服务器部署的踩坑记录/1.png" alt="1"></p><p><img src="/2019/05/02/Flask服务器部署的踩坑记录/2.png" alt="2"></p><p><img src="/2019/05/02/Flask服务器部署的踩坑记录/3.png" alt="3"></p><p>最后发现运行的命令变成了<code>python.exe -m flask run --host=0.0.0.0</code>，并且相应的IP地址也变成了<code>0.0.0.0</code>，此时测试发现服务器能够被外部正常访问了。发现Flask的服务修改默认的IP和端口需要显示指定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python.exe -m flask run --host=0.0.0.0 -- port=8080</span><br></pre></td></tr></table></figure></p><h2 id="Centos-7"><a href="#Centos-7" class="headerlink" title="Centos 7"></a>Centos 7</h2><p>其原理其实和<code>Window 10</code>环境一样，不过不需要重新配置项目，只需要直接修改运行命令即可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flask run -h 0.0.0.0 -p 5000</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;今天在腾讯云进行flask后台进行配置的时候，按照官方的方法无论如何都无法访问到服务器&lt;/p&gt;
+&lt;h2 id=&quot;官方关于外部可访问的服务器配置&quot;&gt;&lt;a href=&quot;#官方关于外部可访问的服务器配置&quot; class=&quot;headerlink&quot; title=&quot;官方关于外部可访问的服
+      
+    
+    </summary>
+    
+      <category term="Flask" scheme="http://yoursite.com/categories/Flask/"/>
+    
+    
+      <category term="Flask" scheme="http://yoursite.com/tags/Flask/"/>
+    
+  </entry>
   
   <entry>
     <title>Golang实现简单的API网关</title>
@@ -492,31 +518,6 @@
       
       
         &lt;h3 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h3&gt;&lt;p&gt;Given a string containing just the characters &lt;code&gt;&amp;#39;(&amp;#39;&lt;/code&gt;
-      
-    
-    </summary>
-    
-      <category term="算法 | leetcode" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95-leetcode/"/>
-    
-    
-      <category term="leetcode" scheme="http://yoursite.com/tags/leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>72. Edit Distance</title>
-    <link href="http://yoursite.com/2018/11/18/72-Edit-Distance/"/>
-    <id>http://yoursite.com/2018/11/18/72-Edit-Distance/</id>
-    <published>2018-11-18T05:48:30.000Z</published>
-    <updated>2018-11-18T05:50:49.874Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>Given two words word1 and word2, find the minimum number of operations required to convert <em>word1</em> to <em>word2</em>.</p><p>You have the following 3 operations permitted on a word:</p><ul><li>Insert a character</li><li>Delete a character</li><li>Replace a character</li></ul><p><strong>Example 1:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: word1 = &quot;horse&quot;, word2 = &quot;ros&quot;</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: </span><br><span class="line">horse -&gt; rorse (replace &apos;h&apos; with &apos;r&apos;)</span><br><span class="line">rorse -&gt; rose (remove &apos;r&apos;)</span><br><span class="line">rose -&gt; ros (remove &apos;e&apos;)</span><br></pre></td></tr></table></figure></p><p><strong>Example 2:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Input: word1 = &quot;intention&quot;, word2 = &quot;execution&quot;</span><br><span class="line">Output: 5</span><br><span class="line">Explanation: </span><br><span class="line">intention -&gt; inention (remove &apos;t&apos;)</span><br><span class="line">inention -&gt; enention (replace &apos;i&apos; with &apos;e&apos;)</span><br><span class="line">enention -&gt; exention (replace &apos;n&apos; with &apos;x&apos;)</span><br><span class="line">exention -&gt; exection (replace &apos;n&apos; with &apos;c&apos;)</span><br><span class="line">exection -&gt; execution (insert &apos;u&apos;)</span><br></pre></td></tr></table></figure></p><h3 id="思路解析"><a href="#思路解析" class="headerlink" title="思路解析"></a>思路解析</h3><ul><li>这道题是一道动态规划的题，需要将一个字符串<code>word1</code>经过<code>add</code>、<code>delete</code>、<code>replace</code>三种操作变换成另一个字符串<code>word2</code>，求最小的编辑距离.</li><li><p>解题思路：假设<code>word1=[123...n]</code>    ,<code>word2=[123...m]</code>，要求使得<code>word1</code>转换成<code>word2</code>。对于这个问题，我们将其分解为子问题求解。</p><ul><li>定义dis[i][j]<ul><li>表示<code>word1&#39; = [1..i]</code>转换成<code>word2&#39; = [1...j]</code>的编辑距离（<code>i</code>代表<code>word1</code>前<code>i</code>个字符,<code>j</code>代表<code>word2</code>前<code>j</code>个字符）</li><li>因此<code>word1</code>到<code>word2</code>的编辑距离为<code>dis[n][m]</code>        </li></ul></li><li>求解<code>word1</code>到<code>word2</code>的编辑距离，我们可以求取<code>word1</code>的前<code>i</code>个字符(<code>0 &lt; i &lt; n</code>)到<code>word2</code>的前<code>j</code>个字符(<code>0 &lt; j &lt; m</code>)的编辑距离<code>dis[i][j]</code>。当然每个<code>dis[i][j]</code>都基于之前的计算。</li><li><p>步骤</p><ul><li>初始化<ul><li>dis[i, 0] = i</li><li>dis[0, j] = j</li></ul></li><li><p><strong>递推关系</strong>—<code>核心</code>    </p><script type="math/tex; mode=display">dis[i][j] = min \begin{cases}      dis[i][j-1] + 1\\      dis[i-1][j] + 1\\      dis[i-1][j-1] + (word1[i-1] == word2[j-1] ? 0 : 1))\\      \end{cases}</script><p>  其中三个操作的表示</p><ul><li><strong>insert</strong>:     <code>dis[i, j] = dis[i][j-1] + 1</code>    </li><li><strong>delete</strong>:    <code>dis[i, j] = dis[i-1][j] + 1</code></li><li><p><strong>replace or no op</strong>：<code>dis[i, j] = dis[i-1][j-1] + (word1[i-1] == word2[j-1] ? 0 : 1)</code></p><p>对于每<code>dis[i][j]</code>，我们选取最小编辑距离    </p></li></ul></li></ul></li><li>最后得到的<code>dis[n][m]</code>就是<code>word1</code>到<code>word2</code>的编辑距离</li></ul></li></ul><h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">minDistance</span><span class="params">(<span class="built_in">string</span> word1, <span class="built_in">string</span> word2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> m = word1.size();</span><br><span class="line">        <span class="keyword">int</span> n = word2.size();</span><br><span class="line">        <span class="keyword">int</span> dis[m+<span class="number">1</span>][n+<span class="number">1</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= m; ++i)</span><br><span class="line">            dis[i][<span class="number">0</span>] = i;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>;j &lt;= n; ++j)</span><br><span class="line">            dis[<span class="number">0</span>][j] = j;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// m or n equal 0</span></span><br><span class="line">        <span class="keyword">if</span> (!m &amp;&amp; !n)</span><br><span class="line">            <span class="keyword">return</span> max(m, n);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// insert: dis[i, j] = dis[i][j-1] + 1</span></span><br><span class="line">        <span class="comment">// delete:dis[i, j] = dis[i-1][j] + 1</span></span><br><span class="line">        <span class="comment">// replace or no op：dis[i, j] = dis[i-1][j-1] + (word1[i-1] == word2[j-1] ? 0 : 1)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">                dis[i][j] = min(dis[i][j<span class="number">-1</span>] + <span class="number">1</span>,</span><br><span class="line">                    min(dis[i<span class="number">-1</span>][j] + <span class="number">1</span>, dis[i<span class="number">-1</span>][j<span class="number">-1</span>] + (word1[i<span class="number">-1</span>] == word2[j<span class="number">-1</span>] ? <span class="number">0</span> : <span class="number">1</span>)));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dis[m][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul><li><a href="https://web.stanford.edu/class/cs124/lec/med.pdf" target="_blank" rel="noopener">参考链接 - pdf</a></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h3&gt;&lt;p&gt;Given two words word1 and word2, find the minimum number of operations
       
     
     </summary>
