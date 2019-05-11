@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="leetcode,">
+  <meta name="keywords" content="安装配置,">
 
 
 
@@ -81,18 +81,20 @@
 
 
 
-<meta name="description" content="题目Implement pow(x, n), which calculates x raised to the power n (xn).  Example 1:   12Input: 2.00000, 10Output: 1024.00000  Example 2:   12Input: 2.10000, 3Output: 9.26100  Example 3:   123Input: 2.00">
-<meta name="keywords" content="leetcode">
+<meta name="description" content="最近在写项目的时候，在将后台服务器部署到腾讯云后，因为前端是小程序，微信小程序开发对于正常使用必须基于HTTPS请求，因此需要配置HTTPS。本来是使用比较简单openssl进行配置使用，使用第三方免费的SSL证书，但是由于自己配置的证书不稳定，不能被校验通过，服务功能不能正常使用。因此选择申请腾讯云服务器的SSL证书使用，后台的服务器框架为Flask，但是腾讯云里面免费的SSL证书只有Apac">
+<meta name="keywords" content="安装配置">
 <meta property="og:type" content="article">
-<meta property="og:title" content="50. Pow(x, n)">
-<meta property="og:url" content="http://yoursite.com/2018/11/12/50-Pow-x-n/index.html">
+<meta property="og:title" content="腾讯云| Nginx安装与配置HTTPS">
+<meta property="og:url" content="http://yoursite.com/2019/05/11/腾讯云-Nginx安装与配置HTTPS/index.html">
 <meta property="og:site_name" content="My Blog">
-<meta property="og:description" content="题目Implement pow(x, n), which calculates x raised to the power n (xn).  Example 1:   12Input: 2.00000, 10Output: 1024.00000  Example 2:   12Input: 2.10000, 3Output: 9.26100  Example 3:   123Input: 2.00">
+<meta property="og:description" content="最近在写项目的时候，在将后台服务器部署到腾讯云后，因为前端是小程序，微信小程序开发对于正常使用必须基于HTTPS请求，因此需要配置HTTPS。本来是使用比较简单openssl进行配置使用，使用第三方免费的SSL证书，但是由于自己配置的证书不稳定，不能被校验通过，服务功能不能正常使用。因此选择申请腾讯云服务器的SSL证书使用，后台的服务器框架为Flask，但是腾讯云里面免费的SSL证书只有Apac">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-12T02:17:15.917Z">
+<meta property="og:image" content="http://yoursite.com/2019/05/11/腾讯云-Nginx安装与配置HTTPS/1.png">
+<meta property="og:updated_time" content="2019-05-11T09:38:07.944Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="50. Pow(x, n)">
-<meta name="twitter:description" content="题目Implement pow(x, n), which calculates x raised to the power n (xn).  Example 1:   12Input: 2.00000, 10Output: 1024.00000  Example 2:   12Input: 2.10000, 3Output: 9.26100  Example 3:   123Input: 2.00">
+<meta name="twitter:title" content="腾讯云| Nginx安装与配置HTTPS">
+<meta name="twitter:description" content="最近在写项目的时候，在将后台服务器部署到腾讯云后，因为前端是小程序，微信小程序开发对于正常使用必须基于HTTPS请求，因此需要配置HTTPS。本来是使用比较简单openssl进行配置使用，使用第三方免费的SSL证书，但是由于自己配置的证书不稳定，不能被校验通过，服务功能不能正常使用。因此选择申请腾讯云服务器的SSL证书使用，后台的服务器框架为Flask，但是腾讯云里面免费的SSL证书只有Apac">
+<meta name="twitter:image" content="http://yoursite.com/2019/05/11/腾讯云-Nginx安装与配置HTTPS/1.png">
 
 
 
@@ -122,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/12/50-Pow-x-n/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/11/腾讯云-Nginx安装与配置HTTPS/">
 
 
 
 
 
-  <title>50. Pow(x, n) | My Blog</title>
+  <title>腾讯云| Nginx安装与配置HTTPS | My Blog</title>
   
 
 
@@ -265,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/12/50-Pow-x-n/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/11/腾讯云-Nginx安装与配置HTTPS/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liuyt49">
@@ -282,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">50. Pow(x, n)</h1>
+          <h1 class="post-title" itemprop="name headline">腾讯云| Nginx安装与配置HTTPS</h1>
         
 
         <div class="post-meta">
@@ -294,8 +296,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-12T10:06:40+08:00">
-                2018-11-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-11T17:03:39+08:00">
+                2019-05-11
               </time>
             
 
@@ -317,8 +319,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法-leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">算法 | leetcode</span>
+                  <a href="/categories/centos/" itemprop="url" rel="index">
+                    <span itemprop="name">centos</span>
                   </a>
                 </span>
 
@@ -353,7 +355,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  398
+                  497
                 </span>
               
 
@@ -390,55 +392,29 @@
       
 
       
-        <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>Implement pow(x, n), which calculates x raised to the power n (xn).</p>
-<ul>
-<li><p>Example 1:</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: 2.00000, 10</span><br><span class="line">Output: 1024.00000</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Example 2:</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: 2.10000, 3</span><br><span class="line">Output: 9.26100</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Example 3:</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: 2.00000, -2</span><br><span class="line">Output: 0.25000</span><br><span class="line">Explanation: 2-2 = 1/22 = 1/4 = 0.25</span><br></pre></td></tr></table></figure>
-</li>
+        <blockquote>
+<p>最近在写项目的时候，在将后台服务器部署到腾讯云后，因为前端是小程序，微信小程序开发对于正常使用必须基于<code>HTTPS</code>请求，因此需要配置<code>HTTPS</code>。<br>本来是使用比较简单<code>openssl</code>进行配置使用，使用第三方免费的<code>SSL证书</code>，但是由于自己配置的证书不稳定，不能被校验通过，服务功能不能正常使用。因此选择申请腾讯云服务器的<code>SSL证书</code>使用，后台的服务器框架为<code>Flask</code>，但是腾讯云里面免费的<code>SSL证书</code>只有<code>Apache</code>、<code>IIS</code>、<code>Nginx</code>、<code>Tomcat</code>四种，相应的证书对应专属的服务器，因此选择使用配置<code>Nginx</code>服务器，再将相关请求代理到后端服务器处理</p>
+</blockquote>
+<h2 id="环境系统"><a href="#环境系统" class="headerlink" title="环境系统"></a><code>环境系统</code></h2><ul>
+<li><strong>Centos 7</strong></li>
 </ul>
-<p><strong>Note:</strong></p>
-<ul>
-<li>-100.0 &lt; x &lt; 100.0</li>
-<li>n is a 32-bit signed integer, within the range [$−2^{31}$, $2^{31}$ − 1]     </li>
-</ul>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><h4 id="解法-1-—-暴力破解（Failed）"><a href="#解法-1-—-暴力破解（Failed）" class="headerlink" title="解法 1 — 暴力破解（Failed）"></a>解法 1 — <strong>暴力破解</strong>（<code>Failed</code>）</h4><ul>
-<li>将n的值分为<code>n&gt;0</code>,<code>n&lt;0</code>,<code>n=0</code>三种情况</li>
-<li>递归算出结果</li>
-<li><p>实现代码        </p>
-  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 解法一 暴力破解</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">myPow</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> result = <span class="number">1.0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="built_in">abs</span>(n); ++i) &#123;</span><br><span class="line">            result *= x;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> n &gt; <span class="number">0</span> ? result : <span class="number">1</span> / result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>这种做法测试后果然不能<code>AC</code>，错误分析</p>
-<ul>
-<li><p>时间$O(n)$，当n很大时，超时</p>
-</li>
-<li><p>未考虑边界条件<code>n =INT_MIN</code>，这个时候<code>-n</code>赋不进<code>n</code></p>
-</li>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install nginx</span><br></pre></td></tr></table></figure>
+<p>安装之后，可以查看<code>nginx</code>的默认安装目录<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 方法 1</span><br><span class="line">nginx -t </span><br><span class="line"><span class="meta">#</span> 方法 2</span><br><span class="line">whereis nginx</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2019/05/11/腾讯云-Nginx安装与配置HTTPS/1.png" alt="1"></p>
+<h2 id="设置启动"><a href="#设置启动" class="headerlink" title="设置启动"></a>设置启动</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 设置自动启动</span><br><span class="line">systemctl enable nginx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 启动nginx</span><br><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure>
+<h2 id="获取证书"><a href="#获取证书" class="headerlink" title="获取证书"></a>获取证书</h2><ul>
+<li><code>腾讯云</code> -&gt; <code>SSL证书管理</code> -&gt; <code>申请</code></li>
+<li>下载证书，将对应的<code>nginx</code>服务器证书上传到腾讯云上<ul>
+<li>在配置<code>nginx</code>需要用到，本文将证书放到<code>/etc/nginx/SSL</code>文件夹</li>
 </ul>
 </li>
 </ul>
-<h4 id="解法-2-—-分治（AC）"><a href="#解法-2-—-分治（AC）" class="headerlink" title="解法 2 — 分治（AC）"></a>解法 2 — <strong>分治</strong>（<code>AC</code>）</h4><ul>
-<li><p>超时问题解决</p>
-<ul>
-<li>将$x^n$分解为$x^{n/2} <em> x^{n/2} </em>  x^{n\%2}$递归求解</li>
-<li>时间复杂度$O(logn)$</li>
-</ul>
-</li>
-<li><p>边界越界问题解决</p>
-<ul>
-<li>n = $-2^{31}$时，通过简单的<code>-n</code>来求其相反数将导致溢出，最大正整数为$2^{31}-1$</li>
-<li>对于<code>n&lt;0</code>的情况，令$n’ = -(n+1)$ 。求$x^n$等价于求 $1 / (x^{n’}*x)$</li>
-</ul>
-</li>
-<li>实现代码 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 解法二 分治 + 递归</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">myPow</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// 越处理--粗糙版</span></span><br><span class="line">            <span class="comment">// x = 1.0 / x;</span></span><br><span class="line">            <span class="comment">// if(n == INT_MIN)</span></span><br><span class="line">            <span class="comment">// 	return x * myPow(x, -1* (n+1));</span></span><br><span class="line">            <span class="comment">// else</span></span><br><span class="line">            <span class="comment">// 	return myPow(x, -1 * n);</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 越界处理--精简版 	</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">1.0</span> / (x * myPow(x, <span class="number">-1</span> * (n+<span class="number">1</span>)));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(n == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1.0</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">double</span> tmp = myPow(x, n / <span class="number">2</span>);</span><br><span class="line">            <span class="keyword">if</span>(n % <span class="number">2</span>  == <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">return</span> tmp * tmp;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                <span class="keyword">return</span> tmp * tmp * x;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><ul>
+<li><code>cd /etc/nginx</code></li>
+<li><code>vi nginx.conf</code>，修改相应部分<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  xxx.xxx.cn;                    # 对应的域名或者host</span><br><span class="line">    rewrite ^(.*)$ https://$host$1 permanent;   # 默认强制使用https对http进行跳转</span><br><span class="line"></span><br><span class="line">    #charset koi8-r;</span><br><span class="line"></span><br><span class="line">    #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   html;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"># HTTPS server</span><br><span class="line">#</span><br><span class="line">server &#123;</span><br><span class="line">    listen       443 ssl;</span><br><span class="line">    server_name  qcloud.captainp.cn;</span><br><span class="line"></span><br><span class="line">    ssl_certificate      /etc/nginx/SSL/1_qcloud.captainp.cn_bundle.crt;    # 指定对应的证书</span><br><span class="line">    ssl_certificate_key  /etc/nginx/SSL/2_qcloud.captainp.cn.key;           # 指定对应的私钥</span><br><span class="line"></span><br><span class="line">    ssl_session_cache    shared:SSL:1m;</span><br><span class="line">    ssl_session_timeout  5m;</span><br><span class="line"></span><br><span class="line">    ssl_ciphers  HIGH:!aNULL:!MD5;</span><br><span class="line">    ssl_prefer_server_ciphers  on;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">#       root   html;</span><br><span class="line">#       index  index.html index.html;</span><br><span class="line">        proxy_pass http://xxx.xxx.cn:5000/; # 将请求都代理到本机5000，Flask服务器监听的端口进行处理，可以根据需要修改该部分</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-
+<h2 id="重启Nginx"><a href="#重启Nginx" class="headerlink" title="重启Nginx"></a>重启Nginx</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service nginx restart</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -455,7 +431,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+            <a href="/tags/安装配置/" rel="tag"># 安装配置</a>
           
         </div>
       
@@ -468,8 +444,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/11/22-Generate-Parentheses/" rel="next" title="22. Generate Parentheses">
-                <i class="fa fa-chevron-left"></i> 22. Generate Parentheses
+              <a href="/2019/05/02/Flask服务器部署的踩坑记录/" rel="next" title="Flask服务器部署的踩坑记录">
+                <i class="fa fa-chevron-left"></i> Flask服务器部署的踩坑记录
               </a>
             
           </div>
@@ -477,10 +453,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/12/64-Minimum-Path-Sum/" rel="prev" title="64. Minimum Path Sum">
-                64. Minimum Path Sum <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -638,7 +610,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题思路"><span class="nav-number">2.</span> <span class="nav-text">解题思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解法-1-—-暴力破解（Failed）"><span class="nav-number">2.1.</span> <span class="nav-text">解法 1 — 暴力破解（Failed）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解法-2-—-分治（AC）"><span class="nav-number">2.2.</span> <span class="nav-text">解法 2 — 分治（AC）</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境系统"><span class="nav-number">1.</span> <span class="nav-text">环境系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置启动"><span class="nav-number">3.</span> <span class="nav-text">设置启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取证书"><span class="nav-number">4.</span> <span class="nav-text">获取证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改配置文件"><span class="nav-number">5.</span> <span class="nav-text">修改配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启Nginx"><span class="nav-number">6.</span> <span class="nav-text">重启Nginx</span></a></li></ol></div>
             
 
           </div>
