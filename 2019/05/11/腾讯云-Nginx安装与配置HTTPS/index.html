@@ -399,9 +399,9 @@
 <li><strong>Centos 7</strong></li>
 </ul>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install nginx</span><br></pre></td></tr></table></figure>
-<p>安装之后，可以查看<code>nginx</code>的默认安装目录<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 方法 1</span><br><span class="line">nginx -t </span><br><span class="line"><span class="meta">#</span> 方法 2</span><br><span class="line">whereis nginx</span><br></pre></td></tr></table></figure></p>
+<p>安装之后，可以查看<code>nginx</code>的默认安装目录<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 方法 1</span></span><br><span class="line">nginx -t </span><br><span class="line"><span class="meta">#</span><span class="bash"> 方法 2</span></span><br><span class="line">whereis nginx</span><br></pre></td></tr></table></figure></p>
 <p><img src="/2019/05/11/腾讯云-Nginx安装与配置HTTPS/1.png" alt="1"></p>
-<h2 id="设置启动"><a href="#设置启动" class="headerlink" title="设置启动"></a>设置启动</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 设置自动启动</span><br><span class="line">systemctl enable nginx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 启动nginx</span><br><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure>
+<h2 id="设置启动"><a href="#设置启动" class="headerlink" title="设置启动"></a>设置启动</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 设置自动启动</span></span><br><span class="line">systemctl enable nginx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动nginx</span></span><br><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure>
 <h2 id="获取证书"><a href="#获取证书" class="headerlink" title="获取证书"></a>获取证书</h2><ul>
 <li><code>腾讯云</code> -&gt; <code>SSL证书管理</code> -&gt; <code>申请</code></li>
 <li>下载证书，将对应的<code>nginx</code>服务器证书上传到腾讯云上<ul>
@@ -453,6 +453,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/12/Go-kit微服务-JWT身份认证/" rel="prev" title="Go-kit微服务| JWT身份认证">
+                Go-kit微服务| JWT身份认证 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -538,7 +542,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -560,7 +564,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
