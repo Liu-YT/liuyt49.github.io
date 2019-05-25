@@ -90,7 +90,7 @@
 <meta property="og:description" content="最近在写项目的时候，在将后台服务器部署到腾讯云后，因为前端是小程序，微信小程序开发对于正常使用必须基于HTTPS请求，因此需要配置HTTPS。本来是使用比较简单openssl进行配置使用，使用第三方免费的SSL证书，但是由于自己配置的证书不稳定，不能被校验通过，服务功能不能正常使用。因此选择申请腾讯云服务器的SSL证书使用，后台的服务器框架为Flask，但是腾讯云里面免费的SSL证书只有Apac">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/2019/05/11/腾讯云-Nginx安装与配置HTTPS/1.png">
-<meta property="og:updated_time" content="2019-05-11T09:38:07.944Z">
+<meta property="og:updated_time" content="2019-05-23T05:37:15.768Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="腾讯云| Nginx安装与配置HTTPS">
 <meta name="twitter:description" content="最近在写项目的时候，在将后台服务器部署到腾讯云后，因为前端是小程序，微信小程序开发对于正常使用必须基于HTTPS请求，因此需要配置HTTPS。本来是使用比较简单openssl进行配置使用，使用第三方免费的SSL证书，但是由于自己配置的证书不稳定，不能被校验通过，服务功能不能正常使用。因此选择申请腾讯云服务器的SSL证书使用，后台的服务器框架为Flask，但是腾讯云里面免费的SSL证书只有Apac">
@@ -355,7 +355,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  497
+                  692
                 </span>
               
 
@@ -415,6 +415,22 @@
 </li>
 </ul>
 <h2 id="重启Nginx"><a href="#重启Nginx" class="headerlink" title="重启Nginx"></a>重启Nginx</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service nginx restart</span><br></pre></td></tr></table></figure>
+<h2 id="问题补充与解决"><a href="#问题补充与解决" class="headerlink" title="问题补充与解决"></a>问题补充与解决</h2><blockquote>
+<p>在之前的成功配置后，某天在使用在服务器后，突然发现访问异常了，服务被拒绝，简单的重启服务器后，再次请求，发现服务器日志没有相关请求信息，猜想nginx的服务出现了问题</p>
+</blockquote>
+<ul>
+<li>首先检查nginx的配置是否正确：<br>  <code>nginx -t -c /etc/nginx/nginx.conf</code></li>
+<li>发现有以下报错：<br>  <code>nginx: [emerg] open() &quot;/var/run/nginx/nginx.pid&quot; failed (2: No such file or directory)</code></li>
+<li><p>查阅相关博客：<br>  不要在/var/run目下创建新目录。</p>
+<p>  centos7，创建<code>了/var/run/nginx/</code>目录存放<code>nginx.pid</code>，<strong>每次重启后，/var/run目录下都会清空！</strong></p>
+<p>  <strong>解决方法</strong>：</p>
+<ul>
+<li><code>$vi /etc/nginx/nginx.conf</code></li>
+<li>修改相应部分  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#pid       /var/run/nginx/nginx.pid;</span><br><span class="line">pid        /home/nginx/pid/nginx.pid;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+
       
     </div>
     
@@ -614,7 +630,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境系统"><span class="nav-number">1.</span> <span class="nav-text">环境系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置启动"><span class="nav-number">3.</span> <span class="nav-text">设置启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取证书"><span class="nav-number">4.</span> <span class="nav-text">获取证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改配置文件"><span class="nav-number">5.</span> <span class="nav-text">修改配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启Nginx"><span class="nav-number">6.</span> <span class="nav-text">重启Nginx</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境系统"><span class="nav-number">1.</span> <span class="nav-text">环境系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置启动"><span class="nav-number">3.</span> <span class="nav-text">设置启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取证书"><span class="nav-number">4.</span> <span class="nav-text">获取证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改配置文件"><span class="nav-number">5.</span> <span class="nav-text">修改配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启Nginx"><span class="nav-number">6.</span> <span class="nav-text">重启Nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题补充与解决"><span class="nav-number">7.</span> <span class="nav-text">问题补充与解决</span></a></li></ol></div>
             
 
           </div>
