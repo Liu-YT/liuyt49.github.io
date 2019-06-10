@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/06/10/Linux-Socket网络编程/TCP三次握手.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/10/Linux-Socket网络编程/TCP交互流程.png">
 <meta property="og:image" content="http://yoursite.com/2019/06/10/Linux-Socket网络编程/TCP交互流程.png">
-<meta property="og:updated_time" content="2019-06-10T11:01:37.970Z">
+<meta property="og:updated_time" content="2019-06-10T11:15:01.566Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux| Socket网络编程">
 <meta name="twitter:description" content="基于TCP网络编程API  什么是 socket？socket起源于UNIX，而 UNIX/Linux 基本哲学之一就是”一切皆文件”，都可以用打开(open) -&amp;gt; 读写(write/read) -&amp;gt; 关闭(close)模式来操作。socket其实就是该模式的一个实现，socket即是一种特殊的文件，一些socket函数就是对其进行的操作(读／写、 打开、关闭)。 socket 的">
@@ -426,11 +426,11 @@
 <p><strong>注意</strong>：<code>accept</code>的第一个参数为服务器的 <code>socket</code> 描述字，是服务器开始调用 <code>socket()</code>函数生成的，称为监听<code>socket</code>描述字；而 <code>accept</code>函数返回的是己连接的 <code>socket</code>描述字。 一个服务器通常仅仅只创建一个监听 <code>socket</code> 描述字，它在该服务器的生命周期内一直存在。内核为每个由服务器进程接受的客户创建了一个已连接 <code>socket</code> 描述字，当服务器完成了对某个客户的服务，相应的已连接 <code>socket</code>描述字就被关闭</p>
 <h2 id="read-和-write-函数"><a href="#read-和-write-函数" class="headerlink" title="read 和 write 函数"></a>read 和 write 函数</h2><p>至此服务器与客户已经建立好连接了，可以调用网络 I/O 进行读写操作了，即实现了网络中不同进程之间的通信。网络 I/O 操作有下面几组</p>
 <ul>
-<li>read() / write()</li>
-<li>recv() / send() </li>
-<li>readv() / writev() </li>
-<li>recvmsg() / sendmsg() </li>
-<li>recvfrom() / sendto() </li>
+<li><code>read() / write()</code></li>
+<li><code>recv() / send()</code> </li>
+<li><code>readv() / writev()</code> </li>
+<li><code>recvmsg() / sendmsg()</code> </li>
+<li><code>recvfrom() / sendto()</code> </li>
 </ul>
 <p>比较常用的是<code>read</code>和<code>write</code><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ssize_t</span> read(<span class="keyword">int</span> fd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count);</span><br></pre></td></tr></table></figure></p>
 <p><code>read()</code>函数是负责从fd中读取内容。当读取成功时，<code>read()</code>返回实际所读的字节数，如果返回的值是 0 表示已经读到文件的结束了，小于 0 表示出现了错误。如果错误为 <code>EINTR</code> 说明读是由中断引起的，如果是 <code>ECONNREST</code> 表示网络连接出了问题。</p>
@@ -440,10 +440,8 @@
 <li>缓冲区长度 <code>count</code>。</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ssize_t</span> write(<span class="keyword">int</span> fd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count);</span><br></pre></td></tr></table></figure>
-<p><code>write()</code>函数将buf中的 nbytes 字节内容写入文件描述符fd成功时返回写的字节数。失败时返回-1，并设置 <code>errno</code> 变量。在网络程序中，当我们向套接字文件描述符写时有两种可能</p>
-<pre><code>* `write` 的返回值大于0，表示写了部分或者是全部的数据
-* 返回的值小于 0，此时出现了错误。实际中要根据错误类型来处理。如果错误为 `EINTR` 表示在写的时候出现了中断错误。如果为 `EPIPE` 表示网络连接出现了问题（对方已经关闭了连接）
-</code></pre><ul>
+<p><code>write()</code>函数将buf中的 nbytes 字节内容写入文件描述符fd成功时返回写的字节数。失败时返回-1，并设置 <code>errno</code> 变量。在网络程序中，当我们向套接字文件描述符写时有两种可能: 1.<code>write</code> 的返回值大于0，表示写了部分或者是全部的数据; 2.返回的值小于 0，此时出现了错误。实际中要根据错误类型来处理。如果错误为 <code>EINTR</code> 表示在写的时候出现了中断错误。如果为 <code>EPIPE</code> 表示网络连接出现了问题（对方已经关闭了连接）</p>
+<ul>
 <li>fd 表示 socket 描述字</li>
 <li>buf表示缓冲区</li>
 <li>count 表示缓冲区长度</li>
@@ -451,7 +449,7 @@
 <h2 id="close-函数"><a href="#close-函数" class="headerlink" title="close 函数"></a>close 函数</h2><p>在服务器与客户端建立连接之后，会进行一些读写操作，完成了读写操作就要关闭相应的 <code>socket</code>描述字</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">close</span><span class="params">(<span class="keyword">int</span> fd)</span></span>;</span><br></pre></td></tr></table></figure>
 <p><code>close</code>一个 <code>TCP socket</code> 的默认行为时，会把该 <code>socket</code> 标记为以关闭，然后立即返回到调用进程。该描述字不能再由调用进程使用，也就是说不能再作为 <code>read</code> 或 <code>write</code> 的第一个参数</p>
-<h1 id="实现简单的TCP-Server"><a href="#实现简单的TCP-Server" class="headerlink" title="实现简单的TCP-Server"></a>实现简单的TCP-Server</h1><p>该实现主要是了解一些相关API的调用，起主要参考的<strong>TCP交互流程</strong>即可 - <a href="https://github.com/Liu-YT/TCP-Server" target="_blank" rel="noopener">项目 - TCP-Server</a><br><img src="/2019/06/10/Linux-Socket网络编程/TCP交互流程.png" alt="TCP交互流程">s</p>
+<h1 id="实现简单的TCP-Server"><a href="#实现简单的TCP-Server" class="headerlink" title="实现简单的TCP-Server"></a>实现简单的TCP-Server</h1><p>该实现主要是了解一些相关API的调用，起主要参考的<strong>TCP交互流程</strong>即可 - <a href="https://github.com/Liu-YT/TCP-Server" target="_blank" rel="noopener">项目 - TCP-Server</a><br><img src="/2019/06/10/Linux-Socket网络编程/TCP交互流程.png" alt="TCP交互流程"></p>
 <h1 id="网络字节序与主机序"><a href="#网络字节序与主机序" class="headerlink" title="网络字节序与主机序"></a>网络字节序与主机序</h1><ul>
 <li><code>主机序</code> - 不同的<code>CPU</code>有不同的字节序类型，这些字节序是指整数在内存中保存的顺序，称为主机序。最常见的就是大端和小端<ul>
 <li><code>Little Endian</code> - 小端: 把地址低位存储值的低位，地址高位存储值的高位</li>
@@ -503,6 +501,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/10/谈谈cookie-session和JWT认证机制/" rel="prev" title="谈谈cookie-session和JWT认证机制">
+                谈谈cookie-session和JWT认证机制 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -588,7 +590,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -599,7 +601,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -610,7 +612,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
