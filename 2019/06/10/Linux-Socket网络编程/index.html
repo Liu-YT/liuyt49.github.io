@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="My Blog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="基于TCP网络编程API  什么是 socket？socket起源于UNIX，而 UNIX/Linux 基本哲学之一就是”一切皆文件”，都可以用打开(open) -&amp;gt; 读写(write/read) -&amp;gt; 关闭(close)模式来操作。socket其实就是该模式的一个实现，socket即是一种特殊的文件，一些socket函数就是对其进行的操作(读／写、 打开、关闭)。 socket 的">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux| Socket网络编程">
+<meta property="og:url" content="http://yoursite.com/2019/06/10/Linux-Socket网络编程/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="基于TCP网络编程API  什么是 socket？socket起源于UNIX，而 UNIX/Linux 基本哲学之一就是”一切皆文件”，都可以用打开(open) -&amp;gt; 读写(write/read) -&amp;gt; 关闭(close)模式来操作。socket其实就是该模式的一个实现，socket即是一种特殊的文件，一些socket函数就是对其进行的操作(读／写、 打开、关闭)。 socket 的">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/2019/06/10/Linux-Socket网络编程/TCP三次握手.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/10/Linux-Socket网络编程/TCP交互流程.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/10/Linux-Socket网络编程/TCP交互流程.png">
+<meta property="og:updated_time" content="2019-06-10T11:01:37.970Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux| Socket网络编程">
+<meta name="twitter:description" content="基于TCP网络编程API  什么是 socket？socket起源于UNIX，而 UNIX/Linux 基本哲学之一就是”一切皆文件”，都可以用打开(open) -&amp;gt; 读写(write/read) -&amp;gt; 关闭(close)模式来操作。socket其实就是该模式的一个实现，socket即是一种特殊的文件，一些socket函数就是对其进行的操作(读／写、 打开、关闭)。 socket 的">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/10/Linux-Socket网络编程/TCP三次握手.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/10/Linux-Socket网络编程/">
+
+
+
+
+
+  <title>Linux| Socket网络编程 | My Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?dd7561cc103d4f0d4f23d16cf9774edd";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/Liu-YT" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">My Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/10/Linux-Socket网络编程/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liuyt49">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux| Socket网络编程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-10T15:44:08+08:00">
+                2019-06-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>基于TCP网络编程API</p>
+</blockquote>
+<h1 id="什么是-socket？"><a href="#什么是-socket？" class="headerlink" title="什么是 socket？"></a>什么是 socket？</h1><p><code>socket</code>起源于UNIX，而 UNIX/Linux 基本哲学之一就是”一切皆文件”，都可以用<code>打开(open) -&gt; 读写(write/read) -&gt; 关闭(close)</code>模式来操作。<code>socket</code>其实就是该模式的一个实现，<code>socket</code>即是一种特殊的文件，一些<code>socket</code>函数就是对其进行的操作(读／写、 打开、关闭)。</p>
+<h1 id="socket-的基本操作"><a href="#socket-的基本操作" class="headerlink" title="socket 的基本操作"></a>socket 的基本操作</h1><p><code>socket</code>是<code>open-write/read-close</code>模式的一种实现，那么<code>socket</code>就提供了这些操作对应的函数接口，本文将以<code>TCP</code>协议通信<code>socket</code>为例，讲解相关的函数接口</p>
+<p><strong>TCP三次握手</strong><br><img src="/2019/06/10/Linux-Socket网络编程/TCP三次握手.png" alt="TCP三次握手"></p>
+<p><strong>TCP交互流程</strong><br><img src="/2019/06/10/Linux-Socket网络编程/TCP交互流程.png" alt="TCP交互流程"></p>
+<h2 id="socket-函数"><a href="#socket-函数" class="headerlink" title="socket 函数"></a>socket 函数</h2><p><code>socket</code>函数对应于普通文件的打开操作。普通文件的打开操作返回一个文件描述符，而<code>socket()</code>用于创建一个<code>socket</code>描述符(<code>socket description</code>)，它唯一标识一个<code>socket</code>。这个<code>socket</code>描述字跟文件描述字一样，后续的操作都有用到它，把它作为参数，通过它进行一些读写操作<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">socket</span><span class="params">(<span class="keyword">int</span> domain, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p><code>参数简述</code></p>
+<ul>
+<li><code>domain</code>：协议域，又称为协议族(<code>family</code>)。常用的协议族有：<code>AF_INEF</code>、<code>AF_INET6</code>、<code>AF_LOCAL</code>等。协议族决定了<code>socket</code>的地址类型，在通信种必须采用对应的地址，如<code>AF_INEF</code>决定了要用ipv4地址（322）位与端口号（16位）</li>
+<li><code>type</code>：指定socket类型。常用的socket类型有：<code>SOCK_STREAM</code>、<code>SOCK_DGRAM</code>等等。其中， <code>SOCK_STREAM</code>表示提供面向连接的稳定数据传输，即 TCP 协议。<code>SOCK_DGRAM</code>表示使用不连续、不可靠的数据包连接</li>
+<li><code>protocol</code>：指定协议。常用的协议有：<code>IPPROTO_TCP</code>, <code>IPPTOTO_UDP</code>, <code>IPPROTO _ SCTP</code>、 <code>IPPROTO_TIPC</code> 等，它们分别对应 TCP 传输协议、 UDP 传输协议、 STCP 传输协议、 TIPC 传输协议</li>
+</ul>
+<h2 id="bind-函数"><a href="#bind-函数" class="headerlink" title="bind 函数"></a>bind 函数</h2><p><code>bind()</code> 函数把一个地址族中的特定地址赋给 <code>socket</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bind</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> struct sockaddr* addr, <span class="keyword">socklen_t</span> addrlen)</span></span>;</span><br></pre></td></tr></table></figure>
+<p><code>参数简述</code></p>
+<ul>
+<li><code>sockfd</code>：即<code>socket</code>描述字，它是通过<code>socket()</code>函数创建来唯一标识一个socket的。<code>bind()</code>函数就是将给这个描述字绑定一个名字</li>
+<li><code>addr</code>：一个 <code>const struct sockaddr＊</code>指针，指向要绑定给 <code>sockfd</code>的协议地址。 这个地 结构根据地址创建 <code>socket</code>时的地址协议族的不同而不同</li>
+<li><code>addrlen</code>：对应的是地址的长度</li>
+</ul>
+<h2 id="listen-和-connect-函数"><a href="#listen-和-connect-函数" class="headerlink" title="listen 和 connect 函数"></a>listen 和 connect 函数</h2><p>如果作为一个服务器，在调用<code>socket()</code>、<code>bind()</code>之后就会调用<code>listen()</code>来监听这个<code>socket</code>，如果客户端这时调用<code>connect()</code>发出连接请求，服务器端就会接收到这个请求。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">listen</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">int</span> backlog)</span></span>;</span><br></pre></td></tr></table></figure></p>
+<p><code>listen</code>函数的第一个参数即为要监听的<code>socket</code>描述字，第二个参数为相应<code>socket</code>可以排队的最大连接个数。<code>socket()</code>函数创建的 <code>socket</code> 默认是一个主动类型的， <code>listen</code> 函数将 <code>socket</code> 变为被动类型的，等待客户的连接请求。 </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">connect</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> struct sockaddr *addr, <span class="keyword">socklen_t</span> addrlen)</span></span>;</span><br></pre></td></tr></table></figure>
+<p><code>connect</code>函数的第一个参数即为客户端的<code>socket</code>描述字，第二参数为服务器的<code>socket</code>地址，第三个参数为<code>socket</code>地址的长度。客户端通过调用<code>connect</code>函数来建立与TCP服务器的连接</p>
+<h2 id="accept-函数"><a href="#accept-函数" class="headerlink" title="accept 函数"></a>accept 函数</h2><p>TCP 服务器端依次调用 <code>socket()</code>、<code>bind()</code>、<code>listen()</code>之后，就会监听指定的<code>socket</code> 地址了。TCP 客户端依次调用 <code>socket()</code>、<code>connect()</code>之后就会向 TCP 服务器发送了一个连接请求。 TCP 服务器监听到这个请求之后，就会调用<code>accept()</code>取接收请求，这样连接就建立好了。 之后就可以开始网络 I/O 操作了，即类同于普通文件的读写 I/O 操作。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">accept</span><span class="params">(<span class="keyword">int</span> sockfd, struct sockaddr *addr, <span class="keyword">socklen_t</span> *addrlen)</span></span>;</span><br></pre></td></tr></table></figure>
+<p><code>accept</code>函数的第一个参数为服务器的 <code>socket</code> 描述字；第二个参数为指向 <code>struct sockaddr*</code> 的指针，用于返回客户端的协议地址；第三个参数为协议地址的长度。如果 <code>accpet</code>成功，那么其返回值是由内核自动生成的一个全新的描述字，代表与返回客户的 TCP 连接</p>
+<p><strong>注意</strong>：<code>accept</code>的第一个参数为服务器的 <code>socket</code> 描述字，是服务器开始调用 <code>socket()</code>函数生成的，称为监听<code>socket</code>描述字；而 <code>accept</code>函数返回的是己连接的 <code>socket</code>描述字。 一个服务器通常仅仅只创建一个监听 <code>socket</code> 描述字，它在该服务器的生命周期内一直存在。内核为每个由服务器进程接受的客户创建了一个已连接 <code>socket</code> 描述字，当服务器完成了对某个客户的服务，相应的已连接 <code>socket</code>描述字就被关闭</p>
+<h2 id="read-和-write-函数"><a href="#read-和-write-函数" class="headerlink" title="read 和 write 函数"></a>read 和 write 函数</h2><p>至此服务器与客户已经建立好连接了，可以调用网络 I/O 进行读写操作了，即实现了网络中不同进程之间的通信。网络 I/O 操作有下面几组</p>
+<ul>
+<li>read() / write()</li>
+<li>recv() / send() </li>
+<li>readv() / writev() </li>
+<li>recvmsg() / sendmsg() </li>
+<li>recvfrom() / sendto() </li>
+</ul>
+<p>比较常用的是<code>read</code>和<code>write</code><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ssize_t</span> read(<span class="keyword">int</span> fd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count);</span><br></pre></td></tr></table></figure></p>
+<p><code>read()</code>函数是负责从fd中读取内容。当读取成功时，<code>read()</code>返回实际所读的字节数，如果返回的值是 0 表示已经读到文件的结束了，小于 0 表示出现了错误。如果错误为 <code>EINTR</code> 说明读是由中断引起的，如果是 <code>ECONNREST</code> 表示网络连接出了问题。</p>
+<ul>
+<li><code>socket</code> 描述字 <code>fd</code></li>
+<li>缓冲区 <code>buf</code></li>
+<li>缓冲区长度 <code>count</code>。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ssize_t</span> write(<span class="keyword">int</span> fd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count);</span><br></pre></td></tr></table></figure>
+<p><code>write()</code>函数将buf中的 nbytes 字节内容写入文件描述符fd成功时返回写的字节数。失败时返回-1，并设置 <code>errno</code> 变量。在网络程序中，当我们向套接字文件描述符写时有两种可能</p>
+<pre><code>* `write` 的返回值大于0，表示写了部分或者是全部的数据
+* 返回的值小于 0，此时出现了错误。实际中要根据错误类型来处理。如果错误为 `EINTR` 表示在写的时候出现了中断错误。如果为 `EPIPE` 表示网络连接出现了问题（对方已经关闭了连接）
+</code></pre><ul>
+<li>fd 表示 socket 描述字</li>
+<li>buf表示缓冲区</li>
+<li>count 表示缓冲区长度</li>
+</ul>
+<h2 id="close-函数"><a href="#close-函数" class="headerlink" title="close 函数"></a>close 函数</h2><p>在服务器与客户端建立连接之后，会进行一些读写操作，完成了读写操作就要关闭相应的 <code>socket</code>描述字</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">close</span><span class="params">(<span class="keyword">int</span> fd)</span></span>;</span><br></pre></td></tr></table></figure>
+<p><code>close</code>一个 <code>TCP socket</code> 的默认行为时，会把该 <code>socket</code> 标记为以关闭，然后立即返回到调用进程。该描述字不能再由调用进程使用，也就是说不能再作为 <code>read</code> 或 <code>write</code> 的第一个参数</p>
+<h1 id="实现简单的TCP-Server"><a href="#实现简单的TCP-Server" class="headerlink" title="实现简单的TCP-Server"></a>实现简单的TCP-Server</h1><p>该实现主要是了解一些相关API的调用，起主要参考的<strong>TCP交互流程</strong>即可 - <a href="https://github.com/Liu-YT/TCP-Server" target="_blank" rel="noopener">项目 - TCP-Server</a><br><img src="/2019/06/10/Linux-Socket网络编程/TCP交互流程.png" alt="TCP交互流程">s</p>
+<h1 id="网络字节序与主机序"><a href="#网络字节序与主机序" class="headerlink" title="网络字节序与主机序"></a>网络字节序与主机序</h1><ul>
+<li><code>主机序</code> - 不同的<code>CPU</code>有不同的字节序类型，这些字节序是指整数在内存中保存的顺序，称为主机序。最常见的就是大端和小端<ul>
+<li><code>Little Endian</code> - 小端: 把地址低位存储值的低位，地址高位存储值的高位</li>
+<li><code>Big Endian</code> - 大端: 把地址低位存储值的高位，地址高位存储值的低位</li>
+</ul>
+</li>
+<li><code>网络字节序</code> - 4个字节的32 bit值以下面的次序传输：首先是0～7bit，其次8～15bit，然后16～23bit，最后是24~31bit。这种传输次序称作大端字节序。由于<code>TCP/IP</code>首部中所有的二进制整数在网络中传输时都要求以这种次序，因此它又称作网络字节序</li>
+<li><strong>网络协议也都是采用 <code>Big Endian</code> 的方式来传输数据的。 所以有时也会把 <code>Big Endian</code> 方式称之为网络字节序。 当两台采用不同字节序的主机通信时，在发送数据之前都必须经过字节序的转换成网络字节序后再进行传输</strong></li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
+<li><a href="https://book.douban.com/subject/26850616/" target="_blank" rel="noopener">后台开发：核心技术与应用实践</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/18/系统分析与设计-作业5/" rel="next" title="系统分析与设计 作业5">
+                <i class="fa fa-chevron-left"></i> 系统分析与设计 作业5
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div style="text-align:center;">
+        <button class="btn" id="load-livere" onclick="livere.load();">加载评论</button>
+      </div>
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MTY4MS8xODIyNw=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="liuyt49">
+            
+              <p class="site-author-name" itemprop="name">liuyt49</p>
+              <p class="site-description motion-element" itemprop="description">一个菜鸟的成长记录</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Liu-YT" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是-socket？"><span class="nav-number">1.</span> <span class="nav-text">什么是 socket？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#socket-的基本操作"><span class="nav-number">2.</span> <span class="nav-text">socket 的基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#socket-函数"><span class="nav-number">2.1.</span> <span class="nav-text">socket 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bind-函数"><span class="nav-number">2.2.</span> <span class="nav-text">bind 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#listen-和-connect-函数"><span class="nav-number">2.3.</span> <span class="nav-text">listen 和 connect 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#accept-函数"><span class="nav-number">2.4.</span> <span class="nav-text">accept 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#read-和-write-函数"><span class="nav-number">2.5.</span> <span class="nav-text">read 和 write 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#close-函数"><span class="nav-number">2.6.</span> <span class="nav-text">close 函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现简单的TCP-Server"><span class="nav-number">3.</span> <span class="nav-text">实现简单的TCP-Server</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网络字节序与主机序"><span class="nav-number">4.</span> <span class="nav-text">网络字节序与主机序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liuyt49</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+    var livere = {
+      load : function() {
+          (function(d, s) {
+          var j, e = d.getElementsByTagName(s)[0];
+          if (typeof LivereTower === 'function') { return; }
+          j = d.createElement(s);
+          j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+          j.async = true;
+          e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+        $('#load-livere').remove(); ///加载后移除按钮
+      }
+    }
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
