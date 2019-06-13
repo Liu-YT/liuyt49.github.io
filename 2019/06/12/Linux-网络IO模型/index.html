@@ -68,10 +68,12 @@
 
 
 
-  <meta name="keywords" content="安装配置,">
+  <meta name="keywords" content="Linux,">
 
 
 
+
+  
 
 
   <link rel="alternate" href="/atom.xml" title="My Blog" type="application/atom+xml">
@@ -81,20 +83,24 @@
 
 
 
-<meta name="description" content="最近在写项目的时候，在将后台服务器部署到腾讯云后，因为前端是小程序，微信小程序开发对于正常使用必须基于HTTPS请求，因此需要配置HTTPS。本来是使用比较简单openssl进行配置使用，使用第三方免费的SSL证书，但是由于自己配置的证书不稳定，不能被校验通过，服务功能不能正常使用。因此选择申请腾讯云服务器的SSL证书使用，后台的服务器框架为Flask，但是腾讯云里面免费的SSL证书只有Apac">
-<meta name="keywords" content="安装配置">
+<meta name="description" content="IO(Input/Output, 输入/输出)是计算机体系的重要的一部分。IO有两种操作，同步IO或异步IO。同步IO指的是，必须等待IO操作完成，控制权才返回给用户进程。异步IO指的是，无需等待IO操作完成，就将控制权返回给用户进程。网络中的IO，由于不同的IO设备有着不同的特点，网络通信中往往需要等待。常见的有以下4种情况  输入操作：等待数据到达套接字接收缓冲区 输出操作：等待套接字发送缓冲">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="腾讯云| Nginx安装与配置HTTPS">
-<meta property="og:url" content="http://yoursite.com/2019/05/11/腾讯云-Nginx安装与配置HTTPS/index.html">
+<meta property="og:title" content="Linux| 网络IO模型">
+<meta property="og:url" content="http://yoursite.com/2019/06/12/Linux-网络IO模型/index.html">
 <meta property="og:site_name" content="My Blog">
-<meta property="og:description" content="最近在写项目的时候，在将后台服务器部署到腾讯云后，因为前端是小程序，微信小程序开发对于正常使用必须基于HTTPS请求，因此需要配置HTTPS。本来是使用比较简单openssl进行配置使用，使用第三方免费的SSL证书，但是由于自己配置的证书不稳定，不能被校验通过，服务功能不能正常使用。因此选择申请腾讯云服务器的SSL证书使用，后台的服务器框架为Flask，但是腾讯云里面免费的SSL证书只有Apac">
+<meta property="og:description" content="IO(Input/Output, 输入/输出)是计算机体系的重要的一部分。IO有两种操作，同步IO或异步IO。同步IO指的是，必须等待IO操作完成，控制权才返回给用户进程。异步IO指的是，无需等待IO操作完成，就将控制权返回给用户进程。网络中的IO，由于不同的IO设备有着不同的特点，网络通信中往往需要等待。常见的有以下4种情况  输入操作：等待数据到达套接字接收缓冲区 输出操作：等待套接字发送缓冲">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2019/05/11/腾讯云-Nginx安装与配置HTTPS/1.png">
-<meta property="og:updated_time" content="2019-05-23T05:37:15.768Z">
+<meta property="og:image" content="http://yoursite.com/2019/06/12/Linux-网络IO模型/阻塞IO模型.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/12/Linux-网络IO模型/非阻塞IO模型.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/12/Linux-网络IO模型/多路IO复用模型.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/12/Linux-网络IO模型/异步IO模型.png">
+<meta property="og:image" content="http://yoursite.com/2019/06/12/Linux-网络IO模型/各种IO模型比较.png">
+<meta property="og:updated_time" content="2019-06-13T10:18:22.411Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="腾讯云| Nginx安装与配置HTTPS">
-<meta name="twitter:description" content="最近在写项目的时候，在将后台服务器部署到腾讯云后，因为前端是小程序，微信小程序开发对于正常使用必须基于HTTPS请求，因此需要配置HTTPS。本来是使用比较简单openssl进行配置使用，使用第三方免费的SSL证书，但是由于自己配置的证书不稳定，不能被校验通过，服务功能不能正常使用。因此选择申请腾讯云服务器的SSL证书使用，后台的服务器框架为Flask，但是腾讯云里面免费的SSL证书只有Apac">
-<meta name="twitter:image" content="http://yoursite.com/2019/05/11/腾讯云-Nginx安装与配置HTTPS/1.png">
+<meta name="twitter:title" content="Linux| 网络IO模型">
+<meta name="twitter:description" content="IO(Input/Output, 输入/输出)是计算机体系的重要的一部分。IO有两种操作，同步IO或异步IO。同步IO指的是，必须等待IO操作完成，控制权才返回给用户进程。异步IO指的是，无需等待IO操作完成，就将控制权返回给用户进程。网络中的IO，由于不同的IO设备有着不同的特点，网络通信中往往需要等待。常见的有以下4种情况  输入操作：等待数据到达套接字接收缓冲区 输出操作：等待套接字发送缓冲">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/12/Linux-网络IO模型/阻塞IO模型.png">
 
 
 
@@ -124,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/11/腾讯云-Nginx安装与配置HTTPS/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/12/Linux-网络IO模型/">
 
 
 
 
 
-  <title>腾讯云| Nginx安装与配置HTTPS | My Blog</title>
+  <title>Linux| 网络IO模型 | My Blog</title>
   
 
 
@@ -267,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/11/腾讯云-Nginx安装与配置HTTPS/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/12/Linux-网络IO模型/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liuyt49">
@@ -284,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">腾讯云| Nginx安装与配置HTTPS</h1>
+          <h1 class="post-title" itemprop="name headline">Linux| 网络IO模型</h1>
         
 
         <div class="post-meta">
@@ -296,8 +302,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-11T17:03:39+08:00">
-                2019-05-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-12T17:42:44+08:00">
+                2019-06-12
               </time>
             
 
@@ -319,8 +325,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/centos/" itemprop="url" rel="index">
-                    <span itemprop="name">centos</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -355,7 +361,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  692
+                  2.7k
                 </span>
               
 
@@ -371,7 +377,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2
+                  9
                 </span>
               
             </div>
@@ -392,44 +398,58 @@
       
 
       
-        <blockquote>
-<p>最近在写项目的时候，在将后台服务器部署到腾讯云后，因为前端是小程序，微信小程序开发对于正常使用必须基于<code>HTTPS</code>请求，因此需要配置<code>HTTPS</code>。<br>本来是使用比较简单<code>openssl</code>进行配置使用，使用第三方免费的<code>SSL证书</code>，但是由于自己配置的证书不稳定，不能被校验通过，服务功能不能正常使用。因此选择申请腾讯云服务器的<code>SSL证书</code>使用，后台的服务器框架为<code>Flask</code>，但是腾讯云里面免费的<code>SSL证书</code>只有<code>Apache</code>、<code>IIS</code>、<code>Nginx</code>、<code>Tomcat</code>四种，相应的证书对应专属的服务器，因此选择使用配置<code>Nginx</code>服务器，再将相关请求代理到后端服务器处理</p>
-</blockquote>
-<h2 id="环境系统"><a href="#环境系统" class="headerlink" title="环境系统"></a><code>环境系统</code></h2><ul>
-<li><strong>Centos 7</strong></li>
-</ul>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install nginx</span><br></pre></td></tr></table></figure>
-<p>安装之后，可以查看<code>nginx</code>的默认安装目录<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 方法 1</span></span><br><span class="line">nginx -t </span><br><span class="line"><span class="meta">#</span><span class="bash"> 方法 2</span></span><br><span class="line">whereis nginx</span><br></pre></td></tr></table></figure></p>
-<p><img src="/2019/05/11/腾讯云-Nginx安装与配置HTTPS/1.png" alt="1"></p>
-<h2 id="设置启动"><a href="#设置启动" class="headerlink" title="设置启动"></a>设置启动</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 设置自动启动</span></span><br><span class="line">systemctl enable nginx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动nginx</span></span><br><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure>
-<h2 id="获取证书"><a href="#获取证书" class="headerlink" title="获取证书"></a>获取证书</h2><ul>
-<li><code>腾讯云</code> -&gt; <code>SSL证书管理</code> -&gt; <code>申请</code></li>
-<li>下载证书，将对应的<code>nginx</code>服务器证书上传到腾讯云上<ul>
-<li>在配置<code>nginx</code>需要用到，本文将证书放到<code>/etc/nginx/SSL</code>文件夹</li>
-</ul>
-</li>
-</ul>
-<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><ul>
-<li><code>cd /etc/nginx</code></li>
-<li><code>vi nginx.conf</code>，修改相应部分<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  xxx.xxx.cn;                    # 对应的域名或者host</span><br><span class="line">    rewrite ^(.*)$ https://$host$1 permanent;   # 默认强制使用https对http进行跳转</span><br><span class="line"></span><br><span class="line">    #charset koi8-r;</span><br><span class="line"></span><br><span class="line">    #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   html;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"># HTTPS server</span><br><span class="line">#</span><br><span class="line">server &#123;</span><br><span class="line">    listen       443 ssl;</span><br><span class="line">    server_name  qcloud.captainp.cn;</span><br><span class="line"></span><br><span class="line">    ssl_certificate      /etc/nginx/SSL/1_qcloud.captainp.cn_bundle.crt;    # 指定对应的证书</span><br><span class="line">    ssl_certificate_key  /etc/nginx/SSL/2_qcloud.captainp.cn.key;           # 指定对应的私钥</span><br><span class="line"></span><br><span class="line">    ssl_session_cache    shared:SSL:1m;</span><br><span class="line">    ssl_session_timeout  5m;</span><br><span class="line"></span><br><span class="line">    ssl_ciphers  HIGH:!aNULL:!MD5;</span><br><span class="line">    ssl_prefer_server_ciphers  on;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">#       root   html;</span><br><span class="line">#       index  index.html index.html;</span><br><span class="line">        proxy_pass http://xxx.xxx.cn:5000/; # 将请求都代理到本机5000，Flask服务器监听的端口进行处理，可以根据需要修改该部分</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="重启Nginx"><a href="#重启Nginx" class="headerlink" title="重启Nginx"></a>重启Nginx</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service nginx restart</span><br></pre></td></tr></table></figure>
-<h2 id="问题补充与解决"><a href="#问题补充与解决" class="headerlink" title="问题补充与解决"></a>问题补充与解决</h2><blockquote>
-<p>在之前的成功配置后，某天在使用在服务器后，突然发现访问异常了，服务被拒绝，简单的重启服务器后，再次请求，发现服务器日志没有相关请求信息，猜想nginx的服务出现了问题</p>
-</blockquote>
+        <p><code>IO(Input/Output, 输入/输出)</code>是计算机体系的重要的一部分。<code>IO</code>有两种操作，<code>同步IO</code>或<code>异步IO</code>。<code>同步IO</code>指的是，必须等待<code>IO</code>操作完成，控制权才返回给用户进程。<code>异步IO</code>指的是，无需等待<code>IO</code>操作完成，就将控制权返回给用户进程。<br>网络中的<code>IO</code>，由于不同的<code>IO</code>设备有着不同的特点，网络通信中往往需要等待。常见的有以下4种情况</p>
 <ul>
-<li>首先检查nginx的配置是否正确：<br>  <code>nginx -t -c /etc/nginx/nginx.conf</code></li>
-<li>发现有以下报错：<br>  <code>nginx: [emerg] open() &quot;/var/run/nginx/nginx.pid&quot; failed (2: No such file or directory)</code></li>
-<li><p>查阅相关博客：<br>  不要在/var/run目下创建新目录。</p>
-<p>  centos7，创建<code>了/var/run/nginx/</code>目录存放<code>nginx.pid</code>，<strong>每次重启后，/var/run目录下都会清空！</strong></p>
-<p>  <strong>解决方法</strong>：</p>
+<li>输入操作：等待数据到达套接字接收缓冲区</li>
+<li>输出操作：等待套接字发送缓冲区有足够的空间容纳将要发送的数据</li>
+<li>服务器接收连接请求：等待新的客户端连接请求的到来</li>
+<li>客户端发送连接请求：等待服务器回送客户的发起的<code>SYN</code>对应的<code>ACK</code></li>
+</ul>
+<p>4种网络<code>IO模型</code></p>
 <ul>
-<li><code>$vi /etc/nginx/nginx.conf</code></li>
-<li>修改相应部分  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#pid       /var/run/nginx/nginx.pid;</span><br><span class="line">pid        /home/nginx/pid/nginx.pid;</span><br></pre></td></tr></table></figure></li>
+<li><code>阻塞IO模型</code></li>
+<li><code>非阻塞IO模型</code></li>
+<li><code>多路IO复用模型</code></li>
+<li><code>异步IO模型</code></li>
 </ul>
-</li>
+<h1 id="阻塞IO模型"><a href="#阻塞IO模型" class="headerlink" title="阻塞IO模型"></a>阻塞IO模型</h1><p>在 Linux 中，默认情况下所有的 socket 都是阻塞的，一个典型的<strong>读操作流程</strong>如下所示</p>
+<p><img src="/2019/06/12/Linux-网络IO模型/阻塞IO模型.png" alt="阻塞IO模型"></p>
+<p>当应用进程调用了 recvfrom 这个系统调用后，系统内核就开始了 IO 的第一个阶段：准备数据。对于网络 IO 来说，很多时候数据在一开始还没到达时（比如还没有收到一个完整的 TCP 包），系统内核就要等待足够的数据到来。而在用户进程这边，整个进程会被阻塞。当系统内核一直等到数据准备好了，它就会将数据从系统内核中拷贝到用户内存中，然后系统内核返回结果，用户进程才解除阻塞的状态，重新运行起来。所以，阻塞 IO 模型的特点就是在 IO 执行的两个阶段（等待数据和拷贝数据）都被阻塞了。</p>
+<p><strong>阻塞和非阻塞的概念描述的是用户线程调用内核 IO 操作的方式：阻塞是指 IO 操作需要彻底完成后才返回到用户空间；而非阻塞是指 IO 操作被调用后立即返回给用户一个状态值，不需要等到IO操作彻底完成。</strong></p>
+<p>大部分的 socket 接口都是阻塞的。所谓阻塞型接口是指系统调用时（一般是 IO 接口）却不返回调用结果，并让当前线程一直处于阻塞状态，只有当该系统调用获得结果或者超时出错时才返回结果。除非特别指定，几乎所有的 IO 接口（包括 socket 接口）都是阻塞型的。这给网络编程带来了一个很大的问题，如在调用 <code>send()</code>的同时，线程处于阻塞状态，则在此期间，线程将无法执行任何运算或响应任何网络请求。一个简单的改进方案是在服务器端使用多线程（或多进程）。多线程（或多进程）的目的是让每个连接都拥有独立的线程（或进程），这样任何一个连接的阻塞不会影响其他的连接。<br>多线程的服务器模型似乎完美地解决了多个客户机提供问答服务的要求，但其实并不尽然。如果要同时响应成百上千路的连接请求，则无论多线程还是多进程都会严重的占据系统资源，降低系统对外界响应的效率，而线程与进程本身也更容易进入假死状态。此时考虑使用<strong>线程池</strong>或者<strong>连接池</strong></p>
+<ul>
+<li><strong>线程池</strong>旨在降低创建和销毁线程的频率，使其维持一定合理数量的线程，并让空闲的线程重新承担新的执行任务</li>
+<li><strong>连接池</strong>是指维持连接的缓存池，尽量重中已有的连接，减低创建和关闭连接的频率。</li>
 </ul>
+<p><strong>线程池</strong>和<strong>连接池</strong>或许可以缓解部分压力，但是不能解决所有问题，多线程模型可以方便高效的解决小规模的服务请求，但面对大规模的服务请求，多线程模型也会遇到瓶颈，可以用非阻塞模型来尝试解决这个问题</p>
+<hr>
+<h1 id="非阻塞IO模型"><a href="#非阻塞IO模型" class="headerlink" title="非阻塞IO模型"></a>非阻塞IO模型</h1><p>在 Linux 中，可以通过设置 socket 使IO变为非阻塞状态。当对一个非阻塞的 socket 执行读 read 操作时，其流程如下</p>
+<p><img src="/2019/06/12/Linux-网络IO模型/非阻塞IO模型.png" alt="非阻塞IO模型"></p>
+<p>当用户进程发出 <code>read</code> 操作时，如果内核中的数据还没有准备好，那么它并不会 <code>block</code> 用户进程，而是立刻返回一个错误。从用户进程角度讲，它发起一个 <code>read</code> 操作后，并不需要等待，而是马上就得到了一个结果。当用户进程判断结果是一个错误时，它就知道数据还没有准备好，于是它可以再次发送 <code>read</code> 操作。一旦内核中的数据准备好了，并且又再次收到了用户进程的系统调用，那么它马上就将数据复制到了用户内存中，然后返回正确的返回值。所以，在<code>非阻塞式 IO</code> 中，用户进程其实需要不断地主动询问 <code>kernel</code> 数据是否准备好。<strong>非阻塞的接口相比于阻塞型接口的显著差异在于被调用之后立即返回</strong>。使用如下的函数可以将某句柄归设为非阻塞状态<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fcntl (fd, F_SETFL, O_NONBLOCK);</span><br></pre></td></tr></table></figure></p>
+<p>在非阻塞状态下， <code>recv()</code>接口在被调用后立即返回，返回值代表了不同的含义，如下所述</p>
+<ul>
+<li><code>recv()</code>返回值大于0，表示接收数据完毕，返回值即是接收到的字节数</li>
+<li><code>recv()</code>返回 0，表示连接已经正常断开</li>
+<li><code>recv()</code>返回－1 ，且 <code>errno</code> 等于 <code>EAGAIN</code>，表示 <code>recv</code> 操作还没执行完成</li>
+<li><code>recv()</code>返回－1 ，且 <code>errno</code> 不等于 <code>EAGAIN</code>，表示 <code>recv</code> 操作遇到系统错误<code>errno</code></li>
+</ul>
+<p>可以看到服务器线程可以通过循环调用<code>recv()</code>接口，可以在单个线程内实现对所有连接的数据接收工作。但是上述模型绝不被推荐，因为循环调用<code>recv()</code>将大幅度占用CPU使用率；此外，在这个方案中<code>recv()</code>更多的是起到检测”操作是否完成”的作用，实际操作系统提供了更为高效的检测”操作是否完成”作用的接口，例如 <code>select()</code>多路复用模式，可以一次检测多个连接是存活跃</p>
+<hr>
+<h1 id="多路IO复用模型"><a href="#多路IO复用模型" class="headerlink" title="多路IO复用模型"></a>多路IO复用模型</h1><p>多路 IO 复用，有时也称为事件驱动 IO。<strong>它的基本原理就是有个函数（例如 <code>select</code>）会不断地轮询所负责的所有 <code>socket</code>，当某个 <code>socket</code> 有数据到达了，就通知用户进程</strong>， 多路 IO 复用模型的流程如下所示</p>
+<p><img src="/2019/06/12/Linux-网络IO模型/多路IO复用模型.png" alt="多路IO复用模型"></p>
+<p>当用户进程调用了 select ，那么整个进程会被阻塞，而同时，内核会“监视”所有 select 负责的 socket，当任何一个 socket 中的数据准备好了，select 就会返回。这个时候用户进程再调用 read 操作，将数据从内核拷贝到用户进程。<br><strong>这个模型和<code>阻塞IO</code> 的模型其实并没有太大的不同，事实上还更差一些。因为这里需要使用两个系统调用（<code>select</code> 和 <code>recvfrom</code>），而阻塞 IO 只调用了一个系统调用(<code>recvfrom</code>)。但是，用<code>select</code>的优势在于它可以同时处理多个连接。所以，如果处理的连接数不是很高的话，使用<code>select/epoll</code>的 Web server 不一定比使用多线程的<code>阻塞IO</code>的 Web server 性能更好，可能延迟还更大；<code>select/epoll</code>的优势并不是对于单个连接能处理得更快，而是在于能处理更多的连接。</strong><br>在<code>多路复用IO模型</code>中，对于每一个<code>socket</code>，一般都设置成为非阻塞的，但是，如上图所示，整个用户的进程其实是一直被阻塞的。只不过进程是被 select 这个函数阻塞，而不是被 socket IO 阻塞。 因此使用 <code>select()</code>的效果与<code>非阻塞IO</code>类似</p>
+<blockquote>
+<p>select、epoll相关将会在后续学习中进行补充</p>
+</blockquote>
+<hr>
+<h1 id="异步IO模型"><a href="#异步IO模型" class="headerlink" title="异步IO模型"></a>异步IO模型</h1><p>异步IO模型的流程</p>
+<p><img src="/2019/06/12/Linux-网络IO模型/异步IO模型.png" alt="异步IO模型"></p>
+<p>用户进程发起 <code>read</code> 操作之后，立刻就可以开始去做其他的事；而另一方面，从内核的角度，当它收到一个异步的 <code>read</code> 请求操作之后，首先会立刻返回，所以不会对用户进程产生任何阻塞。然后，内核会等待数据准备完成，然后将数据拷贝到用户内存中，当这一切都完成之后，内核会给用户进程发送一个信号，返回<code>read</code>操作已完成的信息。</p>
+<p><strong>调用阻塞 IO 会一直阻塞住对应的进程直到操作完成，而非阻塞 IO 在内核还在准备数据的情况下会立刻返回。两者的区别就在于同步 IO 进行 IO 操作时会阻塞进程。按照这个定义，之前所述的阻塞 IO、非阻塞 IO 及多路 IO 复用都属于同步 IO。</strong> 实际上，真实的 IO 操作，就是例子中的 <code>recvfrom</code> 这个系统调用。 非阻塞 IO 在执行 <code>recvfrom</code> 这个系统调用的时候，如果内核的数据没有准备好，这时候不会阻塞进程。但是当内核中数据准备好时，<code>recvfrom</code> 会将数据从内核拷贝到用户内存中，这个时候进程则被阻塞。而异步 IO 则不一样，当进程发起 IO 操作之后，就直接返回，直到内核发送一个信号，告诉进程 IO 已完成，则在这整个过程中，进程完全没有被阻塞。 </p>
+<hr>
+<h1 id="模型比较"><a href="#模型比较" class="headerlink" title="模型比较"></a>模型比较</h1><p>各个 IO 模型的比较</p>
+<p><img src="/2019/06/12/Linux-网络IO模型/各种IO模型比较.png" alt="各种IO模型比较"></p>
+<p><strong><code>非阻塞 IO</code> 和<code>异步 IO</code> 的区别还是很明显的。 在<code>非阻塞 IO</code> 中，虽然进程大部分时间都不会被阻塞，但是它仍然要求进程去主动检查，并且当数据准备完成以后，也需要进程主动地再次调用 <code>recvfrom</code> 来将数据拷贝到用户内存中。 而<code>异步 IO</code>则完全不同，它就像是用户进程将整个 IO 操作交给了他人（内核）完成，然后内核做完后发信号通知。在此期间，用户进程不需要去检查 IO 操作的状态，也不需要主动地拷贝数据。</strong></p>
 
       
     </div>
@@ -447,7 +467,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/安装配置/" rel="tag"># 安装配置</a>
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
           
         </div>
       
@@ -460,8 +480,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/02/Flask服务器部署的踩坑记录/" rel="next" title="Flask服务器部署的踩坑记录">
-                <i class="fa fa-chevron-left"></i> Flask服务器部署的踩坑记录
+              <a href="/2019/06/10/谈谈cookie-session和JWT认证机制/" rel="next" title="谈谈cookie-session和JWT认证机制">
+                <i class="fa fa-chevron-left"></i> 谈谈cookie-session和JWT认证机制
               </a>
             
           </div>
@@ -469,10 +489,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/12/Go-kit微服务-JWT身份认证/" rel="prev" title="Go-kit微服务| JWT身份认证">
-                Go-kit微服务| JWT身份认证 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -630,7 +646,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境系统"><span class="nav-number">1.</span> <span class="nav-text">环境系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置启动"><span class="nav-number">3.</span> <span class="nav-text">设置启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取证书"><span class="nav-number">4.</span> <span class="nav-text">获取证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改配置文件"><span class="nav-number">5.</span> <span class="nav-text">修改配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启Nginx"><span class="nav-number">6.</span> <span class="nav-text">重启Nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题补充与解决"><span class="nav-number">7.</span> <span class="nav-text">问题补充与解决</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#阻塞IO模型"><span class="nav-number">1.</span> <span class="nav-text">阻塞IO模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#非阻塞IO模型"><span class="nav-number">2.</span> <span class="nav-text">非阻塞IO模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多路IO复用模型"><span class="nav-number">3.</span> <span class="nav-text">多路IO复用模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异步IO模型"><span class="nav-number">4.</span> <span class="nav-text">异步IO模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型比较"><span class="nav-number">5.</span> <span class="nav-text">模型比较</span></a></li></ol></div>
             
 
           </div>
