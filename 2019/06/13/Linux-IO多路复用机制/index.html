@@ -90,7 +90,7 @@
 <meta property="og:description" content="IO多路复用Demo  selectselect可以完成非阻塞方式的工作的程序，它能够监视需要被监视的文件描述符的变化情况 — 读、写或异常 select 函数原型1int select(int maxfdp, fd_set *readfds, fd_set *writefds, fd_set *errorfds, struct timeval *timeout); 主要涉及到两个结构体：fd_">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/2019/06/13/Linux-IO多路复用机制/poll事件.png">
-<meta property="og:updated_time" content="2019-06-15T16:17:39.012Z">
+<meta property="og:updated_time" content="2019-06-17T06:12:41.371Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux| IO多路复用机制">
 <meta name="twitter:description" content="IO多路复用Demo  selectselect可以完成非阻塞方式的工作的程序，它能够监视需要被监视的文件描述符的变化情况 — 读、写或异常 select 函数原型1int select(int maxfdp, fd_set *readfds, fd_set *writefds, fd_set *errorfds, struct timeval *timeout); 主要涉及到两个结构体：fd_">
@@ -355,7 +355,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2.3k
+                  3.5k
                 </span>
               
 
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  8
+                  12
                 </span>
               
             </div>
@@ -462,6 +462,30 @@
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_wait</span><span class="params">(<span class="keyword">int</span> epfd, struct epoll_event *events, <span class="keyword">int</span> maxevents, <span class="keyword">int</span> timeout)</span></span>;</span><br></pre></td></tr></table></figure>
 <p>等待事件的产生，类似于<code>select()</code>调用。参数 events 用来从内核得到事件的集合， maxevents 告诉内核这个 events 有多大，且 maxevents 的值不能大于创建<code>epoll_create()</code>时的 size，参数 timeout 是超时事件（ms为单位，0会立即返回，-1将不确定或称永久阻塞）。该函数返回需要处理的事件数目，如返回0表示已超时。</p>
+<hr>
+<h1 id="select、poll和epoll的区别"><a href="#select、poll和epoll的区别" class="headerlink" title="select、poll和epoll的区别"></a>select、poll和epoll的区别</h1><p><code>select</code>、<code>poll</code>和<code>epoll</code>都是多路 IO 复用的机制。多路 IO 复用就通过一种机制，可以监视多个描述符，一旦某个描述符就绪（一般是读就绪或者写就绪），能够通知程序进行相应的读写操作。但<code>select</code>、<code>poll</code>和<code>epoll</code>本质上都是<code>同步IO</code>，因为它们都需要在读写事件就绪后自己负责进行读写，即是阻塞的，而<code>异步IO</code>则无须自己负责进行读写，<code>异步I/O</code>的实现会负责把数据从内核拷贝到用户空间。</p>
+<p><strong>3种多路IO复用对比</strong></p>
+<ul>
+<li><code>select()</code>和<code>poll()</code><ul>
+<li><code>poll()</code>不要求开发者在计算最大文件描述符时进行 +1 操作</li>
+<li><code>poll()</code>在应付大数目的文件描述符的时候速度更快，因为对于<code>select()</code>来说内核需要检查大量描述符对应的 fd_set 中的每一个比特位，比较费时</li>
+<li><code>select()</code> 可以监控的文件描述符数目是固定的，相对来说也较少（1024或2048）。如果需要监控数值比较大的文件描述符，或是分布得很稀疏得较少的描述符，效率也会很低。而对于<code>poll()</code>函数来说，就可以创建特定大小的数组来保存监控的描述符，而不受文件描述符值大小的影响，而且<code>poll()</code>可以监控的文件数目远大于 </li>
+<li>对于<code>select()</code>来说，所监控的 fd_set 在<code>select()</code>返回之后会发生变化，所以在下一次进入<code>select()</code>之前都需要重新初始化需要监控的 fd_set，<code>poll()</code>函数将监控的输入和输出事件分开，允许被监控的文件数组被复用而不需要重新初始化</li>
+<li><code>select()</code>函数的超时参数在返回时也是未定义的，考虑到可移植性，每次在超时之后在下一次进入到<code>select()</code>之前都需要重新设置超时参数</li>
+</ul>
+</li>
+<li><code>select()</code>的优点<ul>
+<li><code>select()</code>的可移植性更好，在某些 UNIX 系统上不支持<code>poll()</code></li>
+<li><code>select()</code>对于超时值提供了更好的精度，而<code>poll()</code>时精度较差</li>
+</ul>
+</li>
+<li><code>epoll()</code>的优点<ul>
+<li><strong>支持一个进程打开大数目的 socket 描述符(FD)</strong><br>  <code>select()</code>最不能忍受的是一个进程所打开的 FD 是有一定限制的，由 FD_SETSIZE 的默认值是 1024/2048。对于那些需要支持上万连接数目的 IM 服务器来说显然太少了。这时候可以选择修改这个宏然后重新编译内核。不过 epoll 则没有这个限制，它所支持的 FD 上限是最大可以打开文件的数目，这个数字一般远大于 2048。举个例子，在 lGB 内存的空间中这个数字一般是 10 万左右，具体数目可以使用 <code>cat /proc/sys/fs/file-max</code>查看，一般来说这个数目和系统内存关系很大。</li>
+<li><strong>IO效率不随FD数目增加而线性下降</strong><br>  传统的 select/poll 另一个致命弱点就是当你拥有一个很大的 socket 集合，不过由于网络延迟，任一时间只有部分的 socket 是“活跃”的，但是 select/poll 每次调用都会线性扫描全部的集合，导致效率呈现线性下降。但是 epoll 不存在这个问题，它只会对“活跃”的 socket 进行操作 — 主是因为在内核中实现 epoll 是根据每个 fd 上面的 callback 函数实现的。 那么，只有“活跃”的 socket 才会主动去调用 callback 函数，其他 idle 状态 socket 则不会，在这点上，epoll 实现了一个“伪” AIO，因为这时候推动力由 Linux 内核提供   </li>
+<li><strong>使用 mmap 加速内核与用户空间的信息传递</strong><br>  这点实际上涉及 epoll 的具体实现。无论是 select、poll 还是 epoll 都需要内核把消息通知给用户空间，如何避免不必要的内存拷贝就显得尤为重要。在这点上， epoll 是通过内核与用户空间 mmap 处于同一块内存实现的<br>  对于 poll 来说需要将用户传入的 pollfd 数组拷贝到内核空间，因为拷贝操作和数组长度相关，时间上来看，这是一个 $O(n)$ 操作，当事件发生后，poll 将获得的数据传送到用户空间，并执行释放内存和剥离等待队列等工作，向用户空间拷贝数据与剥离等待队列等操作的时间复杂度同样是$O(n)$。</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -501,6 +525,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/16/系统分析与设计-作业6/" rel="prev" title="系统分析与设计 作业6">
+                系统分析与设计 作业6 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -586,7 +614,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -658,7 +686,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#select"><span class="nav-number">1.</span> <span class="nav-text">select</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#poll"><span class="nav-number">2.</span> <span class="nav-text">poll</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#epoll"><span class="nav-number">3.</span> <span class="nav-text">epoll</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#select"><span class="nav-number">1.</span> <span class="nav-text">select</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#poll"><span class="nav-number">2.</span> <span class="nav-text">poll</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#epoll"><span class="nav-number">3.</span> <span class="nav-text">epoll</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#select、poll和epoll的区别"><span class="nav-number">4.</span> <span class="nav-text">select、poll和epoll的区别</span></a></li></ol></div>
             
 
           </div>
