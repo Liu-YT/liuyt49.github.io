@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/09/高性能网络模型学习/单Reactor多线程.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/09/高性能网络模型学习/主从Reactor多线程.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/09/高性能网络模型学习/Proactor模型.png">
-<meta property="og:updated_time" content="2019-07-10T05:51:51.575Z">
+<meta property="og:updated_time" content="2019-07-10T09:15:59.259Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高性能网络模型学习">
 <meta name="twitter:description" content="本文的内容为学习自一些网上优秀的博客以及最近看的一些进阶拓展的书的笔记和总结  服务端处理网络请求服务端处理网络请求的典型模型  主要步骤：  获取请求数据 客户端与服务器建立链接发出请求，服务器接收请求（1-3） 构建响应 当服务器接收完请求，并在用户空间处理客户端的请求，直到构建响应完成（4） 返回数据 服务器将已构建好的响应再通过内核空间的网络I/O发还给客户端（5-7）  设计服务端并发">
@@ -575,7 +575,7 @@
 <li><code>可扩展性</code>，可以方便的通过增加Reactor实例个数来充分利用CPU资源</li>
 <li><code>可复用性</code>，Reactor模型本身与具体事件处理逻辑无关，具有很高的复用性</li>
 </ul>
-<h1 id="Proactor模型"><a href="#Proactor模型" class="headerlink" title="Proactor模型"></a>Proactor模型</h1><p>在Reactor模式中，Reactor等待某个事件或者可应用或个操作的状态发生（比如文件描述符可读写，或者是socket可读写），然后把这个事件传给事先注册的Handler（事件处理函数或者回调函数），由后者来做实际的读写操作，其中的读写操作都需要应用程序同步操作，所以Reactor是非阻塞同步网络模型。如果把I/O操作改为异步，即交给操作系统来完成就能进一步提升性能，这就是异步网络模型Proactor</p>
+<h2 id="Proactor模型"><a href="#Proactor模型" class="headerlink" title="Proactor模型"></a>Proactor模型</h2><p>在Reactor模式中，Reactor等待某个事件或者可应用或个操作的状态发生（比如文件描述符可读写，或者是socket可读写），然后把这个事件传给事先注册的Handler（事件处理函数或者回调函数），由后者来做实际的读写操作，其中的读写操作都需要应用程序同步操作，所以Reactor是非阻塞同步网络模型。如果把I/O操作改为异步，即交给操作系统来完成就能进一步提升性能，这就是异步网络模型Proactor</p>
 <p><img src="/2019/07/09/高性能网络模型学习/Proactor模型.png" alt="Proactor模型"></p>
 <p><strong>Proactor是和异步I/O相关的，详细方案如下</strong></p>
 <ul>
@@ -586,7 +586,7 @@
 <li>Handler完成业务处理</li>
 </ul>
 <p>可以看出Proactor和Reactor的区别：<strong>Reactor是在事件发生时就通知事先注册的事件（读写在应用程序线程中处理完成）；Proactor是在事件发生时基于异步I/O完成读写操作（由内核完成），待I/O操作完成后才回调应用程序的处理器来处理进行业务处理</strong></p>
-<h1 id="Reactor和Proactor对比"><a href="#Reactor和Proactor对比" class="headerlink" title="Reactor和Proactor对比"></a>Reactor和Proactor对比</h1><h2 id="举例分析"><a href="#举例分析" class="headerlink" title="举例分析"></a>举例分析</h2><p><strong>Reactor模式中读取操作</strong></p>
+<h2 id="Reactor和Proactor对比"><a href="#Reactor和Proactor对比" class="headerlink" title="Reactor和Proactor对比"></a>Reactor和Proactor对比</h2><h3 id="举例分析"><a href="#举例分析" class="headerlink" title="举例分析"></a>举例分析</h3><p><strong>Reactor模式中读取操作</strong></p>
 <ul>
 <li>应用程序注册读就绪事件和相关联的事件处理器</li>
 <li>事件分离器等待事件的发生</li>
@@ -598,11 +598,11 @@
 <li>事件分离器捕获到读取完成事件后，激活应用程序注册的事件处理器，事件处理器直接从缓存区读取数据，而不需要进行实际的读取操作</li>
 </ul>
 <p>从上面可以看出，Reactor和Proactor模式的主要区别就是真正的读取和写入操作是有谁来完成的，Reactor中需要应用程序自己读取或者写入数据，而Proactor模式中，应用程序不需要进行实际的读写过程，它只需要从缓存区读取或者写入即可，操作系统会读取缓存区或者写入缓存区到真正的IO设备</p>
-<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><ul>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
 <li>Reactor实现了一个被动的事件分离和分发模型，服务等待请求事件的到来，再通过不受间断的同步处理事件，从而做出反应</li>
 <li>Proactor实现了一个主动的事件分离和分发模型；这种设计允许多个任务并发的执行，从而提高吞吐量；并可执行耗时长的任务（各个任务间互不影响）</li>
 </ul>
-<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><p><strong>优点</strong><br>Reactor实现相对简单，对于耗时短的处理场景处理高效</p>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p><strong>优点</strong><br>Reactor实现相对简单，对于耗时短的处理场景处理高效</p>
 <ul>
 <li>操作系统可以在多个事件源上等待，并且避免了多线程编程相关的性能开销和编程复杂性</li>
 <li>事件的串行化对应用是透明的，可以顺序的同步执行而不需要加锁</li>
@@ -611,7 +611,7 @@
 <p>Proactor性能更高，能够处理耗时长的并发场景；</p>
 <p><strong>缺点</strong><br>Reactor处理耗时长的操作会造成事件分发的阻塞，影响到后续事件的处理；</p>
 <p>Proactor实现逻辑复杂；依赖操作系统对异步的支持，目前实现了纯异步操作的操作系统少，实现优秀的如windows IOCP，但由于其windows系统用于服务器的局限性，目前应用范围较小；而Unix/Linux系统对纯异步的支持有限，应用事件驱动的主流还是通过select/epoll来实现</p>
-<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>Reactor：同时接收多个服务请求，并且依次同步的处理它们的事件驱动程序<br>Proactor：异步接收和同时处理多个服务请求的事件驱动程序</p>
+<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>Reactor：同时接收多个服务请求，并且依次同步的处理它们的事件驱动程序<br>Proactor：异步接收和同时处理多个服务请求的事件驱动程序</p>
 <h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
 <li><a href="https://segmentfault.com/a/1190000002715832" target="_blank" rel="noopener">IO设计模式：Reactor和Proactor对比</a></li>
 <li><a href="https://blog.csdn.net/u013074465/article/details/46276967" target="_blank" rel="noopener">两种高效的服务器设计模型：Reactor和Proactor模型</a></li>
@@ -656,6 +656,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/26/线程池学习与实现/" rel="prev" title="线程池学习与实现">
+                线程池学习与实现 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -741,7 +745,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -752,7 +756,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -763,7 +767,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -813,7 +817,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#服务端处理网络请求"><span class="nav-number">1.</span> <span class="nav-text">服务端处理网络请求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#I-O-模型"><span class="nav-number">2.</span> <span class="nav-text">I/O 模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#理解同步-异步和阻塞-非阻塞的区别"><span class="nav-number">2.1.</span> <span class="nav-text">理解同步/异步和阻塞/非阻塞的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阻塞式-I-O-模型"><span class="nav-number">2.2.</span> <span class="nav-text">阻塞式 I/O 模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非阻塞式-I-O-模型"><span class="nav-number">2.3.</span> <span class="nav-text">非阻塞式 I/O 模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I-O-复用模型"><span class="nav-number">2.4.</span> <span class="nav-text">I/O 复用模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号驱动式-I-O-模型"><span class="nav-number">2.5.</span> <span class="nav-text">信号驱动式 I/O 模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步-I-O-模型"><span class="nav-number">2.6.</span> <span class="nav-text">异步 I/O 模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.7.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程模型"><span class="nav-number">3.</span> <span class="nav-text">线程模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#传统阻塞-I-O-服务模型"><span class="nav-number">3.1.</span> <span class="nav-text">传统阻塞 I/O 服务模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reactor-模式"><span class="nav-number">3.2.</span> <span class="nav-text">Reactor 模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单Reactor单线程"><span class="nav-number">3.2.1.</span> <span class="nav-text">单Reactor单线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单Reactor多线程"><span class="nav-number">3.2.2.</span> <span class="nav-text">单Reactor多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主从Reactor多线程"><span class="nav-number">3.2.3.</span> <span class="nav-text">主从Reactor多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reactor-总结"><span class="nav-number">3.2.4.</span> <span class="nav-text">Reactor 总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Proactor模型"><span class="nav-number">4.</span> <span class="nav-text">Proactor模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reactor和Proactor对比"><span class="nav-number">5.</span> <span class="nav-text">Reactor和Proactor对比</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#举例分析"><span class="nav-number">5.1.</span> <span class="nav-text">举例分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">5.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优缺点"><span class="nav-number">5.3.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#适用场景"><span class="nav-number">5.4.</span> <span class="nav-text">适用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接"><span class="nav-number">6.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#服务端处理网络请求"><span class="nav-number">1.</span> <span class="nav-text">服务端处理网络请求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#I-O-模型"><span class="nav-number">2.</span> <span class="nav-text">I/O 模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#理解同步-异步和阻塞-非阻塞的区别"><span class="nav-number">2.1.</span> <span class="nav-text">理解同步/异步和阻塞/非阻塞的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阻塞式-I-O-模型"><span class="nav-number">2.2.</span> <span class="nav-text">阻塞式 I/O 模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非阻塞式-I-O-模型"><span class="nav-number">2.3.</span> <span class="nav-text">非阻塞式 I/O 模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I-O-复用模型"><span class="nav-number">2.4.</span> <span class="nav-text">I/O 复用模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号驱动式-I-O-模型"><span class="nav-number">2.5.</span> <span class="nav-text">信号驱动式 I/O 模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步-I-O-模型"><span class="nav-number">2.6.</span> <span class="nav-text">异步 I/O 模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.7.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程模型"><span class="nav-number">3.</span> <span class="nav-text">线程模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#传统阻塞-I-O-服务模型"><span class="nav-number">3.1.</span> <span class="nav-text">传统阻塞 I/O 服务模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reactor-模式"><span class="nav-number">3.2.</span> <span class="nav-text">Reactor 模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单Reactor单线程"><span class="nav-number">3.2.1.</span> <span class="nav-text">单Reactor单线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单Reactor多线程"><span class="nav-number">3.2.2.</span> <span class="nav-text">单Reactor多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主从Reactor多线程"><span class="nav-number">3.2.3.</span> <span class="nav-text">主从Reactor多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reactor-总结"><span class="nav-number">3.2.4.</span> <span class="nav-text">Reactor 总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Proactor模型"><span class="nav-number">3.3.</span> <span class="nav-text">Proactor模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reactor和Proactor对比"><span class="nav-number">3.4.</span> <span class="nav-text">Reactor和Proactor对比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#举例分析"><span class="nav-number">3.4.1.</span> <span class="nav-text">举例分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">3.4.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点"><span class="nav-number">3.4.3.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适用场景"><span class="nav-number">3.4.4.</span> <span class="nav-text">适用场景</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接"><span class="nav-number">4.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
             
 
           </div>
